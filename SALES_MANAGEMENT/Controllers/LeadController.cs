@@ -20,53 +20,18 @@ namespace SALES_MANAGEMENT.Controllers
             string constring = ConfigurationManager.ConnectionStrings["LeadConnection"].ToString();
             con = new SqlConnection(constring);
         }
-        public ActionResult Index(string SortingCol, string SortType)
+        //CREATE LEAD
+        [HttpGet]
+        public ActionResult Create(Cities Model, States Models)
         {
-            List<LeadsModel> LeadList = new List<LeadsModel>();
-            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(Dbconnection))
+            LeadsModel DropdownList = new LeadsModel()
             {
-                con.Open();
-                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_SelectAll", con);
-                Com.CommandType = CommandType.StoredProcedure;
-                Com.Parameters.AddWithValue("@SortingCol", SortingCol);
-                Com.Parameters.AddWithValue("@SortType", SortType);
-
-                if (SortType == "ASC")
-                {
-                    SortType = "DESC";
-                }
-                else
-                {
-                    SortType = "ASC";
-                }
-                ViewBag.sorttype = SortType;
-
-                SqlDataReader Sqlreader = Com.ExecuteReader();
-                while (Sqlreader.Read())
-                {
-                    var customer = new LeadsModel();
-                    customer.LeadId = Convert.ToInt32(Sqlreader["LeadId"]);
-                    customer.Photo = Sqlreader["Photo"].ToString(); 
-                    customer.FirstName = Sqlreader["FirstName"].ToString();
-                    customer.LastName = Sqlreader["LastName"].ToString();
-                    customer.DateOfBirth = Convert.ToDateTime(Sqlreader["DateOfBirth"]);
-                    customer.Gender = Sqlreader["Gender"].ToString();
-                    customer.CurrentAddress = Sqlreader["CurrentAddress"].ToString();
-                    customer.PermanentAddress = Sqlreader["PermanentAddress"].ToString();
-                    customer.MobileNumber = Convert.ToInt64(Sqlreader["MobileNumber"]);
-                    customer.EmailId = Sqlreader["EmailId"].ToString();
-                    customer.City = Sqlreader["City"].ToString();
-                    customer.State = Sqlreader["State"].ToString();
-                    customer.Country = Sqlreader["Country"].ToString();
-                    customer.Title = Sqlreader["Title"].ToString();
-                    customer.LeadSource = Sqlreader["LeadSource"].ToString();
-                    customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
-                    LeadList.Add(customer);
-                }
-
-                return View(LeadList);
-            }
+                LeadSourceList = GetLeadSourceList(),
+                StateList = GetStateList(Models),
+                CountryList = GetCountryList(),
+                CityList = GetCityList(Model)
+            };
+            return View(DropdownList);
         }
         public List<LeadSources> GetLeadSourceList()
         {
@@ -91,15 +56,17 @@ namespace SALES_MANAGEMENT.Controllers
             }
         }
 
-        public List<Cities> GetCityList()
+        public List<Cities> GetCityList(Cities Model)
         {
+           // Cities DropdownList = new Cities();
             List<Cities> CityList = new List<Cities>();
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
             {
-                con.Open();
+                 con.Open();
                 SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_FilterByCityName", con);
                 Com.CommandType = CommandType.StoredProcedure;
+                Com.Parameters.AddWithValue("@StateId", Model.CityName);
                 SqlDataReader Sqlreader = Com.ExecuteReader();
                 while (Sqlreader.Read())
                 {
@@ -111,10 +78,21 @@ namespace SALES_MANAGEMENT.Controllers
                 }
                 con.Close();
                 return CityList;
+                //while (Sqlreader.Read())
+                //{
+                  
+                //    DropdownList.Id = Convert.ToInt64(Sqlreader["Id"]);
+                //    DropdownList.CityName = Sqlreader["CityName"].ToString();
+                //    CityList.Add(DropdownList);
+
+                //}
+                //con.Close();
+                //return CityList;
             }
         }
-        public List<States> GetStateList()
+        public List<States> GetStateList(States Models)
         {
+            //States DropdownList = new States();
             List<States> StateList = new List<States>();
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
@@ -122,6 +100,7 @@ namespace SALES_MANAGEMENT.Controllers
                 con.Open();
                 SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_FilterByStateName", con);
                 Com.CommandType = CommandType.StoredProcedure;
+                Com.Parameters.AddWithValue("@CountryId", Models.StateName);
                 SqlDataReader Sqlreader = Com.ExecuteReader();
                 while (Sqlreader.Read())
                 {
@@ -133,6 +112,15 @@ namespace SALES_MANAGEMENT.Controllers
                 }
                 con.Close();
                 return StateList;
+                //while (Sqlreader.Read())
+                //{
+                    
+                //    DropdownList.Id = Convert.ToInt32(Sqlreader["Id"]);
+                //    DropdownList.StateName = Convert.ToString(Sqlreader["StateName"]);
+                //    StateList.Add(DropdownList);
+                //}
+                //con.Close();
+                //return StateList;
             }
         }
 
@@ -144,8 +132,8 @@ namespace SALES_MANAGEMENT.Controllers
             {
                 con.Open();
                 SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_FilterByCountryName", con);
-                Com.CommandType = CommandType.StoredProcedure;
                 SqlDataReader Sqlreader = Com.ExecuteReader();
+                Com.CommandType = CommandType.StoredProcedure;
                 while (Sqlreader.Read())
                 {
                     CountryList.Add(new Countries
@@ -157,32 +145,17 @@ namespace SALES_MANAGEMENT.Controllers
                 con.Close();
                 return CountryList;
             }
-        }
-
-
-        [HttpGet]
-        public ActionResult Create()
-        {
-            LeadsModel DropdownList = new LeadsModel()
-            {
-                LeadSourceList= GetLeadSourceList(),
-                StateList = GetStateList(),
-                CountryList = GetCountryList(),
-                CityList = GetCityList()
-            };
-            return View(DropdownList);
-        }
-        
+        }   
 
         [HttpPost]
-        public ActionResult Create(LeadsModel model, HttpPostedFileBase file)
+        public ActionResult Create(LeadsModel model, Cities Model, States Models,HttpPostedFileBase file)
         {
             LeadsModel DropdownList = new LeadsModel()
             {
-                LeadSourceList = GetLeadSourceList(),
-                StateList = GetStateList(),
+                LeadSourceList = GetLeadSourceList(),      
                 CountryList = GetCountryList(),
-                CityList = GetCityList()
+                StateList = GetStateList(Models),
+                CityList = GetCityList(Model)
             };
             {
                 Connection();
@@ -213,12 +186,63 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@Photo", "~/Lead-Images/" + file.FileName);
                 Command.ExecuteNonQuery();
                 con.Close();
-                ViewBag.Message = "SAVED SUCCESSFULLY!";
+                ViewBag.Message = "SAVED SUCCESSFULLY :)";
                 return View();
             }
 
         }
 
+        //LIST INDEX
+        public ActionResult Index(string SortingCol, string SortType)
+        {
+            List<LeadsModel> LeadList = new List<LeadsModel>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_SelectAll", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                Com.Parameters.AddWithValue("@SortingCol", SortingCol);
+                Com.Parameters.AddWithValue("@SortType", SortType);
+
+                if (SortType == "ASC")
+                {
+                    SortType = "DESC";
+                }
+                else
+                {
+                    SortType = "ASC";
+                }
+                ViewBag.sorttype = SortType;
+
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    var customer = new LeadsModel();
+                    customer.LeadId = Convert.ToInt32(Sqlreader["LeadId"]);
+                    customer.Photo = Sqlreader["Photo"].ToString();
+                    customer.FirstName = Sqlreader["FirstName"].ToString();
+                    customer.LastName = Sqlreader["LastName"].ToString();
+                    customer.DateOfBirth = Convert.ToDateTime(Sqlreader["DateOfBirth"]);
+                    customer.Gender = Sqlreader["Gender"].ToString();
+                    customer.CurrentAddress = Sqlreader["CurrentAddress"].ToString();
+                    customer.PermanentAddress = Sqlreader["PermanentAddress"].ToString();
+                    customer.MobileNumber = Convert.ToInt64(Sqlreader["MobileNumber"]);
+                    customer.EmailId = Sqlreader["EmailId"].ToString();
+                    customer.City = Sqlreader["City"].ToString();
+                    customer.State = Sqlreader["State"].ToString();
+                    customer.Country = Sqlreader["Country"].ToString();
+                    customer.Title = Sqlreader["Title"].ToString();
+                    customer.LeadSource = Sqlreader["LeadSource"].ToString();
+                    customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
+                    LeadList.Add(customer);
+                }
+
+                return View(LeadList);
+            }
+        }
+
+        //
         [HttpGet]
         public ActionResult Edit(int? LeadId)
         {

@@ -27,7 +27,7 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = "DOB is Required ")]
         [Display(Name = "DateOfBirth")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Gender")]
@@ -80,7 +80,7 @@ namespace SALES_MANAGEMENT.Models
 
         public  List<LeadSources> LeadSourceList { get; internal set; }
         public List<Cities> CityList { get; internal set; }
-        public List<States> StateList { get; internal set; }
+        public List<States> StateList { get; set; }
         public List<Countries> CountryList { get; internal set; }
     }
 
@@ -97,12 +97,17 @@ namespace SALES_MANAGEMENT.Models
         public long Id { get; set; }
 
         public string CityName { get; set; }
+
+        public long StateId { get; set; }
     }
+
     public class States
     {
         public long Id { get; set; }
 
         public string StateName { get; set; }
+
+        public long CountryId { get; set; }
     }
 
     public class Countries
