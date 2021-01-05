@@ -1,5 +1,9 @@
-﻿using System;
+﻿using SALES_MANAGEMENT.Models;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,7 +29,7 @@ namespace SALES_MANAGEMENT.Controllers
         {
             
             {
-                Connection();
+                CONNECTION();
                 SqlCommand Command = new SqlCommand("SP_Opportunity_Insert", con);
                 Command.CommandType = CommandType.StoredProcedure;
                 con.Open();
