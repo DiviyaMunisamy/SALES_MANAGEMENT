@@ -49,7 +49,9 @@
         </th>
         <th>
             @Html.ActionLink("MeetingDate", "Index", new { SortType = ViewBag.sorttype, SortingCol = "MeetingDate" })
-
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.LeadId)
@@ -58,59 +60,70 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-           <img src="@Url.Content(item.Photo)" alt="Image" width="100" height="100" />
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfBirth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CurrentAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PermanentAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MobileNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmailId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LeadSource)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MeetingDate)
-        </td>
-        @*<td>
+<tr>
+    <td>
+        <img src="@Url.Content(item.Photo)" alt="Image" width="100" height="100" />
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateOfBirth)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CurrentAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PermanentAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MobileNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EmailId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.City)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.State)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Country)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LeadSource)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MeetingDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CreatedDate)
+    </td>
+    @*<td>
             @Html.DisplayFor(modelItem => item.LeadId)
         </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LeadId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LeadId })
-        </td>
-    </tr>
+<td>
+    <button>
+        @Html.ActionLink("Edit", "Edit", new { id = item.LeadId })
+    </button>
+    <button>
+        @Html.ActionLink("Delete", "Delete", new { id = item.LeadId })
+    </button>
+    <button>
+        @Html.ActionLink("Qualify", "Qualify", new { id = item.LeadId })
+    </button>    
+
+</td>
+</tr>
 }
 
 </table>

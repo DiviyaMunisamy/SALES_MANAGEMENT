@@ -160,5 +160,56 @@ namespace SALES_MANAGEMENT.Controllers
                 return View();
             }
         }
+
+        //LIST INDEX
+        public ActionResult Index(string SortingCol, string SortType)
+        {
+            List<LeadsModel> LeadList = new List<LeadsModel>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_Op_SelectAll", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                Com.Parameters.AddWithValue("@SortingCol", SortingCol);
+                Com.Parameters.AddWithValue("@SortType", SortType);
+
+                if (SortType == "ASC")
+                {
+                    SortType = "DESC";
+                }
+                else
+                {
+                    SortType = "ASC";
+                }
+                ViewBag.sorttype = SortType;
+
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    var customer = new LeadsModel();
+                    customer.LeadId = Convert.ToInt32(Sqlreader["LeadId"]);
+                    customer.Photo = Sqlreader["Photo"].ToString();
+                    customer.FirstName = Sqlreader["FirstName"].ToString();
+                    customer.LastName = Sqlreader["LastName"].ToString();
+                    customer.DateOfBirth = Convert.ToDateTime(Sqlreader["DateOfBirth"]);
+                    customer.Gender = Sqlreader["Gender"].ToString();
+                    customer.CurrentAddress = Sqlreader["CurrentAddress"].ToString();
+                    customer.PermanentAddress = Sqlreader["PermanentAddress"].ToString();
+                    customer.MobileNumber = Convert.ToInt64(Sqlreader["MobileNumber"]);
+                    customer.EmailId = Sqlreader["EmailId"].ToString();
+                    customer.City = Sqlreader["City"].ToString();
+                    customer.State = Sqlreader["State"].ToString();
+                    customer.Country = Sqlreader["Country"].ToString();
+                    customer.Title = Sqlreader["Title"].ToString();
+                    customer.LeadSource = Sqlreader["LeadSource"].ToString();
+                    customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
+                    customer.CreatedDate = Convert.ToDateTime(Sqlreader["CreatedDate"]);
+                    LeadList.Add(customer);
+                }
+
+                return View(LeadList);
+            }
+        }
     }
 }
