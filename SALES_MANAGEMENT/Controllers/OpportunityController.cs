@@ -12,23 +12,131 @@ namespace SALES_MANAGEMENT.Controllers
 {
     public class OpportunityController : Controller
     {
+        //String Con.....
         public SqlConnection con;
         public void CONNECTION()
         {
             string constring = ConfigurationManager.ConnectionStrings["LeadConnection"].ToString();
             con = new SqlConnection(constring);
         }
+        //CREATE......
         [HttpGet]
         public ActionResult Create()
         {
-            return View();   
+            OpportunityModel DropdownList = new OpportunityModel()
+            {
+                PurchaseTimeFormList = GetPurchaseTimeFormList(),
+                CurrencyList = GetCurrencyList(),
+                PurchesProcessList = GetPurchesProcessList(),
+                ForecastCategoryList = GetForecastCategoryList()
+            };
+            return View(DropdownList);
+        }
+        //DROP DOWN FOR PurchaseTimeForm.....
+        public List<PurchaseTimeForm> GetPurchaseTimeFormList()
+            {
+                List<PurchaseTimeForm> PurchaseTimeFormList = new List<PurchaseTimeForm>();
+                string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+                using (SqlConnection con = new SqlConnection(Dbconnection))
+                {
+                    con.Open();
+                    SqlCommand Com = new SqlCommand("SP_PurchaseTimeForm", con);
+                    Com.CommandType = CommandType.StoredProcedure;
+                    SqlDataReader Sqlreader = Com.ExecuteReader();
+                    while (Sqlreader.Read())
+                    {
+                    PurchaseTimeFormList.Add(new PurchaseTimeForm
+                        {
+                        PT_Id = Convert.ToInt32(Sqlreader["PT_Id"]),
+                        PurchaseTimeForm_Name = Convert.ToString(Sqlreader["PurchaseTimeForm_Name"]),
+                        });
+                    }
+                    con.Close();
+                    return PurchaseTimeFormList;
+                }
+            }
+        //DROP DOWN FOR Currency.....
+        public List<Currency> GetCurrencyList()
+        {
+            List<Currency> GetCurrencyList = new List<Currency>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("SP_Currency", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    GetCurrencyList.Add(new Currency
+                    {
+                        Currency_Id = Convert.ToInt32(Sqlreader["Currency_Id"]),
+                        Currency_Name = Convert.ToString(Sqlreader["Currency_Name"]),
+                    });
+                }
+                con.Close();
+                return GetCurrencyList;
+            }
+        }
+        //DROP DOWN FOR PurchesProcess.....
+        public List<PurchesProcess> GetPurchesProcessList()
+        {
+            List<PurchesProcess> PurchaseTimeFormList = new List<PurchesProcess>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("SP_PurchesProcess", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    PurchaseTimeFormList.Add(new PurchesProcess
+                    {
+                        PurchesProcess_Id = Convert.ToInt32(Sqlreader["PurchesProcess_Id"]),
+                        PurchesProcess_Name = Convert.ToString(Sqlreader["PurchesProcess_Name"]),
+                    });
+                }
+                con.Close();
+                return PurchaseTimeFormList;
+            }
+        }
+        //DROP DOWN FOR ForecastCategory....
+        public List<ForecastCategory> GetForecastCategoryList()
+        {
+            List<ForecastCategory> GetForecastCategoryList = new List<ForecastCategory>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("SP_ForecastCategory", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    GetForecastCategoryList.Add(new ForecastCategory
+                    {
+                        ForecastCategory_Id = Convert.ToInt32(Sqlreader["ForecastCategory_Id"]),
+                        ForecastCategory_Name = Convert.ToString(Sqlreader["ForecastCategory_Name"]),
+                    });
+                }
+                con.Close();
+                return GetForecastCategoryList;
+            }
         }
 
-        // GET: Opportunity
+        //CREATE: Opportunity...
+        // GET: Opportunity.......
         [HttpPost]
         public ActionResult Create(OpportunityModel model)
         {
-            
+            OpportunityModel DropdownList = new OpportunityModel()
+            {
+                PurchaseTimeFormList = GetPurchaseTimeFormList(),
+                CurrencyList = GetCurrencyList(),
+                PurchesProcessList = GetPurchesProcessList(),
+                ForecastCategoryList = GetForecastCategoryList()
+            };
             {
                 CONNECTION();
                 SqlCommand Command = new SqlCommand("SP_Opportunity_Insert", con);

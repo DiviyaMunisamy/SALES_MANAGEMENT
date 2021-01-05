@@ -9,12 +9,13 @@
     </style>
 </head>
 <body>
+    @Html.ViewData["Message"]
     @using (Html.BeginForm("Create", "Opportunity"))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h1>Opportunity</h1>
+            <h1>OPPORTUNITY</h1>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
@@ -44,16 +45,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.PurchaseTimeForm, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.PurchaseTimeForm, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PurchaseTimeForm, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.PurchaseTimeForm, new SelectList(Model.PurchaseTimeFormList, "PT_Id", "PurchaseTimeForm_Name"), "Select PurchaseTimeForm", new { @class = "form-control " })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.Currency, new SelectList(Model.CurrencyList, "Currency_Id", "Currency_Name"), "Select Currency", new { @class = "form-control " })
                 </div>
             </div>
 
@@ -68,16 +67,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.PurchesProcess, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.PurchesProcess, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PurchesProcess, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.PurchesProcess, new SelectList(Model.PurchesProcessList, "PurchesProcess_Id", "PurchesProcess_Name"), "Select PurchesProcess", new { @class = "form-control " })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.ForecastCategory, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ForecastCategory, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ForecastCategory, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.ForecastCategory, new SelectList(Model.ForecastCategoryList, "ForecastCategory_Id", "ForecastCategory_Name"), "Select ForecastCategory", new { @class = "form-control " })
                 </div>
             </div>
 
@@ -120,7 +117,7 @@
             </div>
         </div>
     }
-    @Html.ViewData["Message"]
+
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
