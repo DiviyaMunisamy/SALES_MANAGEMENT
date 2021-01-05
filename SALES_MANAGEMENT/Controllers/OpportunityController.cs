@@ -16,10 +16,11 @@ namespace SALES_MANAGEMENT.Controllers
         }
         public ActionResult Create()
         {
-            return View();
+            return View();   
         }
 
         // GET: Opportunity
+        [HttpPost]
         public ActionResult Create(OpportunityModel model)
         {
             
