@@ -8,15 +8,19 @@ namespace SALES_MANAGEMENT.Controllers
 {
     public class OpportunityController : Controller
     {
-        private SqlConnection con;
-        //To Switch Connection String................................//
-        private void Connection()
+        public SqlConnection con;
+        public void CONNECTION()
         {
             string constring = ConfigurationManager.ConnectionStrings["LeadConnection"].ToString();
             con = new SqlConnection(constring);
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         // GET: Opportunity
-        public ActionResult Create(OpportunityModel model, HttpPostedFileBase file)
+        public ActionResult Create(OpportunityModel model)
         {
             
             {
@@ -41,7 +45,6 @@ namespace SALES_MANAGEMENT.Controllers
                 ViewBag.Message = "SAVED SUCCESSFULLY :)";
                 return View();
             }
-
         }
     }
 }
