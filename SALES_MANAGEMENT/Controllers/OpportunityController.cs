@@ -18,6 +18,7 @@ namespace SALES_MANAGEMENT.Controllers
             string constring = ConfigurationManager.ConnectionStrings["LeadConnection"].ToString();
             con = new SqlConnection(constring);
         }
+        [HttpGet]
         public ActionResult Create()
         {
             return View();   
