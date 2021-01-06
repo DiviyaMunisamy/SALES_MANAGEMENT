@@ -26,11 +26,11 @@ namespace SALES_MANAGEMENT.Models
 
         [Display(Name = "Currency")]
         [Required(ErrorMessage = " Currency is Required")]
-        public long Currency { get; set; }
+        public string Currency { get; set; }
 
         [Display(Name = "BudgetAmount")]
         [Required(ErrorMessage = " BudgetAmount is Required")]
-        public string BudgetAmount { get; set; }
+        public long BudgetAmount { get; set; }
 
         [Display(Name = "PurchesProcess")]
         [Required(ErrorMessage = " PurchesProcess is Required")]
