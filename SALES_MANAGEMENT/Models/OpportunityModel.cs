@@ -26,7 +26,7 @@ namespace SALES_MANAGEMENT.Models
 
         [Display(Name = "Currency")]
         [Required(ErrorMessage = " Currency is Required")]
-        public long Currency { get; set; }
+        public string Currency { get; set; }
 
         [Display(Name = "BudgetAmount")]
         [Required(ErrorMessage = " BudgetAmount is Required")]
@@ -55,40 +55,5 @@ namespace SALES_MANAGEMENT.Models
         [Display(Name = "ProposedSolution")]
         [Required(ErrorMessage = " ProposedSolution is Required")]
         public string ProposedSolution { get; set; }
-
-        public List<PurchaseTimeForm> PurchaseTimeFormList { get; internal set; }
-        public List<Currency> CurrencyList { get; internal set; }
-        public List<PurchesProcess> PurchesProcessList { get; internal set; }
-        public List<ForecastCategory> ForecastCategoryList { get; internal set; }
     }
-    public class PurchaseTimeForm
-    {
-        public int PT_Id { get; set; }
-
-        public string PurchaseTimeForm_Name { get; set; }
-
-    }
-    public class  PurchesProcess
-    {
-        public int PurchesProcess_Id { get; set; }
-
-        public string PurchesProcess_Name { get; set; }
-
-    }
-    public class ForecastCategory
-    {
-        public int ForecastCategory_Id { get; set; }
-
-        public string ForecastCategory_Name { get; set; }
-
-    }
-    public class Currency
-    {
-        public int Currency_Id { get; set; }
-
-        public string Currency_Name { get; set; }
-
-    }
-
-
 }
