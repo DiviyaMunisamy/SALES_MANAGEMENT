@@ -137,6 +137,7 @@ namespace SALES_MANAGEMENT.Controllers
                 PurchesProcessList = GetPurchesProcessList(),
                 ForecastCategoryList = GetForecastCategoryList()
             };
+
             {
                 CONNECTION();
                 SqlCommand Command = new SqlCommand("SP_Opportunity_Insert", con);
@@ -157,7 +158,7 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.ExecuteNonQuery();
                 con.Close();
                 ViewBag.Message = "SAVED SUCCESSFULLY :)";
-                return View();
+                return View(DropdownList);
             }
         }
 
