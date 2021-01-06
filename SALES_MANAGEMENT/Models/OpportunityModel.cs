@@ -68,7 +68,7 @@ namespace SALES_MANAGEMENT.Models
         public string PurchaseTimeForm_Name { get; set; }
 
     }
-    public class  PurchesProcess
+    public class PurchesProcess
     {
         public int PurchesProcess_Id { get; set; }
 

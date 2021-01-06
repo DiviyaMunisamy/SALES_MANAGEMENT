@@ -34,27 +34,27 @@ namespace SALES_MANAGEMENT.Controllers
         }
         //DROP DOWN FOR PurchaseTimeForm.....
         public List<PurchaseTimeForm> GetPurchaseTimeFormList()
+        {
+            List<PurchaseTimeForm> PurchaseTimeFormList = new List<PurchaseTimeForm>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
             {
-                List<PurchaseTimeForm> PurchaseTimeFormList = new List<PurchaseTimeForm>();
-                string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(Dbconnection))
+                con.Open();
+                SqlCommand Com = new SqlCommand("SP_PurchaseTimeForm", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
                 {
-                    con.Open();
-                    SqlCommand Com = new SqlCommand("SP_PurchaseTimeForm", con);
-                    Com.CommandType = CommandType.StoredProcedure;
-                    SqlDataReader Sqlreader = Com.ExecuteReader();
-                    while (Sqlreader.Read())
-                    {
                     PurchaseTimeFormList.Add(new PurchaseTimeForm
-                        {
+                    {
                         PT_Id = Convert.ToInt32(Sqlreader["PT_Id"]),
                         PurchaseTimeForm_Name = Convert.ToString(Sqlreader["PurchaseTimeForm_Name"]),
-                        });
-                    }
-                    con.Close();
-                    return PurchaseTimeFormList;
+                    });
                 }
+                con.Close();
+                return PurchaseTimeFormList;
             }
+        }
         //DROP DOWN FOR Currency.....
         public List<Currency> GetCurrencyList()
         {
@@ -153,7 +153,7 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@Description", model.Description);
                 Command.Parameters.AddWithValue("@CurrentSuitation", model.CurrentSuitation);
                 Command.Parameters.AddWithValue("@CustommerNeed", model.CustommerNeed);
-                Command.Parameters.AddWithValue("@ProposedSolution", model.ProposedSolution);          
+                Command.Parameters.AddWithValue("@ProposedSolution", model.ProposedSolution);
                 Command.ExecuteNonQuery();
                 con.Close();
                 ViewBag.Message = "SAVED SUCCESSFULLY :)";

@@ -10,9 +10,9 @@
     </style>
 </head>
 
-    @using (Html.BeginForm("Create", "Lead", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm("Create", "Lead", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         <h1 style ="font-family:'Times New Roman';"> Lead Form </h1>     
@@ -100,21 +100,22 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Country, new SelectList(Model.CountryList, "Id", "CountryName"), "", new { @class = "form-control " })
+                @Html.DropDownListFor(model => model.Country, new SelectList(Model.CountryList, "Id", "CountryName"), "", new { @class = "form-control ", id = "Country" })
+
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.State, new SelectList(Model.StateList, "Id", "StateName"), "", new { @class = "form-control " })
+                @Html.DropDownListFor(model => model.State, new SelectList(Model.StateList, "Id", "StateName", "---Please Select State---"), "", new { @class = "form-control ", id = "State", })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.City, new SelectList(Model.CityList, "Id", "CityName"), "", new { @class = "form-control " })
+                @Html.DropDownListFor(model => model.City, new SelectList(Model.CityList, "Id", "CityName", "-- -Please Select City---"), "", new { @class = "form-control ", id = "City" })
             </div>
         </div>
 
@@ -160,6 +161,45 @@
     
 
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+        $("#Country").change(function () {
+            debugger;
+            var CountryId = $('#Country').val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetStateList", "Lead")',
+                dataType: "JSON",
+                data: { CountryId: CountryId },
+                success: function (states) {
+                    $("#State").html(""); // clear before appending new list
+                    $.each(states, function (i, exc) {
+                        $("#State").append(
+                            $('<option></option>').val(exc.Id).html(exc.StateName));
+                    });
+            }
+    });
+        });
+
+        $("#State").change(function () {
+            debugger;
+            var StateId = $('#State').val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetCityList", "Lead")',
+                dataType: "JSON",
+                data: { StateId: StateId },
+                success: function (Cities) {
+                    $("#City").html(""); // clear before appending new list
+                    $.each(Cities, function (i, exc) {
+                        $("#City").append(
+                            $('<option></option>').val(exc.Id).html(exc.CityName));
+                    });
+            }
+    });
+});
+</script>

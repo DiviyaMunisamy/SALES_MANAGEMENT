@@ -22,140 +22,27 @@ namespace SALES_MANAGEMENT.Controllers
         }
         //CREATE LEAD
         [HttpGet]
-        public ActionResult Create(Cities Model, States Models)
+        public ActionResult Create()
         {
             LeadsModel DropdownList = new LeadsModel()
             {
                 LeadSourceList = GetLeadSourceList(),
-                StateList = GetStateList(Models),
                 CountryList = GetCountryList(),
-                CityList = GetCityList(Model)
+                StateList = GetStateList(),
+                CityList = GetCityList()
             };
             return View(DropdownList);
         }
-        public List<LeadSources> GetLeadSourceList()
-        {
-            List<LeadSources> LeadSourceList = new List<LeadSources>();
-            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(Dbconnection))
-            {
-                con.Open();
-                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_SelectAllLeadSource", con);
-                Com.CommandType = CommandType.StoredProcedure;
-                SqlDataReader Sqlreader = Com.ExecuteReader();
-                while (Sqlreader.Read())
-                {
-                    LeadSourceList.Add(new LeadSources
-                    {
-                        Id = Convert.ToInt32(Sqlreader["Id"]),
-                        LeadSource = Convert.ToString(Sqlreader["LeadSource"]),
-                    });
-                }
-                con.Close();
-                return LeadSourceList;
-            }
-        }
-
-        public List<Cities> GetCityList(Cities Model)
-        {
-           // Cities DropdownList = new Cities();
-            List<Cities> CityList = new List<Cities>();
-            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(Dbconnection))
-            {
-                 con.Open();
-                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_FilterByCityName", con);
-                Com.CommandType = CommandType.StoredProcedure;
-                Com.Parameters.AddWithValue("@StateId", Model.CityName);
-                SqlDataReader Sqlreader = Com.ExecuteReader();
-                while (Sqlreader.Read())
-                {
-                    CityList.Add(new Cities
-                    {
-                        Id = Convert.ToInt32(Sqlreader["Id"]),
-                        CityName = Convert.ToString(Sqlreader["CityName"]),
-                    });
-                }
-                con.Close();
-                return CityList;
-                //while (Sqlreader.Read())
-                //{
-                  
-                //    DropdownList.Id = Convert.ToInt64(Sqlreader["Id"]);
-                //    DropdownList.CityName = Sqlreader["CityName"].ToString();
-                //    CityList.Add(DropdownList);
-
-                //}
-                //con.Close();
-                //return CityList;
-            }
-        }
-        public List<States> GetStateList(States Models)
-        {
-            //States DropdownList = new States();
-            List<States> StateList = new List<States>();
-            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(Dbconnection))
-            {
-                con.Open();
-                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_FilterByStateName", con);
-                Com.CommandType = CommandType.StoredProcedure;
-                Com.Parameters.AddWithValue("@CountryId", Models.StateName);
-                SqlDataReader Sqlreader = Com.ExecuteReader();
-                while (Sqlreader.Read())
-                {
-                    StateList.Add(new States
-                    {
-                        Id = Convert.ToInt32(Sqlreader["Id"]),
-                        StateName = Convert.ToString(Sqlreader["StateName"]),
-                    });
-                }
-                con.Close();
-                return StateList;
-                //while (Sqlreader.Read())
-                //{
-                    
-                //    DropdownList.Id = Convert.ToInt32(Sqlreader["Id"]);
-                //    DropdownList.StateName = Convert.ToString(Sqlreader["StateName"]);
-                //    StateList.Add(DropdownList);
-                //}
-                //con.Close();
-                //return StateList;
-            }
-        }
-
-        public List<Countries> GetCountryList()
-        {
-            List<Countries> CountryList = new List<Countries>();
-            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(Dbconnection))
-            {
-                con.Open();
-                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_FilterByCountryName", con);
-                SqlDataReader Sqlreader = Com.ExecuteReader();
-                Com.CommandType = CommandType.StoredProcedure;
-                while (Sqlreader.Read())
-                {
-                    CountryList.Add(new Countries
-                    {
-                        Id = Convert.ToInt32(Sqlreader["Id"]),
-                        CountryName = Convert.ToString(Sqlreader["CountryName"]),
-                    });
-                }
-                con.Close();
-                return CountryList;
-            }
-        }   
-
+       
         [HttpPost]
-        public ActionResult Create(LeadsModel model, Cities Model, States Models,HttpPostedFileBase file)
+        public ActionResult Create(LeadsModel model,  HttpPostedFileBase file)
         {
             LeadsModel DropdownList = new LeadsModel()
             {
                 LeadSourceList = GetLeadSourceList(),      
                 CountryList = GetCountryList(),
-                StateList = GetStateList(Models),
-                CityList = GetCityList(Model)
+                StateList = GetStateList(),
+                CityList = GetCityList()
             };
             {
                 Connection();
@@ -190,6 +77,168 @@ namespace SALES_MANAGEMENT.Controllers
                 return View();
             }
 
+        }
+
+
+public List<Cities> GetCityList()
+{
+    // Cities DropdownList = new Cities();
+
+    List<Cities> CityList = new List<Cities>();
+    string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+    using (SqlConnection con = new SqlConnection(Dbconnection))
+    {
+        con.Open();
+        SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_SelectAllCityName", con);
+        Com.CommandType = CommandType.StoredProcedure;
+        SqlDataReader Sqlreader = Com.ExecuteReader();
+                
+        while (Sqlreader.Read())
+        {
+            CityList.Add(new Cities
+            {
+                Id = Convert.ToInt32(Sqlreader["Id"]),
+                CityName = Convert.ToString(Sqlreader["CityName"]),
+            
+            });
+        }
+               
+                con.Close();
+        return CityList;
+        
+    }
+}
+        [HttpGet]
+        public JsonResult GetCityList(long? StateId)
+        {
+            // Cities DropdownList = new Cities();
+
+            List<Cities> CityList = new List<Cities>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_FilterByCityName", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                Com.Parameters.AddWithValue("@StateId", StateId);
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+
+                while (Sqlreader.Read())
+                {
+                    CityList.Add(new Cities
+                    {
+                        Id = Convert.ToInt32(Sqlreader["Id"]),
+                        CityName = Convert.ToString(Sqlreader["CityName"]),
+
+                    });
+                }
+
+                con.Close();
+                return Json(CityList.ToList(), JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+        public List<States> GetStateList()
+        {
+            //States DropdownList = new States();
+            List<States> StateList = new List<States>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_SelectAllStateName", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    StateList.Add(new States
+                    {
+                        Id = Convert.ToInt32(Sqlreader["Id"]),
+                        StateName = Convert.ToString(Sqlreader["StateName"]),
+
+                    });
+                }
+                con.Close();
+
+                return StateList;
+
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetStateList(long? CountryId)
+        {
+            //States DropdownList = new States();
+            List<States> StateList = new List<States>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_FilterByStateName", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                Com.Parameters.AddWithValue("@CountryId", CountryId);
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    StateList.Add(new States
+                    {
+                        Id = Convert.ToInt32(Sqlreader["Id"]),
+                        StateName = Convert.ToString(Sqlreader["StateName"]),
+             
+                    });
+                }
+                  con.Close();
+
+                return Json(StateList.ToList(), JsonRequestBehavior.AllowGet);
+                
+            }
+        }
+
+public List<Countries> GetCountryList()
+{
+    List<Countries> CountryList = new List<Countries>();
+    string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+    using (SqlConnection con = new SqlConnection(Dbconnection))
+    {
+        con.Open();
+        SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_FilterByCountryName", con);
+        SqlDataReader Sqlreader = Com.ExecuteReader();
+        Com.CommandType = CommandType.StoredProcedure;
+        while (Sqlreader.Read())
+        {
+            CountryList.Add(new Countries
+            {
+                Id = Convert.ToInt32(Sqlreader["Id"]),
+                CountryName = Convert.ToString(Sqlreader["CountryName"]),
+            });
+        }
+       
+        con.Close();
+        return CountryList;
+    }
+}
+        public List<LeadSources> GetLeadSourceList()
+        {
+            List<LeadSources> LeadSourceList = new List<LeadSources>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_SelectAllLeadSource", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    LeadSourceList.Add(new LeadSources
+                    {
+                        Id = Convert.ToInt32(Sqlreader["Id"]),
+                        LeadSource = Convert.ToString(Sqlreader["LeadSource"]),
+                    });
+                }
+                con.Close();
+                return LeadSourceList;
+            }
         }
 
         //LIST INDEX
@@ -235,7 +284,6 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.Title = Sqlreader["Title"].ToString();
                     customer.LeadSource = Sqlreader["LeadSource"].ToString();
                     customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
-                    customer.CreatedDate = Convert.ToDateTime(Sqlreader["CreatedDate"]);
                     LeadList.Add(customer);
                 }
 
@@ -360,7 +408,7 @@ namespace SALES_MANAGEMENT.Controllers
         }
 
         [HttpPost]
-    public ActionResult Delete(int? LeadId, LeadsModel model)
+        public ActionResult Delete(int? LeadId, LeadsModel model)
     {
         string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
         using (SqlConnection con = new SqlConnection(Dbconnection))
@@ -375,25 +423,6 @@ namespace SALES_MANAGEMENT.Controllers
 
             return RedirectToAction("Index");
         }
-    }
-
-        public ActionResult Qualify(int? id)
-        {
-            {
-                string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(Dbconnection))
-
-                {
-                    con.Open();
-                    SqlCommand cmd = new SqlCommand("SP_Qialify_Update", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@LeadId", id);
-                    //cmd.Parameters.AddWithValue("@ISQualify",IsQualify);
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    return RedirectToAction("Index");
-                }
-            }
-        }
+    }               
 }
-    }
+}

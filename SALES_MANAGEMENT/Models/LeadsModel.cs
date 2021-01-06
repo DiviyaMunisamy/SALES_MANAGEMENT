@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace SALES_MANAGEMENT.Models
 {
@@ -27,7 +28,7 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = "DOB is Required ")]
         [Display(Name = "DateOfBirth")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Gender")]
@@ -72,27 +73,14 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = "LeadSource is Required")]
         public string LeadSource { get; set; }
 
-        [Display(Name = "Type")]
-        [Required(ErrorMessage = "Type is Required")]
-        public string Type { get; set; }
-
-        [Display(Name = "Company Website")]
-        [Required(ErrorMessage = "Company Website is Required")]
-        public string CompanyWebsite { get; set; }
-
-        [Display(Name = "Job Title")]
-        [Required(ErrorMessage = "Job Title is Required")]
-        public string JobTitle { get; set; }
-
         [Display(Name = "Meeting Date")]
         [Required(ErrorMessage = "MeetingDate is Required")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
-
         public DateTime MeetingDate { get; set; }
         public DateTime CreatedDate { get; set; }
-        public Boolean IsQualify { get; set; }
-        public List<LeadSources> LeadSourceList { get; internal set; }
+
+        public  List<LeadSources> LeadSourceList { get; internal set; }
         public List<Cities> CityList { get; internal set; }
         public List<States> StateList { get; set; }
         public List<Countries> CountryList { get; internal set; }
@@ -131,4 +119,5 @@ namespace SALES_MANAGEMENT.Models
         public string CountryName { get; set; }
 
     }
+
 }
