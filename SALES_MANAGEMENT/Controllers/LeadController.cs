@@ -29,57 +29,13 @@ namespace SALES_MANAGEMENT.Controllers
                 LeadSourceList = GetLeadSourceList(),
                 CountryList = GetCountryList(),
                 StateList = GetStateList(),
-                CityList = GetCityList()
+                CityList = GetCityList(),
+                TypeList= GetTypeList()
             };
             return View(DropdownList);
         }
 
-        [HttpPost]
-        public ActionResult Create(LeadsModel model, HttpPostedFileBase file)
-        {
-            LeadsModel DropdownList = new LeadsModel()
-            {
-                LeadSourceList = GetLeadSourceList(),
-                CountryList = GetCountryList(),
-                StateList = GetStateList(),
-                CityList = GetCityList()
-            };
-            {
-                Connection();
-                SqlCommand Command = new SqlCommand("SP_Lead_Insert", con);
-                Command.CommandType = CommandType.StoredProcedure;
-                con.Open();
-                //Command.Parameters.AddWithValue("@Photo", model.Photo);
-                Command.Parameters.AddWithValue("@FirstName", model.FirstName);
-                Command.Parameters.AddWithValue("@LastName", model.LastName);
-                Command.Parameters.AddWithValue("@DateOfBirth", model.DateOfBirth);
-                Command.Parameters.AddWithValue("@Gender", model.Gender);
-                Command.Parameters.AddWithValue("@CurrentAddress", model.CurrentAddress);
-                Command.Parameters.AddWithValue("@PermanentAddress", model.PermanentAddress);
-                Command.Parameters.AddWithValue("@MobileNumber", model.MobileNumber);
-                Command.Parameters.AddWithValue("@EmailId", model.EmailId);
-                Command.Parameters.AddWithValue("@Country", model.Country);
-                Command.Parameters.AddWithValue("@State", model.State);
-                Command.Parameters.AddWithValue("@City", model.City);
-                Command.Parameters.AddWithValue("@Title", model.Title);
-                Command.Parameters.AddWithValue("@LeadSource", model.LeadSource);
-                Command.Parameters.AddWithValue("@MeetingDate", model.MeetingDate);
-                if (file != null && file.ContentLength > 0)
-                {
-                    string filename = Path.GetFileName(file.FileName);
-                    string imgpath = Path.Combine(Server.MapPath("~/Lead-Images/"), filename);
-                    file.SaveAs(imgpath);
-                }
-                Command.Parameters.AddWithValue("@Photo", "~/Lead-Images/" + file.FileName);
-                Command.ExecuteNonQuery();
-                con.Close();
-                ViewBag.Message = "SAVED SUCCESSFULLY :)";
-                return View(DropdownList);
-            }
-
-        }
-
-
+        //DropdownList Cities
         public List<Cities> GetCityList()
         {
             // Cities DropdownList = new Cities();
@@ -138,7 +94,7 @@ namespace SALES_MANAGEMENT.Controllers
 
             }
         }
-
+        //DropdownList States
         public List<States> GetStateList()
         {
             //States DropdownList = new States();
@@ -165,7 +121,6 @@ namespace SALES_MANAGEMENT.Controllers
 
             }
         }
-
         [HttpGet]
         public JsonResult GetStateList(long? CountryId)
         {
@@ -195,6 +150,7 @@ namespace SALES_MANAGEMENT.Controllers
             }
         }
 
+        //DropdownList Countries
         public List<Countries> GetCountryList()
         {
             List<Countries> CountryList = new List<Countries>();
@@ -218,6 +174,8 @@ namespace SALES_MANAGEMENT.Controllers
                 return CountryList;
             }
         }
+
+        //DropdownList LeadSources
         public List<LeadSources> GetLeadSourceList()
         {
             List<LeadSources> LeadSourceList = new List<LeadSources>();
@@ -239,6 +197,82 @@ namespace SALES_MANAGEMENT.Controllers
                 con.Close();
                 return LeadSourceList;
             }
+        }
+
+
+        //DropdownList Type
+        public List<Types> GetTypeList()
+        {
+            List<Types> TypeList = new List<Types>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("SP_SALES_MANAGEMENT_Lead_Type", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    TypeList.Add(new Types
+                    {
+                        TypeId = Convert.ToInt32(Sqlreader["TypeId"]),
+                        TypeName = Convert.ToString(Sqlreader["TypeName"]),
+                    });
+                }
+                con.Close();
+                return TypeList;
+            }
+        }
+
+        //CREATE LEADS 
+        [HttpPost]
+        public ActionResult Create(LeadsModel model, HttpPostedFileBase file)
+        {
+            LeadsModel DropdownList = new LeadsModel()
+            {
+                LeadSourceList = GetLeadSourceList(),
+                CountryList = GetCountryList(),
+                StateList = GetStateList(),
+                CityList = GetCityList(),
+                TypeList = GetTypeList()
+            };
+            {
+                Connection();
+                SqlCommand Command = new SqlCommand("SP_Lead_Insert", con);
+                Command.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                //Command.Parameters.AddWithValue("@Photo", model.Photo);
+                Command.Parameters.AddWithValue("@FirstName", model.FirstName);
+                Command.Parameters.AddWithValue("@LastName", model.LastName);
+                Command.Parameters.AddWithValue("@DateOfBirth", model.DateOfBirth);
+                Command.Parameters.AddWithValue("@Gender", model.Gender);
+                Command.Parameters.AddWithValue("@CurrentAddress", model.CurrentAddress);
+                Command.Parameters.AddWithValue("@PermanentAddress", model.PermanentAddress);
+                Command.Parameters.AddWithValue("@MobileNumber", model.MobileNumber);
+                Command.Parameters.AddWithValue("@EmailId", model.EmailId);
+                Command.Parameters.AddWithValue("@Country", model.Country);
+                Command.Parameters.AddWithValue("@State", model.State);
+                Command.Parameters.AddWithValue("@City", model.City);
+                Command.Parameters.AddWithValue("@Title", model.Title);
+                Command.Parameters.AddWithValue("@LeadSource", model.LeadSource);
+                Command.Parameters.AddWithValue("@MeetingDate", model.MeetingDate);
+                Command.Parameters.AddWithValue("@Type", model.Type);
+                Command.Parameters.AddWithValue("@JobTitle", model.JobTitle);
+                Command.Parameters.AddWithValue("@CompanyName", model.CompanyName);
+                Command.Parameters.AddWithValue("@CompanyWebSite", model.CompanyWebsite);
+                if (file != null && file.ContentLength > 0)
+                {
+                    string filename = Path.GetFileName(file.FileName);
+                    string imgpath = Path.Combine(Server.MapPath("~/Lead-Images/"), filename);
+                    file.SaveAs(imgpath);
+                }
+                Command.Parameters.AddWithValue("@Photo", "~/Lead-Images/" + file.FileName);
+                Command.ExecuteNonQuery();
+                con.Close();
+                ViewBag.Message = "SAVED SUCCESSFULLY :)";
+                return View(DropdownList);
+            }
+
         }
 
         //LIST INDEX
@@ -284,6 +318,10 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.Title = Sqlreader["Title"].ToString();
                     customer.LeadSource = Sqlreader["LeadSource"].ToString();
                     customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
+                    customer.Type = Sqlreader["Type"].ToString();
+                    customer.JobTitle = Sqlreader["Job Title"].ToString();
+                    customer.CompanyWebsite = Sqlreader["CompanyWebsite"].ToString();
+                    customer.CompanyName = Sqlreader["CompanyName"].ToString();
                     LeadList.Add(customer);
                 }
 
@@ -323,6 +361,10 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.Title = Sqlreader["Title"].ToString();
                     customer.LeadSource = Sqlreader["LeadSource"].ToString();
                     customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
+                    customer.Type = Sqlreader["Type"].ToString();
+                    customer.JobTitle = Sqlreader["JobTitle"].ToString();
+                    customer.CompanyWebsite = Sqlreader["CompanyWebsite"].ToString();
+                    customer.CompanyName = Sqlreader["CompanyName"].ToString();
                     LeadList.Add(customer);
                 }
 
@@ -357,6 +399,10 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@Title", model.Title);
                 Command.Parameters.AddWithValue("@LeadSource", model.LeadSource);
                 Command.Parameters.AddWithValue("@MeetingDate", model.MeetingDate);
+                Command.Parameters.AddWithValue("@Type", model.Type);
+                Command.Parameters.AddWithValue("@Job Title", model.JobTitle);
+                Command.Parameters.AddWithValue("@CompanyName", model.CompanyName);
+                Command.Parameters.AddWithValue("@CompanyWebSite", model.CompanyWebsite);
                 if (file != null && file.ContentLength > 0)
                 {
                     string filename = Path.GetFileName(file.FileName);

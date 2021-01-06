@@ -163,7 +163,7 @@ namespace SALES_MANAGEMENT.Controllers
         }
 
         //LIST INDEX
-        public ActionResult Index(string SortingCol, string SortType)
+        public ActionResult IndexOpportunity (string SortingCol, string SortType)
         {
             List<LeadsModel> LeadList = new List<LeadsModel>();
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
