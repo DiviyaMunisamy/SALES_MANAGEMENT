@@ -49,7 +49,7 @@ namespace SALES_MANAGEMENT.Models
 
         [Display(Name = "FreightTerms")]
         [Required(ErrorMessage = " FreightTerms is Required")]
-        public long FreightTerms { get; set; }
+        public string FreightTerms { get; set; }
 
         [Display(Name = "BillToStreet")]
         [Required(ErrorMessage = " BillToStreet is Required")]
@@ -97,7 +97,7 @@ namespace SALES_MANAGEMENT.Models
 
         [Display(Name = "PostalCode")]
         [Required(ErrorMessage = "PostalCode is Required")]
-        public string ShipingPostalCode { get; set; }
+        public long ShipingPostalCode { get; set; }
 
 
         public List<StatusReason> StatusReasonList { get; internal set; }
@@ -106,6 +106,7 @@ namespace SALES_MANAGEMENT.Models
         public List<ShippingMethod> ShippingMethodList { get; internal set; }
         public List<FreightTerms> FreightTermsList { get; internal set; }
         public List<PaymentTerms> PaymentTermsList { get; internal set; }
+        public int QuoteId { get; internal set; }
     }
 
 

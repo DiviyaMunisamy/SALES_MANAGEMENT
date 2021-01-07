@@ -62,9 +62,6 @@
             @Html.DisplayNameFor(model => model.Type)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LeadSource)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.JobTitle)
         </th>
         <th>
@@ -88,6 +85,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadSource)
         </th>
         <th>
             @Html.ActionLink("MeetingDate", "Index", new { SortType = ViewBag.sorttype, SortingCol = "MeetingDate" })
@@ -131,9 +131,6 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.Type)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.LeadSource)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.JobTitle)

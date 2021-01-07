@@ -225,5 +225,48 @@ namespace SALES_MANAGEMENT.Controllers
                 return View(DropdownList);
             }
         }
+
+        //LIST INDEX
+        public ActionResult QuotesIndex()
+        {
+            List<QuoteModel> QuoteList = new List<QuoteModel>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_SelectAll", con);
+                Com.CommandType = CommandType.StoredProcedure;
+
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    var customer = new QuoteModel();
+                    customer.QuoteId = Convert.ToInt32(Sqlreader["QuoteId"]);
+                    customer.Name = Sqlreader["Name"].ToString();
+                    customer.Currency = Sqlreader["Currency"].ToString();
+                    customer.Opportunity = Sqlreader["Opportunity"].ToString();
+                    customer.PotentialCustomer = Sqlreader["PotentialCustomer"].ToString();
+                    customer.PriceList = Sqlreader["PriceList"].ToString();
+                    customer.QuoteExpiresOn = Convert.ToDateTime(Sqlreader["QuoteExpiresOn"]);
+                    customer.StatusReason = Sqlreader["StatusReason"].ToString();
+                    customer.Description = Sqlreader["Description"].ToString();
+                    customer.PaymentTerms = Sqlreader["PaymentTerms"].ToString();
+                    customer.FreightTerms = Sqlreader["FreightTerms"].ToString();
+                    customer.BillToStreet = Sqlreader["BillToStreet"].ToString();
+                    customer.BillToState = Sqlreader["Country"].ToString();
+                    customer.BillToCountry = Sqlreader["BillToCountry"].ToString();
+                    customer.BillingPostalCode = Sqlreader["BillingPostalCode"].ToString();
+                    customer.ShipTo = Sqlreader["ShipTo"].ToString();
+                    customer.ShippingMethod = Sqlreader["ShippingMethod"].ToString();
+                    customer.ShipToStreet = Sqlreader["ShipToStreet"].ToString();
+                    customer.ShipToCity = Sqlreader["ShipToCity"].ToString();
+                    customer.ShipToState = Sqlreader["ShipToState"].ToString();
+                    customer.ShipToCountry = Sqlreader["ShipToCountry"].ToString();
+                    customer.ShipingPostalCode = Convert.ToInt32(Sqlreader["ShipingPostalCode"]);
+                    QuoteList.Add(customer);
+                }
+                return View(QuoteList);
+            }
+        }
     }
 }
