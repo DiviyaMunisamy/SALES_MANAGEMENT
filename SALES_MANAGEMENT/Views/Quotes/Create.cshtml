@@ -11,13 +11,10 @@
         }
     </style>
 </head>
-@Html.ViewData["Message"]
+<h1>@Html.ViewData["Message"]</h1> 
 
-@using (Html.BeginForm("Create", "Quotes"))
-{
-    @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
+    @using (Html.BeginForm("Create", "Quotes")) { @Html.AntiForgeryToken()   
+    <div class="form-horizontal">
     <h1 style="font-family:'Times New Roman';"> QUOTES </h1>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
