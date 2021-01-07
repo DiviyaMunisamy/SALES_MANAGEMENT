@@ -108,9 +108,9 @@ namespace SALES_MANAGEMENT.Models
 
     public class StatusReason
     {
-        public int ShipId_Id { get; set; }
+        public int StatusReason_Id { get; set; }
 
-        public string ShipId_Name { get; set; }
+        public string StatusReason_NAME { get; set; }
 
     }
 
@@ -132,9 +132,9 @@ namespace SALES_MANAGEMENT.Models
 
     public class FreightTerms
     {
-        public int ForecastCategory_Id { get; set; }
+        public int Freight_Id { get; set; }
 
-        public string ForecastCategory_Name { get; set; }
+        public string FreightTerm_Name { get; set; }
 
     }
 
