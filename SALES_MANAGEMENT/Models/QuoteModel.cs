@@ -124,9 +124,9 @@ namespace SALES_MANAGEMENT.Models
 
     public class ShippingMethod
     {
-        public int ShipId_Id { get; set; }
+        public int ShippingMethod_Id { get; set; }
 
-        public string ShipId_Name { get; set; }
+        public string ShippingMethod_Name { get; set; }
 
     }
 

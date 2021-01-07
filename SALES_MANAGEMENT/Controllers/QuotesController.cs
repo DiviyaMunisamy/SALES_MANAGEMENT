@@ -49,8 +49,8 @@ namespace SALES_MANAGEMENT.Controllers
                 {
                     ShippingMethodList.Add(new ShippingMethod
                     {
-                        ShipId_Id = Convert.ToInt32(Sqlreader["ShipId_Id"]),
-                        ShipId_Name = Convert.ToString(Sqlreader["	ShipId_Name"]),
+                        ShippingMethod_Id = Convert.ToInt32(Sqlreader["ShippingMethod_Id"]),
+                        ShippingMethod_Name = Convert.ToString(Sqlreader["ShippingMethod_Name"]),
                     });
                 }
                 con.Close();
@@ -97,7 +97,7 @@ namespace SALES_MANAGEMENT.Controllers
                     PaymentTermsList.Add(new PaymentTerms
                     {
                         Payment_Id = Convert.ToInt32(Sqlreader["Payment_Id"]),
-                        PaymentTerm_Name = Convert.ToString(Sqlreader["	PaymentTerm_Name"]),
+                        PaymentTerm_Name = Convert.ToString(Sqlreader["PaymentTerm_Name"]),
                     });
                 }
                 con.Close();
@@ -161,7 +161,7 @@ namespace SALES_MANAGEMENT.Controllers
             using (SqlConnection con = new SqlConnection(Dbconnection))
             {
                 con.Open();
-                SqlCommand Com = new SqlCommand("SP_Quote_DropDownQuoteCurrency", con);
+                SqlCommand Com = new SqlCommand("SP_Quote_DropDownForQuoteCurrency", con);
                 Com.CommandType = CommandType.StoredProcedure;
                 SqlDataReader Sqlreader = Com.ExecuteReader();
                 while (Sqlreader.Read())
@@ -220,7 +220,7 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@ShipingPostalCode", model.ShipingPostalCode);
                 Command.ExecuteNonQuery();
                 con.Close();
-                ViewBag.Message = "QUOTE CREATE SUCCESSFULLY :)";
+                ViewBag.Message = "QUOTE CREATE SUCCESSFULLY :)"; 
                 return View(DropdownList);
             }
         }
