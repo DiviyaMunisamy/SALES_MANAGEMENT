@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace SALES_MANAGEMENT.Controllers
 {
-    public class QuorteController : Controller
+    public class QuotesController : Controller
     {
         //String Con.....
         public SqlConnection con;

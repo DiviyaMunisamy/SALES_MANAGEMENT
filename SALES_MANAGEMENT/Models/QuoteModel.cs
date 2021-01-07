@@ -94,5 +94,13 @@ namespace SALES_MANAGEMENT.Models
         [Display(Name = "PostalCode")]
         [Required(ErrorMessage = "PostalCode is Required")]
         public string ShipingPostalCode { get; set; }
+
+        public class PurchaseTimeForm
+        {
+            public int PT_Id { get; set; }
+
+            public string PurchaseTimeForm_Name { get; set; }
+
+        }
     }
 }
