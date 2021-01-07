@@ -55,6 +55,10 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = " BillToStreet is Required")]
         public string BillToStreet { get; set; }
 
+        [Display(Name = "BillToState")]
+        [Required(ErrorMessage = " BillToState is Required")]
+        public string BillToState { get; set; }
+
         [Display(Name = "[BillToCity]")]
         [Required(ErrorMessage = " [BillToCity] is Required")]
         public string BillToCity { get; set; }

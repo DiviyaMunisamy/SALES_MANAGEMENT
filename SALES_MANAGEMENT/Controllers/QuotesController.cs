@@ -208,6 +208,7 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@PaymentTerms", model.PaymentTerms);
                 Command.Parameters.AddWithValue("@FreightTerms", model.FreightTerms); 
                 Command.Parameters.AddWithValue("@BillToStreet", model.BillToStreet);
+                Command.Parameters.AddWithValue("@BillToState", model.BillToState);
                 Command.Parameters.AddWithValue("@BillToCity", model.BillToCity);
                 Command.Parameters.AddWithValue("@BillToCountry", model.BillToCountry);
                 Command.Parameters.AddWithValue("@BillingPostalCode", model.BillingPostalCode);
