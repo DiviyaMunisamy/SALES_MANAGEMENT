@@ -94,8 +94,8 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = "MeetingDate is Required")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
-
         public DateTime MeetingDate { get; set; }
+
         public DateTime CreatedDate { get; set; }
 
         public  List<LeadSources> LeadSourceList { get; internal set; }

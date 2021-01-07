@@ -157,7 +157,7 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@ProposedSolution", model.ProposedSolution);
                 Command.ExecuteNonQuery();
                 con.Close();
-                ViewBag.Message = "SAVED SUCCESSFULLY :)";
+                ViewBag.Message = "OPPORTUNITY CREATE SUCCESSFULLY :)";
                 return View(DropdownList);
             }
         }

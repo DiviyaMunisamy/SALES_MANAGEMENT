@@ -269,7 +269,7 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@Photo", "~/Lead-Images/" + file.FileName);
                 Command.ExecuteNonQuery();
                 con.Close();
-                ViewBag.Message = "SAVED SUCCESSFULLY :)";
+                ViewBag.Message = "LEAD CREATE SUCCESSFULLY :)";
                 return View(DropdownList);
             }
 

@@ -24,9 +24,9 @@ namespace SALES_MANAGEMENT
              defaults: new { controller = "Lead", action = "Create", id = UrlParameter.Optional }
          );
             routes.MapRoute(
-             name: "Default3",
+             name: "Default",
              url: "{controller}/{action}/{id}",
-             defaults: new { controller = "Lead", action = "Edit", id = UrlParameter.Optional }
+             defaults: new { controller = "Qourte", action = "Create", id = UrlParameter.Optional }
          );
 
         }
