@@ -177,6 +177,7 @@
     <Content Include="Views\Opportunity\Create.cshtml" />
     <Content Include="Views\Opportunity\IndexOpportunity.cshtml" />
     <Content Include="Views\Quotes\Create.cshtml" />
+    <Content Include="Views\Opportunity\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

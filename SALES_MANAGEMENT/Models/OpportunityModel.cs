@@ -14,7 +14,7 @@ namespace SALES_MANAGEMENT.Models
 
         [Display(Name = "Contact")]
         [Required(ErrorMessage = " Contact is Required")]
-        public string Contact { get; set; }
+        public long Contact { get; set; }
 
         [Display(Name = "Account")]
         [Required(ErrorMessage = " LAccount is Required")]
