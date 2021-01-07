@@ -95,12 +95,63 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = "PostalCode is Required")]
         public string ShipingPostalCode { get; set; }
 
-        public class PurchaseTimeForm
-        {
-            public int PT_Id { get; set; }
 
-            public string PurchaseTimeForm_Name { get; set; }
-
-        }
+        public List<StatusReason> StatusReasonList { get; internal set; }
+        public List<CurrencyForQuotes> CurrencyList { get; internal set; }
+        public List<ShipTo> ShipToList { get; internal set; }
+        public List<ShippingMethod> ShippingMethodList { get; internal set; }
+        public List<FreightTerms> FreightTermsList { get; internal set; }
+        public List<PaymentTerms> PaymentTermsList { get; internal set; }
     }
+
+
+
+    public class StatusReason
+    {
+        public int ShipId_Id { get; set; }
+
+        public string ShipId_Name { get; set; }
+
+    }
+
+    public class ShipTo
+    {
+        public int ShipTo_Id { get; set; }
+
+        public string ShipTo_NAME { get; set; }
+
+    }
+
+    public class ShippingMethod
+    {
+        public int ShipId_Id { get; set; }
+
+        public string ShipId_Name { get; set; }
+
+    }
+
+    public class FreightTerms
+    {
+        public int ForecastCategory_Id { get; set; }
+
+        public string ForecastCategory_Name { get; set; }
+
+    }
+
+    public class PaymentTerms
+    {
+        public int Payment_Id { get; set; }
+
+        public string PaymentTerm_Name { get; set; }
+
+    }
+
+    public class CurrencyForQuotes
+    {
+        public int Currency_Id { get; set; }
+
+        public string Currency_Name { get; set; }
+
+    }
+
 }
