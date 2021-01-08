@@ -234,14 +234,14 @@ namespace SALES_MANAGEMENT.Controllers
             using (SqlConnection con = new SqlConnection(Dbconnection))
             {
                 con.Open();
-                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_SelectAll", con);
+                SqlCommand Com = new SqlCommand("SP_Quote_SelectAll", con);
                 Com.CommandType = CommandType.StoredProcedure;
 
                 SqlDataReader Sqlreader = Com.ExecuteReader();
                 while (Sqlreader.Read())
                 {
                     var customer = new QuoteModel();
-                    customer.QuoteId = Convert.ToInt32(Sqlreader["QuoteId"]);
+                    //customer.QuoteId = Convert.ToInt32(Sqlreader["QuoteId"]);
                     customer.Name = Sqlreader["Name"].ToString();
                     customer.Currency = Sqlreader["Currency"].ToString();
                     customer.Opportunity = Sqlreader["Opportunity"].ToString();
