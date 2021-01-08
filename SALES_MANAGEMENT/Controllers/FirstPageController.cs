@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace SALES_MANAGEMENT.Controllers
+{
+    public class FirstPageController : Controller
+    {
+         
+        // GET: FirstPage
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Mark()
+        {
+            return View();
+        }
+    }
+}

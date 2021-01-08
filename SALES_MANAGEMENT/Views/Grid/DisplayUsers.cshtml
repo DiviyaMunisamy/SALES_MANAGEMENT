@@ -1,0 +1,94 @@
+﻿@model IEnumerable<SALES_MANAGEMENT.Models.LoginModel>
+<style>
+
+    p {
+        text-align: center;
+    }
+</style>
+<h1>Existing Users:</h1>
+<style type="text/css">
+    .grey {
+        background-color: grey;
+    }
+
+    .approved {
+        background-color: green;
+    }
+
+    .rejected {
+        background-color: red;
+    }
+
+    .pending {
+        background-color: lime;
+    }
+</style>
+
+<head>
+    <style>
+        table {
+            border-collapse: separate;
+            width: 300%;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 15px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #ffffff;
+            color: black;
+            text-align: center;
+        }
+    </style>
+</head>
+<table class="table " border="1" width="100%">
+    <tr tyle="background:green">
+        <th>
+            @Html.DisplayNameFor(model => model.UserEmailId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserDepartment)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.UserEmailId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDepartment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.LeadId)
+                </td>*@
+
+        </tr>
+    }
+
+</table>
+
+

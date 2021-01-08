@@ -121,6 +121,8 @@
     <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FirstPageController.cs" />
+    <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadController.cs" />
     <Compile Include="Controllers\OpportunityController.cs" />
@@ -129,6 +131,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LeadsModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OpportunityModel.cs" />
     <Compile Include="Models\QuoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -188,6 +191,10 @@
     <Content Include="Views\Quotes\QuotesIndex.cshtml" />
     <Content Include="Site1.Master" />
     <Content Include="Views\Quotes\IndexOppQuote.cshtml" />
+    <Content Include="Views\Grid\DisplayUsers.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Shared\layoutpage.cshtml" />
+    <Content Include="Views\FirstPage\Mark.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
