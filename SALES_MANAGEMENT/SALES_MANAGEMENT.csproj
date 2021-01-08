@@ -128,13 +128,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Credentials.cs" />
-    <Compile Include="Models\Department.cs" />
-    <Compile Include="Models\displayuser.cs" />
     <Compile Include="Models\LeadsModel.cs" />
-    <Compile Include="Models\log.cs" />
-    <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\Model1.Context.cs" />
     <Compile Include="Models\OpportunityModel.cs" />
     <Compile Include="Models\QuoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
