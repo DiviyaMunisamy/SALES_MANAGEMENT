@@ -143,6 +143,7 @@ namespace SALES_MANAGEMENT.Controllers
                 SqlCommand Command = new SqlCommand("SP_Opportunity_Insert", con);
                 Command.CommandType = CommandType.StoredProcedure;
                 con.Open();
+                Command.Parameters.AddWithValue("@RefOppId", model.RefOppId);
                 Command.Parameters.AddWithValue("@Topic", model.Topic);
                 Command.Parameters.AddWithValue("@Contact", model.Contact);
                 Command.Parameters.AddWithValue("@Account", model.Account);

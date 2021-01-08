@@ -8,6 +8,10 @@ namespace SALES_MANAGEMENT.Models
 {
     public class OpportunityModel
     {
+        [Display(Name = "Lead ID")]
+        [Required(ErrorMessage = " Lead ID is Required")]
+        public long RefOppId { get; set; }
+
         [Display(Name = "Topic")]
         [Required(ErrorMessage = " Topic is Required")]
         public string Topic { get; set; }

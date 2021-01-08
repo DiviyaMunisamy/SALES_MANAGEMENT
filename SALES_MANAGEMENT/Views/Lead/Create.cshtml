@@ -10,6 +10,8 @@
     </style>
 </head>
 
+<h2 style="font-family:'Times New Roman';"> @Html.ViewData["Message"] </h2>
+
 @using (Html.BeginForm("Create", "Lead", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
