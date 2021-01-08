@@ -268,5 +268,40 @@ namespace SALES_MANAGEMENT.Controllers
                 return View(QuoteList);
             }
         }
+
+
+        //Qualified opportunity List
+        public ActionResult IndexOppQuote()
+        {
+            List<OpportunityModel> OpportunityList = new List<OpportunityModel>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("SP_SelectAll_OpportunityQualify", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    var customer = new OpportunityModel();
+                    //customer.LeadId = Convert.ToInt32(Sqlreader["LeadId"]);
+                    customer.RefOppId = Convert.ToInt32(Sqlreader["RefOppId"]);
+                    customer.Topic = Sqlreader["Topic"].ToString();
+                    customer.Contact = Convert.ToInt64(Sqlreader["Contact"]);
+                    customer.Account = Sqlreader["Account"].ToString();
+                    customer.PurchaseTimeForm = Sqlreader["PurchaseTimeForm"].ToString();
+                    customer.Currency = Sqlreader["Currency"].ToString();
+                    customer.BudgetAmount = Convert.ToInt64(Sqlreader["BudgetAmount"]);
+                    customer.PurchesProcess = Sqlreader["PurchesProcess"].ToString();
+                    customer.ForecastCategory = Sqlreader["ForecastCategory"].ToString();
+                    customer.Description = Sqlreader["Description"].ToString();
+                    customer.CurrentSuitation = Sqlreader["CurrentSuitation"].ToString();
+                    customer.CustommerNeed = Sqlreader["CustommerNeed"].ToString();
+                    customer.ProposedSolution = Sqlreader["ProposedSolution"].ToString();
+                    OpportunityList.Add(customer);
+                }
+                return View(OpportunityList);
+            }
+        }
     }
 }

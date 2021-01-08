@@ -187,6 +187,7 @@
     <Content Include="Views\Opportunity\Index.cshtml" />
     <Content Include="Views\Quotes\QuotesIndex.cshtml" />
     <Content Include="Site1.Master" />
+    <Content Include="Views\Quotes\IndexOppQuote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<SALES_MANAGEMENT.Models.OpportunityModel>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RefOppId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Topic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseTimeForm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BudgetAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchesProcess)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ForecastCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentSuitation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustommerNeed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProposedSolution)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RefOppId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Topic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurchaseTimeForm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Currency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BudgetAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurchesProcess)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ForecastCategory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentSuitation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustommerNeed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProposedSolution)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
