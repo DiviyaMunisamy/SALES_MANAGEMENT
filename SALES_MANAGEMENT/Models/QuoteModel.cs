@@ -47,9 +47,9 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = " PaymentTerms is Required")]
         public string PaymentTerms { get; set; }
 
-        [Display(Name = "FreightTerms")]
-        [Required(ErrorMessage = " FreightTerms is Required")]
-        public string FreightTerms { get; set; }
+        [Display(Name = "FrieghtTerms")]
+        [Required(ErrorMessage = " FrieghtTerms is Required")]
+        public string FrieghtTerms { get; set; }
 
         [Display(Name = "BillToStreet")]
         [Required(ErrorMessage = " BillToStreet is Required")]

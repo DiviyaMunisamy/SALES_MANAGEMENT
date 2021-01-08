@@ -100,9 +100,9 @@
         <th>
             @Html.DisplayNameFor(model => model.ShipingPostalCode)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.QuoteId)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -175,9 +175,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ShipingPostalCode)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.QuoteId)
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })

@@ -206,7 +206,7 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@StatusReason", model.StatusReason);
                 Command.Parameters.AddWithValue("@Description", model.Description);
                 Command.Parameters.AddWithValue("@PaymentTerms", model.PaymentTerms);
-                Command.Parameters.AddWithValue("@FreightTerms", model.FreightTerms); 
+                Command.Parameters.AddWithValue("@FrieghtTerms", model.FrieghtTerms); 
                 Command.Parameters.AddWithValue("@BillToStreet", model.BillToStreet);
                 Command.Parameters.AddWithValue("@BillToState", model.BillToState);
                 Command.Parameters.AddWithValue("@BillToCity", model.BillToCity);
@@ -251,7 +251,7 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.StatusReason = Sqlreader["StatusReason"].ToString();
                     customer.Description = Sqlreader["Description"].ToString();
                     customer.PaymentTerms = Sqlreader["PaymentTerms"].ToString();
-                    customer.FreightTerms = Sqlreader["FreightTerms"].ToString();
+                    customer.FrieghtTerms = Sqlreader["FrieghtTerms"].ToString();
                     customer.BillToStreet = Sqlreader["BillToStreet"].ToString();
                     customer.BillToState = Sqlreader["Country"].ToString();
                     customer.BillToCountry = Sqlreader["BillToCountry"].ToString();
