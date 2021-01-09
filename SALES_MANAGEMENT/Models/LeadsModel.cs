@@ -97,11 +97,11 @@ namespace SALES_MANAGEMENT.Models
         public DateTime MeetingDate { get; set; }
 
         public DateTime CreatedDate { get; set; }
-
+        public IEnumerable<Countries> CountryList { get; set; }
         public  List<LeadSources> LeadSourceList { get; internal set; }
         public List<Cities> CityList { get; internal set; }
         public List<States> StateList { get; set; }
-        public List<Countries> CountryList { get; internal set; }
+        //public List<Countries> CountryList { get; internal set; }
         public List<Types> TypeList { get; internal set; }
     }
 

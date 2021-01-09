@@ -64,6 +64,7 @@ namespace SALES_MANAGEMENT.Models
         public List<Currency> CurrencyList { get; internal set; }
         public List<PurchesProcess> PurchesProcessList { get; internal set; }
         public List<ForecastCategory> ForecastCategoryList { get; internal set; }
+        public int Id { get; internal set; }
     }
     public class PurchaseTimeForm
     {

@@ -328,18 +328,18 @@ namespace SALES_MANAGEMENT.Controllers
             }
         }
 
-        //
+        //Edit 
         [HttpGet]
         public ActionResult Edit(int? LeadId)
         {
-            LeadsModel DropdownList = new LeadsModel()
-            {
-                LeadSourceList = GetLeadSourceList(),
-                CountryList = GetCountryList(),
-                StateList = GetStateList(),
-                CityList = GetCityList(),
-                TypeList = GetTypeList()
-            };
+            //LeadsModel DropdownList = new LeadsModel()
+            //{
+            //    LeadSourceList = GetLeadSourceList(),
+            //    CountryList = GetCountryList(),
+            //    StateList = GetStateList(),
+            //    CityList = GetCityList(),
+            //    TypeList = GetTypeList()
+            //};
             LeadsModel customer = new LeadsModel();
             List<LeadsModel> LeadList = new List<LeadsModel>();
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
@@ -379,31 +379,18 @@ namespace SALES_MANAGEMENT.Controllers
             }
         }
       
-        //[HttpGet]
-        //public ActionResult Edit()
-        //{
-        //    LeadsModel DropdownList = new LeadsModel()
-        //    {
-        //        LeadSourceList = GetLeadSourceList(),
-        //        CountryList = GetCountryList(),
-        //        StateList = GetStateList(),
-        //        CityList = GetCityList(),
-        //        TypeList = GetTypeList()
-        //    };
-        //    return View(DropdownList);
-
-        //}
+       
         [HttpPost]
         public ActionResult Edit(LeadsModel model, HttpPostedFileBase file)
         {
-            LeadsModel DropdownList = new LeadsModel()
-            {
-                LeadSourceList = GetLeadSourceList(),
-                CountryList = GetCountryList(),
-                StateList = GetStateList(),
-                CityList = GetCityList(),
-                TypeList = GetTypeList()
-            };
+            //LeadsModel DropdownList = new LeadsModel()
+            //{
+            //    LeadSourceList = GetLeadSourceList(),
+            //    CountryList = GetCountryList(),
+            //    StateList = GetStateList(),
+            //    CityList = GetCityList(),
+            //    TypeList = GetTypeList()
+            //};
 
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
@@ -440,8 +427,8 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@Photo", "~/Lead-Images/" + file.FileName);
                 Command.ExecuteNonQuery();
                 con.Close();
-                //return RedirectToAction("Index");
-                return View(DropdownList);
+                return RedirectToAction("Index");
+                
             }
         }
         //[HttpGet]
