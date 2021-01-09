@@ -317,6 +317,7 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.Title = Sqlreader["Title"].ToString();
                     customer.LeadSource = Sqlreader["LeadSource"].ToString();
                     customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
+                    customer.CreatedDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
                     customer.Type = Sqlreader["Type"].ToString();
                     customer.JobTitle = Sqlreader["JobTitle"].ToString();
                     customer.CompanyWebsite = Sqlreader["CompanyWebsite"].ToString();
@@ -449,7 +450,7 @@ namespace SALES_MANAGEMENT.Controllers
                 return RedirectToAction("Index");
             }
         }
-        public ActionResult Qualify(int? Id)
+        public ActionResult Qualify(int? LeadId)
         {
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
@@ -458,7 +459,7 @@ namespace SALES_MANAGEMENT.Controllers
                 con.Open();
                 SqlCommand cmd = new SqlCommand("SP_Qialify_Update", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@LeadId", Id);
+                cmd.Parameters.AddWithValue("@LeadId", LeadId);
                 cmd.ExecuteNonQuery();
                 con.Close();
 

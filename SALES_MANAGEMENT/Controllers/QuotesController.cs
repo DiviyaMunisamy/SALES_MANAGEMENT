@@ -303,5 +303,106 @@ namespace SALES_MANAGEMENT.Controllers
                 return View(OpportunityList);
             }
         }
+
+        //Edit
+        [HttpGet]
+        public ActionResult Edit(int? RefOppId)
+        {
+            List<QuoteModel> QuoteList = new List<QuoteModel>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("------", con);
+                Com.CommandType = CommandType.StoredProcedure;
+
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    var customer = new QuoteModel();
+                    //customer.QuoteId = Convert.ToInt32(Sqlreader["QuoteId"]);
+                    customer.Name = Sqlreader["Name"].ToString();
+                    customer.Currency = Sqlreader["Currency"].ToString();
+                    customer.Opportunity = Sqlreader["Opportunity"].ToString();
+                    customer.PotentialCustomer = Sqlreader["PotentialCustomer"].ToString();
+                    customer.PriceList = Sqlreader["PriceList"].ToString();
+                    customer.QuoteExpiresOn = Convert.ToDateTime(Sqlreader["QuoteExpiresOn"]);
+                    customer.StatusReason = Sqlreader["StatusReason"].ToString();
+                    customer.Description = Sqlreader["Description"].ToString();
+                    customer.PaymentTerms = Sqlreader["PaymentTerms"].ToString();
+                    customer.FrieghtTerms = Sqlreader["FrieghtTerms"].ToString();
+                    customer.BillToStreet = Sqlreader["BillToStreet"].ToString();
+                    customer.BillToState = Sqlreader["Country"].ToString();
+                    customer.BillToCountry = Sqlreader["BillToCountry"].ToString();
+                    customer.BillingPostalCode = Sqlreader["BillingPostalCode"].ToString();
+                    customer.ShipTo = Sqlreader["ShipTo"].ToString();
+                    customer.ShippingMethod = Sqlreader["ShippingMethod"].ToString();
+                    customer.ShipToStreet = Sqlreader["ShipToStreet"].ToString();
+                    customer.ShipToCity = Sqlreader["ShipToCity"].ToString();
+                    customer.ShipToState = Sqlreader["ShipToState"].ToString();
+                    customer.ShipToCountry = Sqlreader["ShipToCountry"].ToString();
+                    customer.ShipingPostalCode = Convert.ToInt32(Sqlreader["ShipingPostalCode"]);
+                    QuoteList.Add(customer);
+                }
+                return View(QuoteList);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(QuoteModel model)
+        {
+
+            {
+                CONNECTION();
+                SqlCommand Command = new SqlCommand("---------", con);
+                Command.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                Command.Parameters.AddWithValue("@Name", model.Name);
+                Command.Parameters.AddWithValue("@Currency", model.Currency);
+                Command.Parameters.AddWithValue("@Opportunity", model.Opportunity);
+                Command.Parameters.AddWithValue("@PotentialCustomer", model.PotentialCustomer);
+                Command.Parameters.AddWithValue("@PriceList", model.PriceList);
+                Command.Parameters.AddWithValue("@QuoteExpiresOn", model.QuoteExpiresOn);
+                Command.Parameters.AddWithValue("@StatusReason", model.StatusReason);
+                Command.Parameters.AddWithValue("@Description", model.Description);
+                Command.Parameters.AddWithValue("@PaymentTerms", model.PaymentTerms);
+                Command.Parameters.AddWithValue("@FrieghtTerms", model.FrieghtTerms);
+                Command.Parameters.AddWithValue("@BillToStreet", model.BillToStreet);
+                Command.Parameters.AddWithValue("@BillToState", model.BillToState);
+                Command.Parameters.AddWithValue("@BillToCity", model.BillToCity);
+                Command.Parameters.AddWithValue("@BillToCountry", model.BillToCountry);
+                Command.Parameters.AddWithValue("@BillingPostalCode", model.BillingPostalCode);
+                Command.Parameters.AddWithValue("@ShipTo", model.ShipTo);
+                Command.Parameters.AddWithValue("@ShippingMethod", model.ShippingMethod);
+                Command.Parameters.AddWithValue("@ShipToStreet", model.ShipToStreet);
+                Command.Parameters.AddWithValue("@ShipToState", model.ShipToState);
+                Command.Parameters.AddWithValue("@ShipToCity", model.ShipToCity);
+                Command.Parameters.AddWithValue("@ShipToCountry", model.ShipToCountry);
+                Command.Parameters.AddWithValue("@ShipingPostalCode", model.ShipingPostalCode);
+                Command.ExecuteNonQuery();
+                con.Close();
+                return RedirectToAction("QuotesIndex");
+            }
+        }
+
+
+        //delete
+        public ActionResult Delete(int? RefOppId)
+        {
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("[SP_Opprtunity_Delete]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@RefOppId", RefOppId);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                return RedirectToAction("Index");
+            }
+
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = "DOB is Required ")]
         [Display(Name = "DateOfBirth")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Gender")]
@@ -93,9 +93,10 @@ namespace SALES_MANAGEMENT.Models
         [Display(Name = "Meeting Date")]
         [Required(ErrorMessage = "MeetingDate is Required")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime MeetingDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime CreatedDate { get; set; }
 
         public  List<LeadSources> LeadSourceList { get; internal set; }

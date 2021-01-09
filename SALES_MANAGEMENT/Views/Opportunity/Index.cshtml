@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SALES_MANAGEMENT.Models.OpportunityModel>
-
+<h1 style="text-align: center;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> OPPORTUNITY LIST </h1>
 <style>
 
     p {
@@ -113,8 +113,15 @@
                 @Html.DisplayFor(modelItem => item.ProposedSolution)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <button>
+                    @Html.ActionLink("Edit", "Edit", new { RefOppId = item.RefOppId })
+                </button>
+                <button>
+                    @Html.ActionLink("Delete", "Delete", new { RefOppId = item.RefOppId }, new { onclick = "return confirm('Are you sure you want to delete this Lead Record?')" })
+                </button>
+                @*<button>
+                    @Html.ActionLink("Qualify", "Qualify", new { RefOppId = item.RefOppId })
+                </button>*@
             </td>
         </tr>
     }

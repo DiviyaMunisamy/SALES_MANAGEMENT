@@ -10,14 +10,14 @@
     </style>
 </head>
 
-<h2 style="font-family:'Times New Roman';"> @Html.ViewData["Message"] </h2>
+<h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;"> @Html.ViewData["Message"] </h2>
 
 @using (Html.BeginForm("Create", "Lead", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h1 style="font-family:'Times New Roman';"> Lead Form </h1>
+    <h1 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> Lead Form </h1>
     <div>
         <button> <h4> @Html.ActionLink("All Leads", "Index") </h4> </button>
     </div>

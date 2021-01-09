@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<SALES_MANAGEMENT.Models.QuoteModel>
+<h1 style="text-align: center;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> QUOTES LIST </h1>
 
 <style>
 
@@ -101,8 +102,8 @@
             @Html.DisplayNameFor(model => model.ShipingPostalCode)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.QuoteId)
-        </th>*@
+                @Html.DisplayNameFor(model => model.QuoteId)
+            </th>*@
         <th></th>
     </tr>
 
@@ -176,8 +177,8 @@
                 @Html.DisplayFor(modelItem => item.ShipingPostalCode)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.QuoteId)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.QuoteId)
+                </td>*@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })

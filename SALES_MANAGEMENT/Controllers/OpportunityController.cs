@@ -229,7 +229,7 @@ namespace SALES_MANAGEMENT.Controllers
                 while (Sqlreader.Read())
                 {
                     var customer = new OpportunityModel();
-                   //customer.LeadId = Convert.ToInt32(Sqlreader["LeadId"]);
+                    customer.RefOppId = Convert.ToInt32(Sqlreader["RefOppId"]);
                     customer.Topic = Sqlreader["Topic"].ToString();
                     customer.Contact = Convert.ToInt64(Sqlreader["Contact"]);
                     customer.Account = Sqlreader["Account"].ToString();
@@ -248,7 +248,88 @@ namespace SALES_MANAGEMENT.Controllers
             }
         }
 
+        //Edit
+        [HttpGet]
+        public ActionResult Edit(int? RefOppId)
+        {
+            OpportunityModel customer = new OpportunityModel();
+            List<OpportunityModel> OpportunityList = new List<OpportunityModel>();
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+            {
+                con.Open();
+                SqlCommand Com = new SqlCommand("SP_Opportunity_SelectAllbyId", con);
+                Com.CommandType = CommandType.StoredProcedure;
+                Com.Parameters.AddWithValue("@RefOppId", RefOppId);
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    
+                    //customer.RefOppId = Convert.ToInt32(Sqlreader["RefOppId"]);
+                    customer.Topic = Sqlreader["Topic"].ToString();
+                    customer.Contact = Convert.ToInt64(Sqlreader["Contact"]);
+                    customer.Account = Sqlreader["Account"].ToString();
+                    customer.PurchaseTimeForm = Sqlreader["PurchaseTimeForm"].ToString();
+                    customer.Currency = Sqlreader["Currency"].ToString();
+                    customer.BudgetAmount = Convert.ToInt64(Sqlreader["BudgetAmount"]);
+                    customer.PurchesProcess = Sqlreader["PurchesProcess"].ToString();
+                    customer.ForecastCategory = Sqlreader["ForecastCategory"].ToString();
+                    customer.Description = Sqlreader["Description"].ToString();
+                    customer.CurrentSuitation = Sqlreader["CurrentSuitation"].ToString();
+                    customer.CustommerNeed = Sqlreader["CustommerNeed"].ToString();
+                    customer.ProposedSolution = Sqlreader["ProposedSolution"].ToString();
+                    OpportunityList.Add(customer);
+                }
+                return View(customer);
+            }
+        }
 
+        [HttpPost]
+        public ActionResult Edit(OpportunityModel model)
+        {
+
+            {
+                CONNECTION();
+                SqlCommand Command = new SqlCommand("SP_Opportunity_Update", con);
+                Command.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                Command.Parameters.AddWithValue("@RefOppId", model.RefOppId);
+                Command.Parameters.AddWithValue("@Topic", model.Topic);
+                Command.Parameters.AddWithValue("@Contact", model.Contact);
+                Command.Parameters.AddWithValue("@Account", model.Account);
+                Command.Parameters.AddWithValue("@PurchaseTimeForm", model.PurchaseTimeForm);
+                Command.Parameters.AddWithValue("@Currency", model.Currency);
+                Command.Parameters.AddWithValue("@BudgetAmount", model.BudgetAmount);
+                Command.Parameters.AddWithValue("@PurchesProcess", model.PurchesProcess);
+                Command.Parameters.AddWithValue("@ForecastCategory", model.ForecastCategory);
+                Command.Parameters.AddWithValue("@Description", model.Description);
+                Command.Parameters.AddWithValue("@CurrentSuitation", model.CurrentSuitation);
+                Command.Parameters.AddWithValue("@CustommerNeed", model.CustommerNeed);
+                Command.Parameters.AddWithValue("@ProposedSolution", model.ProposedSolution);
+                Command.ExecuteNonQuery();
+                con.Close();
+                return RedirectToAction("Index");
+            }
+        }
+
+
+        //delete
+        public ActionResult Delete(int? RefOppId)
+        {
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("[SP_Opprtunity_Delete]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@RefOppId", RefOppId);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                return RedirectToAction("Index");
+            }
         
+        }
     }
 }

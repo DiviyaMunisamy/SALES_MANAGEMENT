@@ -1,0 +1,122 @@
+﻿@model SALES_MANAGEMENT.Models.OpportunityModel
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>OpportunityModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RefOppId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RefOppId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Topic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Topic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseTimeForm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseTimeForm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Currency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Currency)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BudgetAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BudgetAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchesProcess)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchesProcess)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ForecastCategory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ForecastCategory)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentSuitation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentSuitation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustommerNeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustommerNeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProposedSolution)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProposedSolution)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
