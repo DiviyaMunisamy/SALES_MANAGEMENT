@@ -241,7 +241,6 @@ namespace SALES_MANAGEMENT.Controllers
                 SqlCommand Command = new SqlCommand("SP_Lead_Insert", con);
                 Command.CommandType = CommandType.StoredProcedure;
                 con.Open();
-                //Command.Parameters.AddWithValue("@Photo", model.Photo);
                 Command.Parameters.AddWithValue("@FirstName", model.FirstName);
                 Command.Parameters.AddWithValue("@LastName", model.LastName);
                 Command.Parameters.AddWithValue("@DateOfBirth", model.DateOfBirth);
@@ -319,7 +318,7 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.LeadSource = Sqlreader["LeadSource"].ToString();
                     customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
                     customer.Type = Sqlreader["Type"].ToString();
-                    customer.JobTitle = Sqlreader["Job Title"].ToString();
+                    customer.JobTitle = Sqlreader["JobTitle"].ToString();
                     customer.CompanyWebsite = Sqlreader["CompanyWebsite"].ToString();
                     customer.CompanyName = Sqlreader["CompanyName"].ToString();
                     LeadList.Add(customer);
@@ -333,6 +332,14 @@ namespace SALES_MANAGEMENT.Controllers
         [HttpGet]
         public ActionResult Edit(int? LeadId)
         {
+            LeadsModel DropdownList = new LeadsModel()
+            {
+                LeadSourceList = GetLeadSourceList(),
+                CountryList = GetCountryList(),
+                StateList = GetStateList(),
+                CityList = GetCityList(),
+                TypeList = GetTypeList()
+            };
             LeadsModel customer = new LeadsModel();
             List<LeadsModel> LeadList = new List<LeadsModel>();
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
@@ -371,11 +378,33 @@ namespace SALES_MANAGEMENT.Controllers
                 return View(customer);
             }
         }
+      
+        //[HttpGet]
+        //public ActionResult Edit()
+        //{
+        //    LeadsModel DropdownList = new LeadsModel()
+        //    {
+        //        LeadSourceList = GetLeadSourceList(),
+        //        CountryList = GetCountryList(),
+        //        StateList = GetStateList(),
+        //        CityList = GetCityList(),
+        //        TypeList = GetTypeList()
+        //    };
+        //    return View(DropdownList);
 
-
+        //}
         [HttpPost]
-        public ActionResult Edit(int? LeadId, LeadsModel model, HttpPostedFileBase file)
+        public ActionResult Edit(LeadsModel model, HttpPostedFileBase file)
         {
+            LeadsModel DropdownList = new LeadsModel()
+            {
+                LeadSourceList = GetLeadSourceList(),
+                CountryList = GetCountryList(),
+                StateList = GetStateList(),
+                CityList = GetCityList(),
+                TypeList = GetTypeList()
+            };
+
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
 
@@ -383,7 +412,6 @@ namespace SALES_MANAGEMENT.Controllers
                 con.Open();
                 SqlCommand Command = new SqlCommand("USP_SALES_MANAGEMENT_Update", con);
                 Command.CommandType = CommandType.StoredProcedure;
-                //Command.Parameters.AddWithValue("@Photo", model.Photo);
                 Command.Parameters.AddWithValue("@LeadId", model.LeadId);
                 Command.Parameters.AddWithValue("@FirstName", model.FirstName);
                 Command.Parameters.AddWithValue("@LastName", model.LastName);
@@ -400,7 +428,7 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@LeadSource", model.LeadSource);
                 Command.Parameters.AddWithValue("@MeetingDate", model.MeetingDate);
                 Command.Parameters.AddWithValue("@Type", model.Type);
-                Command.Parameters.AddWithValue("@Job Title", model.JobTitle);
+                Command.Parameters.AddWithValue("@JobTitle", model.JobTitle);
                 Command.Parameters.AddWithValue("@CompanyName", model.CompanyName);
                 Command.Parameters.AddWithValue("@CompanyWebSite", model.CompanyWebsite);
                 if (file != null && file.ContentLength > 0)
@@ -412,49 +440,13 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@Photo", "~/Lead-Images/" + file.FileName);
                 Command.ExecuteNonQuery();
                 con.Close();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return View(DropdownList);
             }
         }
-        [HttpGet]
+        //[HttpGet]
+        
         public ActionResult Delete(int? LeadId)
-        {
-            LeadsModel customer = new LeadsModel();
-            List<LeadsModel> LeadList = new List<LeadsModel>();
-            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(Dbconnection))
-            {
-                con.Open();
-                SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_SelectAllbyId", con);
-                Com.CommandType = CommandType.StoredProcedure;
-                Com.Parameters.AddWithValue("@LeadId", LeadId);
-                SqlDataReader Sqlreader = Com.ExecuteReader();
-                while (Sqlreader.Read())
-                {
-                    customer.LeadId = Convert.ToInt32(Sqlreader["LeadId"]);
-                    customer.Photo = Sqlreader["Photo"].ToString();
-                    customer.FirstName = Sqlreader["FirstName"].ToString();
-                    customer.LastName = Sqlreader["LastName"].ToString();
-                    customer.DateOfBirth = Convert.ToDateTime(Sqlreader["DateOfBirth"]);
-                    customer.Gender = Sqlreader["Gender"].ToString();
-                    customer.CurrentAddress = Sqlreader["CurrentAddress"].ToString();
-                    customer.PermanentAddress = Sqlreader["PermanentAddress"].ToString();
-                    customer.MobileNumber = Convert.ToInt64(Sqlreader["MobileNumber"]);
-                    customer.EmailId = Sqlreader["EmailId"].ToString();
-                    customer.City = Sqlreader["City"].ToString();
-                    customer.State = Sqlreader["State"].ToString();
-                    customer.Country = Sqlreader["Country"].ToString();
-                    customer.Title = Sqlreader["Title"].ToString();
-                    customer.LeadSource = Sqlreader["LeadSource"].ToString();
-                    customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
-                    LeadList.Add(customer);
-                }
-
-                return View(customer);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Delete(int? LeadId, LeadsModel model)
         {
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
