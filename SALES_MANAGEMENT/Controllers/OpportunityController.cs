@@ -206,7 +206,11 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.Title = Sqlreader["Title"].ToString();
                     customer.LeadSource = Sqlreader["LeadSource"].ToString();
                     customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
-                    customer.CreatedDate = Convert.ToDateTime(Sqlreader["CreatedDate"]);
+                    customer.CreatedDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
+                    customer.Type = Sqlreader["Type"].ToString();
+                    customer.JobTitle = Sqlreader["JobTitle"].ToString();
+                    customer.CompanyWebsite = Sqlreader["CompanyWebsite"].ToString();
+                    customer.CompanyName = Sqlreader["CompanyName"].ToString();
                     LeadList.Add(customer);
                 }
 
