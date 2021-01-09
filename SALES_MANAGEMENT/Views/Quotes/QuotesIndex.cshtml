@@ -109,81 +109,89 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Opportunity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PotentialCustomer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PriceList)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuoteExpiresOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusReason)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentTerms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FrieghtTerms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillToStreet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillToState)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillToCity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillToCountry)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillingPostalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipTo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShippingMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipToStreet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipToState)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipToCity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipToCountry)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipingPostalCode)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.QuoteId)
-                </td>*@
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Currency)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Opportunity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PotentialCustomer)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PriceList)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.QuoteExpiresOn)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StatusReason)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PaymentTerms)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FrieghtTerms)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BillToStreet)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BillToState)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BillToCity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BillToCountry)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BillingPostalCode)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipTo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShippingMethod)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipToStreet)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipToState)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipToCity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipToCountry)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipingPostalCode)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.QuoteId)
+        </td>*@
+    <td>
+        <button>
+            @Html.ActionLink("Edit", "Edit", new { RefQuoteId = item.RefQuoteId })
+        </button>
+        <button>
+            @Html.ActionLink("Delete", "Delete", new { RefQuoteId = item.RefQuoteId }, new { onclick = "return confirm('Are you sure you want to delete this Lead Record?')" })
+        </button>
+        <button>
+            @Html.ActionLink("Qualify", "Qualify", new { RefQuoteId = item.RefQuoteId })
+        </button>
+
+    </td>
+</tr>
     }
 
 </table>

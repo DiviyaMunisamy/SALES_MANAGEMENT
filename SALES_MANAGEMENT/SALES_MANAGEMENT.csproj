@@ -197,6 +197,8 @@
     <Content Include="Views\Lead\Delete.cshtml" />
     <Content Include="Views\Opportunity\Edit.cshtml" />
     <Content Include="Views\Opportunity\Delete.cshtml" />
+    <Content Include="Views\Quotes\Delete.cshtml" />
+    <Content Include="Views\Quotes\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

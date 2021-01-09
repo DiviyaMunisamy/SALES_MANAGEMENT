@@ -285,7 +285,7 @@ namespace SALES_MANAGEMENT.Controllers
                 {
                     var customer = new OpportunityModel();
                     //customer.LeadId = Convert.ToInt32(Sqlreader["LeadId"]);
-                    customer.RefOppId = Convert.ToInt32(Sqlreader["RefOppId"]);
+                    customer.RefQuoteId = Convert.ToInt32(Sqlreader["RefQuoteId"]);
                     customer.Topic = Sqlreader["Topic"].ToString();
                     customer.Contact = Convert.ToInt64(Sqlreader["Contact"]);
                     customer.Account = Sqlreader["Account"].ToString();
@@ -306,15 +306,16 @@ namespace SALES_MANAGEMENT.Controllers
 
         //Edit
         [HttpGet]
-        public ActionResult Edit(int? RefOppId)
+        public ActionResult Edit(int? RefQuoteId)
         {
             List<QuoteModel> QuoteList = new List<QuoteModel>();
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
             {
                 con.Open();
-                SqlCommand Com = new SqlCommand("------", con);
+                SqlCommand Com = new SqlCommand("SP_Quotes_SelectAllbyId", con);
                 Com.CommandType = CommandType.StoredProcedure;
+                Com.Parameters.AddWithValue("@RefQuoteId", RefQuoteId);
 
                 SqlDataReader Sqlreader = Com.ExecuteReader();
                 while (Sqlreader.Read())
@@ -354,7 +355,7 @@ namespace SALES_MANAGEMENT.Controllers
 
             {
                 CONNECTION();
-                SqlCommand Command = new SqlCommand("---------", con);
+                SqlCommand Command = new SqlCommand("SP_Quortes_Update", con);
                 Command.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 Command.Parameters.AddWithValue("@Name", model.Name);
@@ -387,16 +388,16 @@ namespace SALES_MANAGEMENT.Controllers
 
 
         //delete
-        public ActionResult Delete(int? RefOppId)
+        public ActionResult Delete(int? RefQuoteId)
         {
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
 
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("[SP_Opprtunity_Delete]", con);
+                SqlCommand cmd = new SqlCommand("USP_Quortes_Delete", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@RefOppId", RefOppId);
+                cmd.Parameters.AddWithValue("@RefQuoteId", RefQuoteId);
                 cmd.ExecuteNonQuery();
                 con.Close();
 

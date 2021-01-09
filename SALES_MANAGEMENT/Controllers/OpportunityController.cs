@@ -173,18 +173,19 @@ namespace SALES_MANAGEMENT.Controllers
                 con.Open();
                 SqlCommand Com = new SqlCommand("USP_SALES_MANAGEMENT_Op_SelectAll", con);
                 Com.CommandType = CommandType.StoredProcedure;
-                Com.Parameters.AddWithValue("@SortingCol", SortingCol);
-                Com.Parameters.AddWithValue("@SortType", SortType);
 
-                if (SortType == "ASC")
-                {
-                    SortType = "DESC";
-                }
-                else
-                {
-                    SortType = "ASC";
-                }
-                ViewBag.sorttype = SortType;
+                //Com.Parameters.AddWithValue("@SortingCol", SortingCol);
+                //Com.Parameters.AddWithValue("@SortType", SortType);
+
+                //if (SortType == "ASC")
+                //{
+                //    SortType = "DESC";
+                //}
+                //else
+                //{
+                //    SortType = "ASC";
+                //}
+                //ViewBag.sorttype = SortType;
 
                 SqlDataReader Sqlreader = Com.ExecuteReader();
                 while (Sqlreader.Read())

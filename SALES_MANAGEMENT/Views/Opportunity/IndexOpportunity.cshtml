@@ -44,7 +44,7 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.ActionLink("FirstName", "Index", new { SortType = ViewBag.sorttype, SortingCol = "FirstName" })
+            @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.LastName)
@@ -59,7 +59,7 @@
             @Html.DisplayNameFor(model => model.MobileNumber)
         </th>
         <th>
-            @Html.ActionLink("EmailId", "Index", new { SortType = ViewBag.sorttype, SortingCol = "EmailId" })
+            @Html.DisplayNameFor(model => model.EmailId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Type)
@@ -93,8 +93,7 @@
             @Html.DisplayNameFor(model => model.LeadSource)
         </th>
         <th>
-            @Html.ActionLink("MeetingDate", "Index", new { SortType = ViewBag.sorttype, SortingCol = "MeetingDate" })
-
+            @Html.DisplayNameFor(model => model.MeetingDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreatedDate)
@@ -109,7 +108,7 @@
     {
         <tr>
             <td>
-                <img src="@Url.Content(item.Photo)" alt="Image" width="100" height="100" />
+                <img src="@Url.Content(item.Photo)" alt="Image" width="110" height="110" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)

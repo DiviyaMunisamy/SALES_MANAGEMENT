@@ -65,6 +65,7 @@ namespace SALES_MANAGEMENT.Models
         public List<PurchesProcess> PurchesProcessList { get; internal set; }
         public List<ForecastCategory> ForecastCategoryList { get; internal set; }
         public int Id { get; internal set; }
+        public int RefQuoteId { get; internal set; }
     }
     public class PurchaseTimeForm
     {
