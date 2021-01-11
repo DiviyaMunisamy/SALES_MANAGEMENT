@@ -336,5 +336,23 @@ namespace SALES_MANAGEMENT.Controllers
             }
         
         }
+
+        //
+        public ActionResult Qualify(int? RefOppId)
+        {
+            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(Dbconnection))
+
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SP_OpportunityQualify_Update", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@RefOppId", RefOppId);
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

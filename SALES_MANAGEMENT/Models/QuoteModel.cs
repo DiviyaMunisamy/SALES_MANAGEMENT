@@ -106,7 +106,8 @@ namespace SALES_MANAGEMENT.Models
         public List<ShippingMethod> ShippingMethodList { get; internal set; }
         public List<FreightTerms> FreightTermsList { get; internal set; }
         public List<PaymentTerms> PaymentTermsList { get; internal set; }
-        public int QuoteId { get; internal set; }
+        public int QuoteId { get; set; }
+        public int RefQuoteId { get; set; }
     }
 
 

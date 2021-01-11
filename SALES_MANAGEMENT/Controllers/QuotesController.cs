@@ -285,7 +285,7 @@ namespace SALES_MANAGEMENT.Controllers
                 {
                     var customer = new OpportunityModel();
                     //customer.LeadId = Convert.ToInt32(Sqlreader["LeadId"]);
-                    customer.RefQuoteId = Convert.ToInt32(Sqlreader["RefQuoteId"]);
+                    customer.RefOppId = Convert.ToInt32(Sqlreader["RefOppId"]);
                     customer.Topic = Sqlreader["Topic"].ToString();
                     customer.Contact = Convert.ToInt64(Sqlreader["Contact"]);
                     customer.Account = Sqlreader["Account"].ToString();
@@ -358,6 +358,7 @@ namespace SALES_MANAGEMENT.Controllers
                 SqlCommand Command = new SqlCommand("SP_Quortes_Update", con);
                 Command.CommandType = CommandType.StoredProcedure;
                 con.Open();
+                Command.Parameters.AddWithValue("@RefQuoteId", model.RefQuoteId);
                 Command.Parameters.AddWithValue("@Name", model.Name);
                 Command.Parameters.AddWithValue("@Currency", model.Currency);
                 Command.Parameters.AddWithValue("@Opportunity", model.Opportunity);

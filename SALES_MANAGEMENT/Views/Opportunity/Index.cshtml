@@ -7,7 +7,8 @@
     }
 </style>
 <p>
-    <h2> <button>@Html.ActionLink("Create New Opportunity", "Create")</button> </h2>
+    <h3> <button>@Html.ActionLink("Create New Opportunity", "Create")</button> </h3>
+    <button> <h4> @Html.ActionLink("View Qualified Opportunity", "IndexOppQuote", "Quotes") </h4> </button>
 </p>
 <head>
     <style>
@@ -19,6 +20,10 @@
         th, td {
             text-align: center;
             padding: 15px;
+        }
+
+        body {
+            background-color: lavender;
         }
 
         tr:nth-child(even) {
@@ -119,9 +124,9 @@
                 <button>
                     @Html.ActionLink("Delete", "Delete", new { RefOppId = item.RefOppId }, new { onclick = "return confirm('Are you sure you want to delete this Lead Record?')" })
                 </button>
-                @*<button>
-                    @Html.ActionLink("Qualify", "Qualify", new { RefOppId = item.RefOppId })
-                </button>*@
+                <button>
+                  @Html.ActionLink("Qualify", "Qualify", new { RefOppId = item.RefOppId })
+                </button>
             </td>
         </tr>
     }

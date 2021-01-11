@@ -20,8 +20,13 @@
 <div class="form-horizontal">
     <h1 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> OPPORTUNITY </h1>
     <div>
-        <button>  @Html.ActionLink("Qualified Leads", "IndexOpportunity") </button>
+        <button>  @Html.ActionLink("View Qualified Lead List", "IndexOpportunity") </button>
+
+
+
+        <button>  @Html.ActionLink("View Opportunity List ", "Index") </button>
     </div>
+
     <hr />
     <div class="form-group">
         @Html.LabelFor(model => model.RefOppId, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -7,7 +7,8 @@
     }
 </style>
 <p>
-    <h2> <button>@Html.ActionLink("Create New Lead", "Create")</button> </h2>
+    <h3> <button>@Html.ActionLink("Create New Lead", "Create")</button> </h3>
+    <button> <h4> @Html.ActionLink("View Qualified Leads", "IndexOpportunity", "Opportunity") </h4> </button>
 </p>
 <head>
     <style>
@@ -19,6 +20,10 @@
         th, td {
             text-align: center;
             padding: 15px;
+        }
+
+        body {
+            background-color: lavender;
         }
 
         tr:nth-child(even) {
@@ -182,5 +187,4 @@
     </td>
 </tr>
     }
-    <button> <h4> @Html.ActionLink("View Qualify Leads", "IndexOpportunity","Opportunity") </h4> </button>
 </table>

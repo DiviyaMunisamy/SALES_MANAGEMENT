@@ -18,6 +18,10 @@
             padding: 15px;
         }
 
+        body {
+            background-color: lavender;
+        }
+
         tr:nth-child(even) {
             background-color: #f2f2f2
         }
@@ -75,52 +79,55 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RefOppId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Topic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contact)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Account)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PurchaseTimeForm)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BudgetAmount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PurchesProcess)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ForecastCategory)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentSuitation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustommerNeed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProposedSolution)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.RefOppId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Topic)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Contact)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Account)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PurchaseTimeForm)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Currency)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BudgetAmount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PurchesProcess)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ForecastCategory)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CurrentSuitation)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CustommerNeed)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProposedSolution)
+    </td>
+    <td>
+        <button> @Html.ActionLink("CreateQuotes", "Create") </button>
+    </td>
+    @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+</tr>
     }
 
 </table>

@@ -16,15 +16,15 @@ namespace SALES_MANAGEMENT
             routes.MapRoute(
                 name: "Default1",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Lead", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Lead", action = "Create", id = UrlParameter.Optional }
             );
             routes.MapRoute(
              name: "Default2",
              url: "{controller}/{action}/{id}",
-             defaults: new { controller = "Lead", action = "Create", id = UrlParameter.Optional }
+             defaults: new { controller = "Opportunity", action = "Create", id = UrlParameter.Optional }
          );
             routes.MapRoute(
-             name: "Default",
+             name: "Default3",
              url: "{controller}/{action}/{id}",
              defaults: new { controller = "Qourte", action = "Create", id = UrlParameter.Optional }
          );
