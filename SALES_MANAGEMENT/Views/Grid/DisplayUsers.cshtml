@@ -6,6 +6,11 @@
     }
 </style>
 <h1>Existing Users:</h1>
+<br />
+<p>
+    Search for the Users below:
+    <input type="text" class="form-control pull-right" style="width:20%" id="search" placeholder="Type to search table..."><br />&nbsp;
+</p>
 <style type="text/css">
     .grey {
         background-color: grey;
@@ -22,9 +27,13 @@
     .pending {
         background-color: lime;
     }
+
+    .notfound {
+        display: none;
+    }
 </style>
 
-<head>
+<th>
     <style>
         table {
             border-collapse: separate;
@@ -46,49 +55,74 @@
             text-align: center;
         }
     </style>
-</head>
-<table class="table " border="1" width="100%">
-    <tr tyle="background:green">
-        <th>
-            @Html.DisplayNameFor(model => model.UserEmailId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserDepartment)
-        </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
+    <table class="table-bordered table pull-right" id="mytable" border="1" width="100%">
+        <thead>
+            <tr style="background:green">
 
-    </tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserEmailId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserDepartment)
+                </th>
 
-    @foreach (var item in Model)
-    {
-        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.UserEmailId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserDepartment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr>
 
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.LeadId)
-                </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserEmailId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserDepartment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Active)
+                    </td>
 
-        </tr>
-    }
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.LeadId)
+                        </td>*@
 
-</table>
+                </tr>
+            </tbody>
+        }
 
+    </table>
+
+
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#search").keyup(function () {
+                _this = this;
+
+                // Show only matching TR, hide rest of them
+                $.each($("#mytable tbody tr"), function () {
+                    if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1) {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show();
+                    }
+                });
+            });
+        });
+    </script>
 
