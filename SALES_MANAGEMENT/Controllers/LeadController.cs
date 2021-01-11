@@ -335,6 +335,11 @@ namespace SALES_MANAGEMENT.Controllers
         {
             //ViewBag.Designations = employeeDbAccess.GetEmployeeDesignations();
             //var Edit = employeeDbAccess.GetIdEdit(Id);
+            ViewBag.LeadSourceList = GetLeadSourceList();
+            ViewBag.CityList = GetCityList();
+            ViewBag.StateList = GetStateList();
+            ViewBag.CountryList = GetCountryList();
+            ViewBag.TypeList = GetTypeList();
 
             LeadsModel customer = new LeadsModel();
             List<LeadsModel> LeadList = new List<LeadsModel>();

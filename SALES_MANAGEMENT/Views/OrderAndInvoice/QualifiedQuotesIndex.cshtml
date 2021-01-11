@@ -1,0 +1,203 @@
+﻿@model IEnumerable<SALES_MANAGEMENT.Models.QuoteModel>
+<h1 style="text-align: center;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> Qualified Quotes List </h1>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<style>
+
+    p {
+        text-align: center;
+    }
+</style>
+<head>
+    <style>
+        table {
+            border-collapse: separate;
+            width: 300%;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 15px;
+        }
+
+        body {
+            background-color: lavender;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #ffffff;
+            color: black;
+            text-align: center;
+        }
+    </style>
+</head>
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opportunity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PotentialCustomer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriceList)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteExpiresOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusReason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentTerms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrieghtTerms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BillToStreet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BillToState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BillToCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BillToCountry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BillingPostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShippingMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipToStreet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipToState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipToCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipToCountry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShipingPostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RefQuoteId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteId)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opportunity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PotentialCustomer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriceList)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuoteExpiresOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusReason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentTerms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FrieghtTerms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillToStreet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillToState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillToCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillToCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillingPostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipToStreet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipToState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipToCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipToCountry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipingPostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefQuoteId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuoteId)
+            </td>
+            <td>
+                <button> @Html.ActionLink("Create Order&Invoice", "Create") </button>
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+    }
+
+</table>

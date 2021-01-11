@@ -5,14 +5,17 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Net.Configuration;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
 namespace SALES_MANAGEMENT.Controllers
 {
-    public class QuotesController : Controller
+    public class OrderAndInvoiceController : Controller
     {
-        //String Con.....
+        // GET: OrderAndInvoice
         public SqlConnection con;
         public void CONNECTION()
         {
@@ -22,14 +25,12 @@ namespace SALES_MANAGEMENT.Controllers
         // GET: Quorte
         public ActionResult Create()
         {
-            QuoteModel DropdownList = new QuoteModel()
+            OrderAndInvoiceModel DropdownList = new OrderAndInvoiceModel()
             {
                 ShippingMethodList = GetShippingMethodList(),
-                ShipToList = GetShipToList(),
                 PaymentTermsList = GetPaymentTermsList(),
-                StatusReasonList = GetStatusReasonList(),
                 FreightTermsList = GetFreightTermsList(),
-                CurrencyList = GetCurrencyForQuotesList()
+                CurrencyList = GetCurrencyList()
             };
             return View(DropdownList);
         }
@@ -154,7 +155,7 @@ namespace SALES_MANAGEMENT.Controllers
 
 
         //DROP DOWN FOR CurrencyForQuotes.....
-        public List<CurrencyForQuotes> GetCurrencyForQuotesList()
+        public List<CurrencyForQuotes> GetCurrencyList()
         {
             List<CurrencyForQuotes> CurrencyList = new List<CurrencyForQuotes>();
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
@@ -176,197 +177,35 @@ namespace SALES_MANAGEMENT.Controllers
                 return CurrencyList;
             }
         }
-    
+
 
         //Create Quorte
         [HttpPost]
-        public ActionResult Create(QuoteModel model)
+        public ActionResult Create(OrderAndInvoiceModel model)
         {
-        QuoteModel DropdownList = new QuoteModel()
-        {
-            ShippingMethodList = GetShippingMethodList(),
-            ShipToList = GetShipToList(),
-            PaymentTermsList = GetPaymentTermsList(),
-            StatusReasonList = GetStatusReasonList(),
-            FreightTermsList = GetFreightTermsList(),
-            CurrencyList = GetCurrencyForQuotesList()
-        };
+            OrderAndInvoiceModel DropdownList = new OrderAndInvoiceModel()
+            {
+                ShippingMethodList = GetShippingMethodList(),
+                PaymentTermsList = GetPaymentTermsList(),
+                FreightTermsList = GetFreightTermsList(),
+                CurrencyList = GetCurrencyList()
+            };
 
-        {
+            {
                 CONNECTION();
                 SqlCommand Command = new SqlCommand("SP_Quote_Insert", con);
                 Command.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 Command.Parameters.AddWithValue("@Name", model.Name);
+                Command.Parameters.AddWithValue("@EmailId", model.EmailId);
                 Command.Parameters.AddWithValue("@Currency", model.Currency);
                 Command.Parameters.AddWithValue("@Opportunity", model.Opportunity);
                 Command.Parameters.AddWithValue("@PotentialCustomer", model.PotentialCustomer);
                 Command.Parameters.AddWithValue("@PriceList", model.PriceList);
-                Command.Parameters.AddWithValue("@QuoteExpiresOn", model.QuoteExpiresOn);
-                Command.Parameters.AddWithValue("@StatusReason", model.StatusReason);
-                Command.Parameters.AddWithValue("@Description", model.Description);
-                Command.Parameters.AddWithValue("@PaymentTerms", model.PaymentTerms);
-                Command.Parameters.AddWithValue("@FrieghtTerms", model.FrieghtTerms); 
-                Command.Parameters.AddWithValue("@BillToStreet", model.BillToStreet);
-                Command.Parameters.AddWithValue("@BillToState", model.BillToState);
-                Command.Parameters.AddWithValue("@BillToCity", model.BillToCity);
-                Command.Parameters.AddWithValue("@BillToCountry", model.BillToCountry);
-                Command.Parameters.AddWithValue("@BillingPostalCode", model.BillingPostalCode);
-                Command.Parameters.AddWithValue("@ShipTo", model.ShipTo);
-                Command.Parameters.AddWithValue("@ShippingMethod", model.ShippingMethod);
-                Command.Parameters.AddWithValue("@ShipToStreet", model.ShipToStreet);
-                Command.Parameters.AddWithValue("@ShipToState", model.ShipToState);
-                Command.Parameters.AddWithValue("@ShipToCity", model.ShipToCity);
-                Command.Parameters.AddWithValue("@ShipToCountry", model.ShipToCountry);
-                Command.Parameters.AddWithValue("@ShipingPostalCode", model.ShipingPostalCode);
-                Command.ExecuteNonQuery();
-                con.Close();
-                ViewBag.Message = "QUOTE CREATE SUCCESSFULLY :)"; 
-                return View(DropdownList);
-            }
-        }
-
-        //LIST INDEX
-        public ActionResult QuotesIndex()
-        {
-            List<QuoteModel> QuoteList = new List<QuoteModel>();
-            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(Dbconnection))
-            {
-                con.Open();
-                SqlCommand Com = new SqlCommand("SP_Quote_SelectAll", con);
-                Com.CommandType = CommandType.StoredProcedure;
-
-                SqlDataReader Sqlreader = Com.ExecuteReader();
-                while (Sqlreader.Read())
-                {
-                    var customer = new QuoteModel();
-                    //customer.QuoteId = Convert.ToInt32(Sqlreader["QuoteId"]);
-                    customer.Name = Sqlreader["Name"].ToString();
-                    customer.Currency = Sqlreader["Currency"].ToString();
-                    customer.Opportunity = Sqlreader["Opportunity"].ToString();
-                    customer.PotentialCustomer = Sqlreader["PotentialCustomer"].ToString();
-                    customer.PriceList = Sqlreader["PriceList"].ToString();
-                    customer.QuoteExpiresOn = Convert.ToDateTime(Sqlreader["QuoteExpiresOn"]);
-                    customer.StatusReason = Sqlreader["StatusReason"].ToString();
-                    customer.Description = Sqlreader["Description"].ToString();
-                    customer.PaymentTerms = Sqlreader["PaymentTerms"].ToString();
-                    customer.FrieghtTerms = Sqlreader["FrieghtTerms"].ToString();
-                    customer.BillToStreet = Sqlreader["BillToStreet"].ToString();
-                    customer.BillToState = Sqlreader["Country"].ToString();
-                    customer.BillToCountry = Sqlreader["BillToCountry"].ToString();
-                    customer.BillingPostalCode = Sqlreader["BillingPostalCode"].ToString();
-                    customer.ShipTo = Sqlreader["ShipTo"].ToString();
-                    customer.ShippingMethod = Sqlreader["ShippingMethod"].ToString();
-                    customer.ShipToStreet = Sqlreader["ShipToStreet"].ToString();
-                    customer.ShipToCity = Sqlreader["ShipToCity"].ToString();
-                    customer.ShipToState = Sqlreader["ShipToState"].ToString();
-                    customer.ShipToCountry = Sqlreader["ShipToCountry"].ToString();
-                    customer.ShipingPostalCode = Convert.ToInt32(Sqlreader["ShipingPostalCode"]);
-                    QuoteList.Add(customer);
-                }
-                return View(QuoteList);
-            }
-        }
-
-
-        //Qualified opportunity List
-        public ActionResult IndexOppQuote()
-        {
-            List<OpportunityModel> OpportunityList = new List<OpportunityModel>();
-            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(Dbconnection))
-            {
-                con.Open();
-                SqlCommand Com = new SqlCommand("SP_SelectAll_OpportunityQualify", con);
-                Com.CommandType = CommandType.StoredProcedure;
-                SqlDataReader Sqlreader = Com.ExecuteReader();
-                while (Sqlreader.Read())
-                {
-                    var customer = new OpportunityModel();
-                    //customer.LeadId = Convert.ToInt32(Sqlreader["LeadId"]);
-                    customer.RefOppId = Convert.ToInt32(Sqlreader["RefOppId"]);
-                    customer.Topic = Sqlreader["Topic"].ToString();
-                    customer.Contact = Convert.ToInt64(Sqlreader["Contact"]);
-                    customer.Account = Sqlreader["Account"].ToString();
-                    customer.PurchaseTimeForm = Sqlreader["PurchaseTimeForm"].ToString();
-                    customer.Currency = Sqlreader["Currency"].ToString();
-                    customer.BudgetAmount = Convert.ToInt64(Sqlreader["BudgetAmount"]);
-                    customer.PurchesProcess = Sqlreader["PurchesProcess"].ToString();
-                    customer.ForecastCategory = Sqlreader["ForecastCategory"].ToString();
-                    customer.Description = Sqlreader["Description"].ToString();
-                    customer.CurrentSuitation = Sqlreader["CurrentSuitation"].ToString();
-                    customer.CustommerNeed = Sqlreader["CustommerNeed"].ToString();
-                    customer.ProposedSolution = Sqlreader["ProposedSolution"].ToString();
-                    OpportunityList.Add(customer);
-                }
-                return View(OpportunityList);
-            }
-        }
-
-        //Edit
-        [HttpGet]
-        public ActionResult Edit(int? RefQuoteId)
-        {
-            List<QuoteModel> QuoteList = new List<QuoteModel>();
-            string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(Dbconnection))
-            {
-                con.Open();
-                SqlCommand Com = new SqlCommand("SP_Quotes_SelectAllbyId", con);
-                Com.CommandType = CommandType.StoredProcedure;
-                Com.Parameters.AddWithValue("@RefQuoteId", RefQuoteId);
-
-                SqlDataReader Sqlreader = Com.ExecuteReader();
-                while (Sqlreader.Read())
-                {
-                    var customer = new QuoteModel();
-                    //customer.QuoteId = Convert.ToInt32(Sqlreader["QuoteId"]);
-                    customer.Name = Sqlreader["Name"].ToString();
-                    customer.Currency = Sqlreader["Currency"].ToString();
-                    customer.Opportunity = Sqlreader["Opportunity"].ToString();
-                    customer.PotentialCustomer = Sqlreader["PotentialCustomer"].ToString();
-                    customer.PriceList = Sqlreader["PriceList"].ToString();
-                    customer.QuoteExpiresOn = Convert.ToDateTime(Sqlreader["QuoteExpiresOn"]);
-                    customer.StatusReason = Sqlreader["StatusReason"].ToString();
-                    customer.Description = Sqlreader["Description"].ToString();
-                    customer.PaymentTerms = Sqlreader["PaymentTerms"].ToString();
-                    customer.FrieghtTerms = Sqlreader["FrieghtTerms"].ToString();
-                    customer.BillToStreet = Sqlreader["BillToStreet"].ToString();
-                    customer.BillToState = Sqlreader["Country"].ToString();
-                    customer.BillToCountry = Sqlreader["BillToCountry"].ToString();
-                    customer.BillingPostalCode = Sqlreader["BillingPostalCode"].ToString();
-                    customer.ShipTo = Sqlreader["ShipTo"].ToString();
-                    customer.ShippingMethod = Sqlreader["ShippingMethod"].ToString();
-                    customer.ShipToStreet = Sqlreader["ShipToStreet"].ToString();
-                    customer.ShipToCity = Sqlreader["ShipToCity"].ToString();
-                    customer.ShipToState = Sqlreader["ShipToState"].ToString();
-                    customer.ShipToCountry = Sqlreader["ShipToCountry"].ToString();
-                    customer.ShipingPostalCode = Convert.ToInt32(Sqlreader["ShipingPostalCode"]);
-                    QuoteList.Add(customer);
-                }
-                return View(QuoteList);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Edit(QuoteModel model)
-        {
-
-            {
-                CONNECTION();
-                SqlCommand Command = new SqlCommand("SP_Quortes_Update", con);
-                Command.CommandType = CommandType.StoredProcedure;
-                con.Open();
-                Command.Parameters.AddWithValue("@RefQuoteId", model.RefQuoteId);
-                Command.Parameters.AddWithValue("@Name", model.Name);
-                Command.Parameters.AddWithValue("@Currency", model.Currency);
-                Command.Parameters.AddWithValue("@Opportunity", model.Opportunity);
-                Command.Parameters.AddWithValue("@PotentialCustomer", model.PotentialCustomer);
-                Command.Parameters.AddWithValue("@PriceList", model.PriceList);
-                Command.Parameters.AddWithValue("@QuoteExpiresOn", model.QuoteExpiresOn);
-                Command.Parameters.AddWithValue("@StatusReason", model.StatusReason);
-                Command.Parameters.AddWithValue("@Description", model.Description);
+                Command.Parameters.AddWithValue("@PriceLocked", model.PriceLocked);
+                Command.Parameters.AddWithValue("@RequestedDelivery", model.RequestedDelivery);
+                Command.Parameters.AddWithValue("@DateFullfill", model.DateFullfill);
+                Command.Parameters.AddWithValue("@ShippingMethod", model.ShippingMethod);    
                 Command.Parameters.AddWithValue("@PaymentTerms", model.PaymentTerms);
                 Command.Parameters.AddWithValue("@FrieghtTerms", model.FrieghtTerms);
                 Command.Parameters.AddWithValue("@BillToStreet", model.BillToStreet);
@@ -374,55 +213,120 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@BillToCity", model.BillToCity);
                 Command.Parameters.AddWithValue("@BillToCountry", model.BillToCountry);
                 Command.Parameters.AddWithValue("@BillingPostalCode", model.BillingPostalCode);
-                Command.Parameters.AddWithValue("@ShipTo", model.ShipTo);
-                Command.Parameters.AddWithValue("@ShippingMethod", model.ShippingMethod);
                 Command.Parameters.AddWithValue("@ShipToStreet", model.ShipToStreet);
                 Command.Parameters.AddWithValue("@ShipToState", model.ShipToState);
                 Command.Parameters.AddWithValue("@ShipToCity", model.ShipToCity);
                 Command.Parameters.AddWithValue("@ShipToCountry", model.ShipToCountry);
                 Command.Parameters.AddWithValue("@ShipingPostalCode", model.ShipingPostalCode);
+                Command.Parameters.AddWithValue("@Description", model.Description);
                 Command.ExecuteNonQuery();
+                ViewBag.Message = "QUOTE CREATE SUCCESSFULLY :)";
+                SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+                string to = model.EmailId;
+                string from = section.From;
+                int index = to.IndexOf('@');
+                string name = to.Substring(0, index);
+                MailMessage message = new MailMessage(from, to);
+                message.Subject = "Successful Order Created";
+                message.Body = "Hi " + name + " , your Product have been Orderd Successfully!!! And your Order Id is" + model.Id + " and Request Devivery Date is " + model.RequestedDelivery;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Port = section.Network.Port;
+                smtp.EnableSsl = section.Network.EnableSsl;
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = new NetworkCredential(section.Network.UserName, section.Network.Password);
+                smtp.Host = section.Network.Host;
+                smtp.Send(message);
+                
                 con.Close();
-                return RedirectToAction("QuotesIndex");
+                return View(DropdownList);
             }
         }
 
-
-        //delete
-        public ActionResult Delete(int? RefQuoteId)
+        //QualifiedQuotesIndex
+        public ActionResult QualifiedQuotesIndex()
         {
+            List<QuoteModel> QuoteList = new List<QuoteModel>();
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
-
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("USP_Quortes_Delete", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@RefQuoteId", RefQuoteId);
-                cmd.ExecuteNonQuery();
-                con.Close();
+                SqlCommand Com = new SqlCommand("SP_QualifiedQuote_SelectAll", con);
+                Com.CommandType = CommandType.StoredProcedure;
 
-                return RedirectToAction("QuotesIndex");
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    var customer = new QuoteModel();
+                    customer.RefQuoteId = Convert.ToInt32(Sqlreader["RefQuoteId"]);
+                    customer.Name = Sqlreader["Name"].ToString();
+                    customer.Currency = Sqlreader["Currency"].ToString();
+                    customer.Opportunity = Sqlreader["Opportunity"].ToString();
+                    customer.PotentialCustomer = Sqlreader["PotentialCustomer"].ToString();
+                    customer.PriceList = Sqlreader["PriceList"].ToString();
+                    customer.QuoteExpiresOn = Convert.ToDateTime(Sqlreader["QuoteExpiresOn"]);
+                    customer.StatusReason = Sqlreader["StatusReason"].ToString();
+                    customer.Description = Sqlreader["Description"].ToString();
+                    customer.PaymentTerms = Sqlreader["PaymentTerms"].ToString();
+                    customer.FrieghtTerms = Sqlreader["FrieghtTerms"].ToString();
+                    customer.BillToStreet = Sqlreader["BillToStreet"].ToString();
+                    customer.BillToState = Sqlreader["Country"].ToString();
+                    customer.BillToCountry = Sqlreader["BillToCountry"].ToString();
+                    customer.BillingPostalCode = Sqlreader["BillingPostalCode"].ToString();
+                    customer.ShipTo = Sqlreader["ShipTo"].ToString();
+                    customer.ShippingMethod = Sqlreader["ShippingMethod"].ToString();
+                    customer.ShipToStreet = Sqlreader["ShipToStreet"].ToString();
+                    customer.ShipToCity = Sqlreader["ShipToCity"].ToString();
+                    customer.ShipToState = Sqlreader["ShipToState"].ToString();
+                    customer.ShipToCountry = Sqlreader["ShipToCountry"].ToString();
+                    customer.ShipingPostalCode = Convert.ToInt32(Sqlreader["ShipingPostalCode"]);
+                    QuoteList.Add(customer);
+                }
+                return View(QuoteList);
             }
-
         }
 
-        //qualify
-        public ActionResult Qualify(int? RefQuoteId)
+        //index
+        public ActionResult OrderAndInvoiceIxdex()
         {
+            List<OrderAndInvoiceModel> OrderAndInvoiceList = new List<OrderAndInvoiceModel>();
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
-
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SP_OpportunityQualify_Update", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@RefQuoteId", RefQuoteId);
-                cmd.ExecuteNonQuery();
-                con.Close();
+                SqlCommand Com = new SqlCommand("SP_Order_Invoice_SelectAll", con);
+                Com.CommandType = CommandType.StoredProcedure;
 
-                return RedirectToAction("QuotesIndex");
+                SqlDataReader Sqlreader = Com.ExecuteReader();
+                while (Sqlreader.Read())
+                {
+                    var customer = new OrderAndInvoiceModel();
+                    //customer.QuoteId = Convert.ToInt32(Sqlreader["QuoteId"]);
+                    customer.Name = Sqlreader["Name"].ToString();
+                    customer.Currency = Sqlreader["Currency"].ToString();
+                    customer.Opportunity = Sqlreader["Opportunity"].ToString();
+                    customer.PotentialCustomer = Sqlreader["PotentialCustomer"].ToString();
+                    customer.PriceList = Sqlreader["PriceList"].ToString();
+                    customer.RequestedDelivery = Convert.ToDateTime(Sqlreader["RequestedDelivery"]);
+                    customer.DateFullfill = Convert.ToDateTime(Sqlreader["DateFullfill"]);
+                    customer.Description = Sqlreader["Description"].ToString();
+                    customer.PaymentTerms = Sqlreader["PaymentTerms"].ToString();
+                    customer.FrieghtTerms = Sqlreader["FrieghtTerms"].ToString();
+                    customer.BillToStreet = Sqlreader["BillToStreet"].ToString();
+                    customer.BillToState = Sqlreader["Country"].ToString();
+                    customer.BillToCountry = Sqlreader["BillToCountry"].ToString();
+                    customer.BillingPostalCode = Sqlreader["BillingPostalCode"].ToString();
+                    customer.ShippingMethod = Sqlreader["ShippingMethod"].ToString();
+                    customer.ShipToStreet = Sqlreader["ShipToStreet"].ToString();
+                    customer.ShipToCity = Sqlreader["ShipToCity"].ToString();
+                    customer.ShipToState = Sqlreader["ShipToState"].ToString();
+                    customer.ShipToCountry = Sqlreader["ShipToCountry"].ToString();
+                    customer.ShipingPostalCode = Convert.ToInt32(Sqlreader["ShipingPostalCode"]);
+                    OrderAndInvoiceList.Add(customer);
+                }
+                return View(OrderAndInvoiceList);
             }
         }
+
+
     }
 }

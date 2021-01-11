@@ -21,11 +21,11 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = " Opportunity is Required")]
         public string Opportunity { get; set; }
 
-        [Display(Name = "PotentialCustomer")]
+        [Display(Name = "Potential Customer")]
         [Required(ErrorMessage = " PotentialCustomer is Required")]
         public string PotentialCustomer { get; set; }
 
-        [Display(Name = "PriceList")]
+        [Display(Name = "Price List")]
         [Required(ErrorMessage = " PriceList is Required")]
         public string PriceList { get; set; }
 
@@ -35,12 +35,7 @@ namespace SALES_MANAGEMENT.Models
         [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime QuoteExpiresOn { get; set; }
 
-        [Display(Name = "Email Id")]
-        [Required(ErrorMessage = " EmailId is Required")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        public string EmailId { get; set; }
-
-        [Display(Name = "StatusReason")]
+        [Display(Name = "Status Reason")]
         [Required(ErrorMessage = " StatusReason is Required")]
         public string StatusReason { get; set; }
 
@@ -48,71 +43,73 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = " Description is Required")]
         public string Description { get; set; }
 
-        [Display(Name = "PaymentTerms")]
+        [Display(Name = "Payment Terms")]
         [Required(ErrorMessage = " PaymentTerms is Required")]
         public string PaymentTerms { get; set; }
 
-        [Display(Name = "FrieghtTerms")]
+        [Display(Name = "Frieght Terms")]
         [Required(ErrorMessage = " FrieghtTerms is Required")]
         public string FrieghtTerms { get; set; }
 
-        [Display(Name = "BillToStreet")]
+        [Display(Name = "Bill To Street")]
         [Required(ErrorMessage = " BillToStreet is Required")]
         public string BillToStreet { get; set; }
 
-        [Display(Name = "BillToState")]
+        [Display(Name = "Bill To State")]
         [Required(ErrorMessage = " BillToState is Required")]
         public string BillToState { get; set; }
 
-        [Display(Name = "[BillToCity]")]
-        [Required(ErrorMessage = " [BillToCity] is Required")]
+        [Display(Name = "Bill To City")]
+        [Required(ErrorMessage = "BillToCity is Required")]
         public string BillToCity { get; set; }
 
-        [Display(Name = "BillToCountry")]
+        [Display(Name = "Bill To Country")]
         [Required(ErrorMessage = " BillToCountry is Required")]
         public string BillToCountry { get; set; }
 
-        [Display(Name = "PostalCode")]
+        [Display(Name = "Postal Code")]
         [Required(ErrorMessage = " PostalCode is Required")]
         public string BillingPostalCode { get; set; }
 
-        [Display(Name = "ShipTo")]
+        [Display(Name = "Ship To")]
         [Required(ErrorMessage = "ShipTo is Required")]
         public string ShipTo { get; set; }
 
-        [Display(Name = "ShippingMethod")]
+        [Display(Name = "Shipping Method")]
         [Required(ErrorMessage = " ShippingMethod is Required")]
         public string ShippingMethod { get; set; }
 
-        [Display(Name = "ShipToStreet")]
+        [Display(Name = "Ship To Street")]
         [Required(ErrorMessage = "ShipToStreet is Required")]
         public string ShipToStreet { get; set; }
 
-        [Display(Name = "ShipToState")]
+        [Display(Name = "Ship To State")]
         [Required(ErrorMessage = " ShipToState is Required")]
         public string ShipToState { get; set; }
 
-        [Display(Name = "ShipToCity")]
+        [Display(Name = "Ship To City")]
         [Required(ErrorMessage = "ShipToCity is Required")]
         public string ShipToCity { get; set; }
 
-        [Display(Name = "ShipToCountry")]
+        [Display(Name = "Ship To Country")]
         [Required(ErrorMessage = " ShipToCountry is Required")]
         public string ShipToCountry { get; set; }
 
-        [Display(Name = "PostalCode")]
+        [Display(Name = "Postal Code")]
         [Required(ErrorMessage = "PostalCode is Required")]
         public long ShipingPostalCode { get; set; }
 
-
-        public List<StatusReason> StatusReasonList { get; internal set; }
-        public List<CurrencyForQuotes> CurrencyList { get; internal set; }
-        public List<ShipTo> ShipToList { get; internal set; }
-        public List<ShippingMethod> ShippingMethodList { get; internal set; }
-        public List<FreightTerms> FreightTermsList { get; internal set; }
-        public List<PaymentTerms> PaymentTermsList { get; internal set; }
-        public int QuoteId { get; set; }
+        [Display(Name = "Lead Id")]
         public int RefQuoteId { get; set; }
+
+        public List<StatusReason> StatusReasonList { get; set; }
+        public List<CurrencyForQuotes> CurrencyList { get; set; }
+        public List<ShipTo> ShipToList { get; set; }
+        public List<ShippingMethod> ShippingMethodList { get; set; }
+        public List<FreightTerms> FreightTermsList { get; set; }
+        public List<PaymentTerms> PaymentTermsList { get; set; }
+        public int QuoteId { get; set; }
+        
     }
 
 
