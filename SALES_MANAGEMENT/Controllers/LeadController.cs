@@ -333,14 +333,9 @@ namespace SALES_MANAGEMENT.Controllers
         [HttpGet]
         public ActionResult Edit(int? LeadId)
         {
-            //LeadsModel DropdownList = new LeadsModel()
-            //{
-            //    LeadSourceList = GetLeadSourceList(),
-            //    CountryList = GetCountryList(),
-            //    StateList = GetStateList(),
-            //    CityList = GetCityList(),
-            //    TypeList = GetTypeList()
-            //};
+            //ViewBag.Designations = employeeDbAccess.GetEmployeeDesignations();
+            //var Edit = employeeDbAccess.GetIdEdit(Id);
+
             LeadsModel customer = new LeadsModel();
             List<LeadsModel> LeadList = new List<LeadsModel>();
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
@@ -384,15 +379,7 @@ namespace SALES_MANAGEMENT.Controllers
         [HttpPost]
         public ActionResult Edit(LeadsModel model, HttpPostedFileBase file)
         {
-            //LeadsModel DropdownList = new LeadsModel()
-            //{
-            //    LeadSourceList = GetLeadSourceList(),
-            //    CountryList = GetCountryList(),
-            //    StateList = GetStateList(),
-            //    CityList = GetCityList(),
-            //    TypeList = GetTypeList()
-            //};
-
+           
             string Dbconnection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
             using (SqlConnection con = new SqlConnection(Dbconnection))
 

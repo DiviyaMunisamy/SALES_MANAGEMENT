@@ -99,11 +99,11 @@ namespace SALES_MANAGEMENT.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime CreatedDate { get; set; }
 
-        public  List<LeadSources> LeadSourceList { get; internal set; }
-        public List<Cities> CityList { get; internal set; }
+        public  List<LeadSources> LeadSourceList { get;  set; }
+        public List<Cities> CityList { get; set; }
         public List<States> StateList { get; set; }
-        public List<Countries> CountryList { get; internal set; }
-        public List<Types> TypeList { get; internal set; }
+        public List<Countries> CountryList { get; set; }
+        public List<Types> TypeList { get; set; }
     }
 
     public class LeadSources

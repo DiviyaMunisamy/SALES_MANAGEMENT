@@ -6,9 +6,8 @@ using System.Web;
 
 namespace SALES_MANAGEMENT.Models
 {
-    public class QuoteModel
+    public class OrderAndInvoice
     {
-
         [Display(Name = "Name")]
         [Required(ErrorMessage = " Name is Required")]
         public string Name { get; set; }
@@ -35,14 +34,11 @@ namespace SALES_MANAGEMENT.Models
         [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime QuoteExpiresOn { get; set; }
 
-        [Display(Name = "Email Id")]
-        [Required(ErrorMessage = " EmailId is Required")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        public string EmailId { get; set; }
-
-        [Display(Name = "StatusReason")]
-        [Required(ErrorMessage = " StatusReason is Required")]
-        public string StatusReason { get; set; }
+        [Required(ErrorMessage = "Quote Expires On is Required ")]
+        [Display(Name = "Quote Expires On")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime QuoteExpiresOn { get; set; }
 
         [Display(Name = "Description")]
         [Required(ErrorMessage = " Description is Required")]
@@ -76,10 +72,6 @@ namespace SALES_MANAGEMENT.Models
         [Required(ErrorMessage = " PostalCode is Required")]
         public string BillingPostalCode { get; set; }
 
-        [Display(Name = "ShipTo")]
-        [Required(ErrorMessage = "ShipTo is Required")]
-        public string ShipTo { get; set; }
-
         [Display(Name = "ShippingMethod")]
         [Required(ErrorMessage = " ShippingMethod is Required")]
         public string ShippingMethod { get; set; }
@@ -105,33 +97,13 @@ namespace SALES_MANAGEMENT.Models
         public long ShipingPostalCode { get; set; }
 
 
-        public List<StatusReason> StatusReasonList { get; internal set; }
         public List<CurrencyForQuotes> CurrencyList { get; internal set; }
-        public List<ShipTo> ShipToList { get; internal set; }
         public List<ShippingMethod> ShippingMethodList { get; internal set; }
         public List<FreightTerms> FreightTermsList { get; internal set; }
         public List<PaymentTerms> PaymentTermsList { get; internal set; }
-        public int QuoteId { get; set; }
-        public int RefQuoteId { get; set; }
+        public int RefOrder_InvoiceId { get; set; }
     }
 
-
-
-    public class StatusReason
-    {
-        public int StatusReason_Id { get; set; }
-
-        public string StatusReason_NAME { get; set; }
-
-    }
-
-    public class ShipTo
-    {
-        public int ShipTo_Id { get; set; }
-
-        public string ShipTo_NAME { get; set; }
-
-    }
 
     public class ShippingMethod
     {
@@ -157,12 +129,11 @@ namespace SALES_MANAGEMENT.Models
 
     }
 
-    public class CurrencyForQuotes
+    public class Currency
     {
         public int Currency_Id { get; set; }
 
         public string Currency_Name { get; set; }
 
     }
-
 }
