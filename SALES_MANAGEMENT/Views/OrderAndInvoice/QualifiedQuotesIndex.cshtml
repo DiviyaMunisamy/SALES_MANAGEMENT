@@ -42,6 +42,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.RefQuoteId)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
@@ -69,7 +72,7 @@
             @Html.DisplayNameFor(model => model.PaymentTerms)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FrieghtTerms)
+            @Html.DisplayNameFor(model => model.FreightTerms)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.BillToStreet)
@@ -105,99 +108,92 @@
             @Html.DisplayNameFor(model => model.ShipToCountry)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ShipingPostalCode)
+            @Html.DisplayNameFor(model => model.ShipingPostalCodes)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RefQuoteId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.QuoteId)
-        </th>
+
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Currency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Opportunity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PotentialCustomer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PriceList)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuoteExpiresOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusReason)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentTerms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FrieghtTerms)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillToStreet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillToState)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillToCity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillToCountry)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillingPostalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipTo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShippingMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipToStreet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipToState)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipToCity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipToCountry)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShipingPostalCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RefQuoteId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuoteId)
-            </td>
-            <td>
-                <button> @Html.ActionLink("Create Order&Invoice", "Create") </button>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.RefQuoteId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Currency)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Opportunity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PotentialCustomer)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PriceList)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.QuoteExpiresOn)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StatusReason)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PaymentTerms)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FreightTerms)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BillToStreet)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BillToState)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BillToCity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BillToCountry)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BillingPostalCode)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipTo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShippingMethod)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipToStreet)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipToState)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipToCity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipToCountry)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ShipingPostalCodes)
+    </td>
+
+    <td>
+        <button> @Html.ActionLink("Create Order&Invoice", "Create") </button>
+        @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+    </td>
+</tr>
     }
 
 </table>

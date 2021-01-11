@@ -49,7 +49,7 @@ namespace SALES_MANAGEMENT.Models
 
         [Display(Name = "Frieght Terms")]
         [Required(ErrorMessage = " FrieghtTerms is Required")]
-        public string FrieghtTerms { get; set; }
+        public string FreightTerms { get; set; }
 
         [Display(Name = "Bill To Street")]
         [Required(ErrorMessage = " BillToStreet is Required")]
@@ -97,7 +97,7 @@ namespace SALES_MANAGEMENT.Models
 
         [Display(Name = "Postal Code")]
         [Required(ErrorMessage = "PostalCode is Required")]
-        public long ShipingPostalCode { get; set; }
+        public long ShipingPostalCodes { get; set; }
 
         [Display(Name = "Lead Id")]
         public int RefQuoteId { get; set; }

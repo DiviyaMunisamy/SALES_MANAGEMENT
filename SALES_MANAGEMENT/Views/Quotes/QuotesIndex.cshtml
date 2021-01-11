@@ -8,7 +8,8 @@
     }
 </style>
 <p>
-    <h2> <button>@Html.ActionLink("Create New Quortes", "Create")</button> </h2>
+    <h2> <button>@Html.ActionLink("Create New Quote", "Create")</button> </h2>
+    <button> <h4> @Html.ActionLink("View Qualified Quote", "QualifiedQuotesIndex", "OrderAndInvoice") </h4> </button>
 </p>
 <head>
     <style>
@@ -67,7 +68,7 @@
             @Html.DisplayNameFor(model => model.PaymentTerms)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FrieghtTerms)
+            @Html.DisplayNameFor(model => model.FreightTerms)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.BillToStreet)
@@ -103,10 +104,10 @@
             @Html.DisplayNameFor(model => model.ShipToCountry)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ShipingPostalCode)
+            @Html.DisplayNameFor(model => model.ShipingPostalCodes)
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.QuoteId)
+                @Html.DisplayNameFor(model => model.RefQuoteId)
             </th>*@
         <th></th>
     </tr>
@@ -142,7 +143,7 @@
         @Html.DisplayFor(modelItem => item.PaymentTerms)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.FrieghtTerms)
+        @Html.DisplayFor(modelItem => item.FreightTerms)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.BillToStreet)
@@ -178,10 +179,10 @@
         @Html.DisplayFor(modelItem => item.ShipToCountry)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.ShipingPostalCode)
+        @Html.DisplayFor(modelItem => item.ShipingPostalCodes)
     </td>
     @*<td>
-            @Html.DisplayFor(modelItem => item.QuoteId)
+            @Html.DisplayFor(modelItem => item.RefQuoteId)
         </td>*@
     <td>
         <button>

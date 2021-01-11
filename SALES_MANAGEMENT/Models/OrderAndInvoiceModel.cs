@@ -43,11 +43,11 @@ namespace SALES_MANAGEMENT.Models
         [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime RequestedDelivery { get; set; }
 
-        [Required(ErrorMessage = "DateFullfill is Required ")]
-        [Display(Name = "Date Full Fill")]
+        [Required(ErrorMessage = "DateFullfilled is Required ")]
+        [Display(Name = "Date Fullfilled")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DateFullfill { get; set; }
+        public DateTime DateFullfilled { get; set; }
 
         [Display(Name = "Shipping Method")]
         [Required(ErrorMessage = " ShippingMethod is Required")]
@@ -59,7 +59,7 @@ namespace SALES_MANAGEMENT.Models
 
         [Display(Name = "Frieght Terms")]
         [Required(ErrorMessage = " FrieghtTerms is Required")]
-        public string FrieghtTerms { get; set; }
+        public string FreightTerms { get; set; }
 
         [Display(Name = "Bill To Street")]
         [Required(ErrorMessage = " BillToStreet is Required")]
@@ -100,7 +100,7 @@ namespace SALES_MANAGEMENT.Models
 
         [Display(Name = "Postal Code")]
         [Required(ErrorMessage = "PostalCode is Required")]
-        public long ShipingPostalCode { get; set; }
+        public long ShipingPostalCodes { get; set; }
 
 
         [Display(Name = "Description")]

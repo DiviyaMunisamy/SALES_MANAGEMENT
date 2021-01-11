@@ -193,9 +193,10 @@ namespace SALES_MANAGEMENT.Controllers
 
             {
                 CONNECTION();
-                SqlCommand Command = new SqlCommand("SP_Quote_Insert", con);
+                SqlCommand Command = new SqlCommand("SP_OrderInvoice_Insert", con);
                 Command.CommandType = CommandType.StoredProcedure;
                 con.Open();
+                Command.Parameters.AddWithValue("@RefOrder_InvoiceId", model.RefOrder_InvoiceId);
                 Command.Parameters.AddWithValue("@Name", model.Name);
                 Command.Parameters.AddWithValue("@EmailId", model.EmailId);
                 Command.Parameters.AddWithValue("@Currency", model.Currency);
@@ -204,10 +205,10 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@PriceList", model.PriceList);
                 Command.Parameters.AddWithValue("@PriceLocked", model.PriceLocked);
                 Command.Parameters.AddWithValue("@RequestedDelivery", model.RequestedDelivery);
-                Command.Parameters.AddWithValue("@DateFullfill", model.DateFullfill);
+                Command.Parameters.AddWithValue("@DateFullfilled", model.DateFullfilled);
                 Command.Parameters.AddWithValue("@ShippingMethod", model.ShippingMethod);    
                 Command.Parameters.AddWithValue("@PaymentTerms", model.PaymentTerms);
-                Command.Parameters.AddWithValue("@FrieghtTerms", model.FrieghtTerms);
+                Command.Parameters.AddWithValue("@FreightTerms", model.FreightTerms);
                 Command.Parameters.AddWithValue("@BillToStreet", model.BillToStreet);
                 Command.Parameters.AddWithValue("@BillToState", model.BillToState);
                 Command.Parameters.AddWithValue("@BillToCity", model.BillToCity);
@@ -217,10 +218,10 @@ namespace SALES_MANAGEMENT.Controllers
                 Command.Parameters.AddWithValue("@ShipToState", model.ShipToState);
                 Command.Parameters.AddWithValue("@ShipToCity", model.ShipToCity);
                 Command.Parameters.AddWithValue("@ShipToCountry", model.ShipToCountry);
-                Command.Parameters.AddWithValue("@ShipingPostalCode", model.ShipingPostalCode);
+                Command.Parameters.AddWithValue("@ShipingPostalCodes", model.ShipingPostalCodes);
                 Command.Parameters.AddWithValue("@Description", model.Description);
                 Command.ExecuteNonQuery();
-                ViewBag.Message = "QUOTE CREATE SUCCESSFULLY :)";
+                ViewBag.Message = "ORDERS & INVOICE CREATE SUCCESSFULLY :)";
                 SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
                 string to = model.EmailId;
                 string from = section.From;
@@ -228,7 +229,7 @@ namespace SALES_MANAGEMENT.Controllers
                 string name = to.Substring(0, index);
                 MailMessage message = new MailMessage(from, to);
                 message.Subject = "Successful Order Created";
-                message.Body = "Hi " + name + " , your Product have been Orderd Successfully!!! And your Order Id is" + model.Id + " and Request Devivery Date is " + model.RequestedDelivery;
+                message.Body = "Hi " + name + " , your Product have been Orderd Successfully!!! And your Order Id is" + model.RefOrder_InvoiceId + " and Request Devivery Date is " + model.RequestedDelivery;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Port = section.Network.Port;
                 smtp.EnableSsl = section.Network.EnableSsl;
@@ -267,9 +268,8 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.StatusReason = Sqlreader["StatusReason"].ToString();
                     customer.Description = Sqlreader["Description"].ToString();
                     customer.PaymentTerms = Sqlreader["PaymentTerms"].ToString();
-                    customer.FrieghtTerms = Sqlreader["FrieghtTerms"].ToString();
+                    customer.FreightTerms = Sqlreader["FrieghtTerms"].ToString();
                     customer.BillToStreet = Sqlreader["BillToStreet"].ToString();
-                    customer.BillToState = Sqlreader["Country"].ToString();
                     customer.BillToCountry = Sqlreader["BillToCountry"].ToString();
                     customer.BillingPostalCode = Sqlreader["BillingPostalCode"].ToString();
                     customer.ShipTo = Sqlreader["ShipTo"].ToString();
@@ -278,7 +278,7 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.ShipToCity = Sqlreader["ShipToCity"].ToString();
                     customer.ShipToState = Sqlreader["ShipToState"].ToString();
                     customer.ShipToCountry = Sqlreader["ShipToCountry"].ToString();
-                    customer.ShipingPostalCode = Convert.ToInt32(Sqlreader["ShipingPostalCode"]);
+                    customer.ShipingPostalCodes = Convert.ToInt32(Sqlreader["ShipingPostalCodes"]);
                     QuoteList.Add(customer);
                 }
                 return View(QuoteList);
@@ -307,10 +307,10 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.PotentialCustomer = Sqlreader["PotentialCustomer"].ToString();
                     customer.PriceList = Sqlreader["PriceList"].ToString();
                     customer.RequestedDelivery = Convert.ToDateTime(Sqlreader["RequestedDelivery"]);
-                    customer.DateFullfill = Convert.ToDateTime(Sqlreader["DateFullfill"]);
+                    customer.DateFullfilled = Convert.ToDateTime(Sqlreader["DateFullfill"]);
                     customer.Description = Sqlreader["Description"].ToString();
                     customer.PaymentTerms = Sqlreader["PaymentTerms"].ToString();
-                    customer.FrieghtTerms = Sqlreader["FrieghtTerms"].ToString();
+                    customer.FreightTerms = Sqlreader["FrieghtTerms"].ToString();
                     customer.BillToStreet = Sqlreader["BillToStreet"].ToString();
                     customer.BillToState = Sqlreader["Country"].ToString();
                     customer.BillToCountry = Sqlreader["BillToCountry"].ToString();
@@ -320,7 +320,7 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.ShipToCity = Sqlreader["ShipToCity"].ToString();
                     customer.ShipToState = Sqlreader["ShipToState"].ToString();
                     customer.ShipToCountry = Sqlreader["ShipToCountry"].ToString();
-                    customer.ShipingPostalCode = Convert.ToInt32(Sqlreader["ShipingPostalCode"]);
+                    customer.ShipingPostalCodes = Convert.ToInt32(Sqlreader["ShipingPostalCode"]);
                     OrderAndInvoiceList.Add(customer);
                 }
                 return View(OrderAndInvoiceList);
