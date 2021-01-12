@@ -137,6 +137,11 @@
     <Compile Include="Models\OrderAndInvoiceModel.cs" />
     <Compile Include="Models\QuoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -157,6 +162,17 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="SalesDataSet1.xsc">
+      <DependentUpon>SalesDataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="SalesDataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SalesDataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="SalesDataSet1.xss">
+      <DependentUpon>SalesDataSet1.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
