@@ -273,7 +273,7 @@ namespace SALES_MANAGEMENT.Controllers
             }
 
         }
-
+                      
         //LIST INDEX
         public ActionResult Index(string SortingCol, string SortType)
         {
