@@ -104,13 +104,19 @@ namespace SALES_MANAGEMENT.Models
         public List<States> StateList { get; set; }
         public List<Countries> CountryList { get; set; }
         public List<Types> TypeList { get; set; }
+        public string CityName { get;  set; }
+        public string StateName { get; set; }
+        public string CountryName { get; set; }
+        public string TypeName { get; set; }
+        public string LeadSourceName { get; set; }
     }
+    
 
     public class LeadSources
     {
         public int Id { get; set; }
 
-        public string LeadSource { get; set; }
+        public string LeadSourceName { get; set; }
 
     }
 

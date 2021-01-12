@@ -191,7 +191,7 @@ namespace SALES_MANAGEMENT.Controllers
                     LeadSourceList.Add(new LeadSources
                     {
                         Id = Convert.ToInt32(Sqlreader["Id"]),
-                        LeadSource = Convert.ToString(Sqlreader["LeadSource"]),
+                        LeadSourceName = Convert.ToString(Sqlreader["LeadSourceName"]),
                     });
                 }
                 con.Close();
@@ -325,7 +325,7 @@ namespace SALES_MANAGEMENT.Controllers
                     LeadList.Add(customer);
                 }
 
-                return View(LeadList);
+                return View(LeadList); 
             }
         }
 
@@ -363,13 +363,18 @@ namespace SALES_MANAGEMENT.Controllers
                     customer.PermanentAddress = Sqlreader["PermanentAddress"].ToString();
                     customer.MobileNumber = Convert.ToInt64(Sqlreader["MobileNumber"]);
                     customer.EmailId = Sqlreader["EmailId"].ToString();
-                    customer.City = Sqlreader["City"].ToString();
-                    customer.State = Sqlreader["State"].ToString();
                     customer.Country = Sqlreader["Country"].ToString();
+                    customer.CountryName = Sqlreader["CountryName"].ToString();
+                    customer.State = Sqlreader["State"].ToString();
+                    customer.StateName = Sqlreader["StateName"].ToString();
+                    customer.City = Sqlreader["City"].ToString();
+                    customer.CityName = Sqlreader["CityName"].ToString();
                     customer.Title = Sqlreader["Title"].ToString();
                     customer.LeadSource = Sqlreader["LeadSource"].ToString();
+                    customer.LeadSourceName = Sqlreader["LeadSourceName"].ToString();
                     customer.MeetingDate = Convert.ToDateTime(Sqlreader["MeetingDate"]);
                     customer.Type = Sqlreader["Type"].ToString();
+                    customer.TypeName = Sqlreader["TypeName"].ToString();
                     customer.JobTitle = Sqlreader["JobTitle"].ToString();
                     customer.CompanyWebsite = Sqlreader["CompanyWebsite"].ToString();
                     customer.CompanyName = Sqlreader["CompanyName"].ToString();
