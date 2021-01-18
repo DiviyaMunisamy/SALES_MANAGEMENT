@@ -6,16 +6,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.25in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.94792in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.3125in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.23958in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1in</Width>
@@ -24,28 +24,28 @@
               <Width>2.29167in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.86458in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>2.95833in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>2.48958in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>3.73958in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>4.1875in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.34375in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.32292in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.20833in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -63,9 +63,8 @@
                             <TextRun>
                               <Value>Lead Id</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -106,9 +105,8 @@
                             <TextRun>
                               <Value>Title</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -149,9 +147,8 @@
                             <TextRun>
                               <Value>First Name</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -192,9 +189,8 @@
                             <TextRun>
                               <Value>Last Name</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -235,9 +231,8 @@
                             <TextRun>
                               <Value>Gender</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -276,11 +271,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Current Address</Value>
+                              <Value>Address</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -321,9 +315,8 @@
                             <TextRun>
                               <Value>Mobile Number</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -364,9 +357,8 @@
                             <TextRun>
                               <Value>Email Id</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -407,9 +399,8 @@
                             <TextRun>
                               <Value>Job Title</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -450,9 +441,8 @@
                             <TextRun>
                               <Value>Company Name</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -493,9 +483,8 @@
                             <TextRun>
                               <Value>Company Website</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -536,9 +525,8 @@
                             <TextRun>
                               <Value>Meeting Date</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -579,9 +567,8 @@
                             <TextRun>
                               <Value>Created Date</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -622,9 +609,8 @@
                             <TextRun>
                               <Value>Is Qualify</Value>
                               <Style>
-                                <FontStyle>Italic</FontStyle>
                                 <FontFamily>times New Roman</FontFamily>
-                                <FontSize>12pt</FontSize>
+                                <FontSize>16pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                                 <Color>#666666</Color>
                               </Style>
@@ -671,6 +657,7 @@
                               <Value>=Sum(Fields!LeadId.Value)</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -707,6 +694,7 @@
                               <Value>=Fields!Title.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -743,6 +731,7 @@
                               <Value>=Fields!FirstName.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -779,6 +768,7 @@
                               <Value>=Fields!LastName.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -815,6 +805,7 @@
                               <Value>=Fields!Gender.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -851,6 +842,7 @@
                               <Value>=Fields!CurrentAddress.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -887,6 +879,7 @@
                               <Value>=Sum(Fields!MobileNumber.Value)</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -923,6 +916,7 @@
                               <Value>=Fields!EmailId.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -959,6 +953,7 @@
                               <Value>=Fields!JobTitle.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -995,6 +990,7 @@
                               <Value>=Fields!CompanyName.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -1031,6 +1027,7 @@
                               <Value>=Fields!CompanyWebsite.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -1067,7 +1064,9 @@
                               <Value>=Fields!MeetingDate.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
+                                <Format>MM/dd/yyyy</Format>
                                 <Color>#333333</Color>
                               </Style>
                             </TextRun>
@@ -1103,7 +1102,9 @@
                               <Value>=Fields!CreatedDate.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
+                                <Format>MM/dd/yyyy</Format>
                                 <Color>#333333</Color>
                               </Style>
                             </TextRun>
@@ -1139,6 +1140,7 @@
                               <Value>=Fields!IsQualify.Value</Value>
                               <Style>
                                 <FontFamily>times New Roman</FontFamily>
+                                <FontSize>14pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Color>#333333</Color>
                               </Style>
@@ -1196,19 +1198,56 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>LeadDataSet</DataSetName>
+        <Top>0.90625in</Top>
         <Height>0.5in</Height>
-        <Width>15.29167in</Width>
+        <Width>28.15625in</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Tablix>
+      <Textbox Name="Textbox29">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>LEADS REPORTS</Value>
+                <Style>
+                  <FontFamily>times New Roman</FontFamily>
+                  <FontSize>30pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Center</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox29</rd:DefaultName>
+        <Height>0.58208in</Height>
+        <Width>26.07291in</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>2in</Height>
-    <Style />
+    <Height>1.40625in</Height>
+    <Style>
+      <BackgroundColor>White</BackgroundColor>
+    </Style>
   </Body>
-  <Width>15.29167in</Width>
+  <Width>28.15625in</Width>
   <Page>
     <LeftMargin>1in</LeftMargin>
     <RightMargin>1in</RightMargin>

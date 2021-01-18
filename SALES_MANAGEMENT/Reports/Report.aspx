@@ -13,7 +13,7 @@
         <div>
         </div>
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <rsweb:ReportViewer ID="ReportViewer1"  runat="server" AsyncRendering="false" Width="1388px"></rsweb:ReportViewer>
+        <rsweb:ReportViewer ID="ReportViewer1"  runat="server" AsyncRendering="false" BorderStyle="None" Height="462px" PrimaryButtonBackgroundColor="" style="margin-right: 0px; margin-bottom: 0px" Width="2335px"></rsweb:ReportViewer>
     </form>
 </body>
 </html>
