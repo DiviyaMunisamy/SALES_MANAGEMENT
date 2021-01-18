@@ -33,7 +33,6 @@ namespace SALES_MANAGEMENT.Controllers
             };
             return View(DropdownList);
         }
-
         //DROP DOWN FOR ShippingMethod.....
         public List<ShippingMethod> GetShippingMethodList()
         {
