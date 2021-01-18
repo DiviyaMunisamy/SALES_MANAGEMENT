@@ -1,0 +1,2849 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SaleModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order_Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefOrder_InvoiceId" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="EmailId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Currency" Type="int" Nullable="false" />
+          <Property Name="Opportunity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PriceList" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PriceLocked" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="RequestedDelivery" Type="datetime" Nullable="false" />
+          <Property Name="DateFullfilled" Type="datetime" Nullable="false" />
+          <Property Name="ShippingMethod" Type="int" Nullable="false" />
+          <Property Name="PaymentTerms" Type="int" Nullable="false" />
+          <Property Name="FreightTerms" Type="int" Nullable="false" />
+          <Property Name="BillToStreet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BillToCity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BillToState" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BillingPostalCode" Type="bigint" Nullable="false" />
+          <Property Name="BillToCountry" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipToStreet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipToCity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipToState" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipingPostalCodes" Type="bigint" Nullable="false" />
+          <Property Name="ShipToCountry" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PotentialCustomer" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tbl_adminlogin">
+          <Property Name="Admin_id" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+        <EntityType Name="TBL_Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="StateId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="SortName" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="PhoneCode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_credentials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emailid" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsPasswordChanged" Type="bit" />
+          <Property Name="UserDepartment" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_Currency">
+          <Key>
+            <PropertyRef Name="Currency_Id" />
+          </Key>
+          <Property Name="Currency_Id" Type="int" Nullable="false" />
+          <Property Name="Currency_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_CurrencyForQuote">
+          <Key>
+            <PropertyRef Name="Currency_Id" />
+          </Key>
+          <Property Name="Currency_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Currency_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_ForecastCategory">
+          <Key>
+            <PropertyRef Name="ForecastCategory_Id" />
+          </Key>
+          <Property Name="ForecastCategory_Id" Type="int" Nullable="false" />
+          <Property Name="ForecastCategory_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_FreightTerms">
+          <Key>
+            <PropertyRef Name="Freight_Id" />
+          </Key>
+          <Property Name="Freight_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FreightTerm_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_Leads">
+          <Key>
+            <PropertyRef Name="LeadId" />
+          </Key>
+          <Property Name="LeadId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="varchar" MaxLength="100" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CurrentAddress" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="PermanentAddress" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="MobileNumber" Type="bigint" Nullable="false" />
+          <Property Name="EmailId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="Country" Type="int" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LeadSource" Type="int" />
+          <Property Name="MeetingDate" Type="date" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="50" />
+          <Property Name="IsQualify" Type="bit" Nullable="false" />
+          <Property Name="CompanyWebsite" Type="varchar" MaxLength="250" />
+          <Property Name="Type" Type="int" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_LeadSource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LeadSourceName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_Opportunity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Topic" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Contact" Type="bigint" Nullable="false" />
+          <Property Name="Account" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PurchaseTimeForm" Type="int" Nullable="false" />
+          <Property Name="Currency" Type="int" Nullable="false" />
+          <Property Name="BudgetAmount" Type="bigint" Nullable="false" />
+          <Property Name="PurchesProcess" Type="int" Nullable="false" />
+          <Property Name="ForecastCategory" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CurrentSuitation" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CustommerNeed" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ProposedSolution" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="IsOpportunityQualify" Type="bit" Nullable="false" />
+          <Property Name="RefOppId" Type="int" />
+        </EntityType>
+        <EntityType Name="TBL_PaymentTerms">
+          <Key>
+            <PropertyRef Name="Payment_Id" />
+          </Key>
+          <Property Name="Payment_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentTerm_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_PurchaseTimeForm">
+          <Key>
+            <PropertyRef Name="PT_Id" />
+          </Key>
+          <Property Name="PT_Id" Type="int" Nullable="false" />
+          <Property Name="PurchaseTimeForm_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_PurchesProcess">
+          <Key>
+            <PropertyRef Name="PurchesProcess_Id" />
+          </Key>
+          <Property Name="PurchesProcess_Id" Type="int" Nullable="false" />
+          <Property Name="PurchesProcess_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_Quote">
+          <Key>
+            <PropertyRef Name="QuoteId" />
+          </Key>
+          <Property Name="QuoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Currency" Type="int" Nullable="false" />
+          <Property Name="PriceList" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShippingMethod" Type="int" Nullable="false" />
+          <Property Name="PaymentTerms" Type="int" Nullable="false" />
+          <Property Name="FreightTerms" Type="int" Nullable="false" />
+          <Property Name="BillToStreet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BillToCity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BillToState" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BillingPostalCode" Type="bigint" Nullable="false" />
+          <Property Name="BillToCountry" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipToStreet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipToState" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipToCity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipingPostalCodes" Type="bigint" Nullable="false" />
+          <Property Name="ShipToCountry" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PotentialCustomer" Type="varchar" MaxLength="50" />
+          <Property Name="Opportunity" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="StatusReason" Type="int" />
+          <Property Name="ShipTo" Type="int" />
+          <Property Name="QuoteExpiresOn" Type="date" />
+          <Property Name="RefQuoteId" Type="int" />
+          <Property Name="IsQuoteQualify" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_ShippingMethod">
+          <Key>
+            <PropertyRef Name="ShippingMethod_Id" />
+          </Key>
+          <Property Name="ShippingMethod_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShippingMethod_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_ShipTo">
+          <Key>
+            <PropertyRef Name="ShipTo_Id" />
+          </Key>
+          <Property Name="ShipTo_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShipTo_NAME" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_States">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_StatusReason">
+          <Key>
+            <PropertyRef Name="StatusReason_Id" />
+          </Key>
+          <Property Name="StatusReason_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusReason_NAME" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="bigint" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo" Type="varchar(max)" Nullable="false" />
+          <Property Name="AadharNumber" Type="bigint" Nullable="false" />
+          <Property Name="FathersName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaritialStatus" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Order_Inv__Curre__15DA3E5D">
+          <End Role="TBL_Countries" Type="Self.TBL_Countries" Multiplicity="1" />
+          <End Role="Order_Invoice" Type="Self.Order_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order_Invoice">
+              <PropertyRef Name="Currency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Inv__Freig__18B6AB08">
+          <End Role="TBL_FreightTerms" Type="Self.TBL_FreightTerms" Multiplicity="1" />
+          <End Role="Order_Invoice" Type="Self.Order_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_FreightTerms">
+              <PropertyRef Name="Freight_Id" />
+            </Principal>
+            <Dependent Role="Order_Invoice">
+              <PropertyRef Name="FreightTerms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Inv__Payme__17C286CF">
+          <End Role="TBL_PaymentTerms" Type="Self.TBL_PaymentTerms" Multiplicity="1" />
+          <End Role="Order_Invoice" Type="Self.Order_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PaymentTerms">
+              <PropertyRef Name="Payment_Id" />
+            </Principal>
+            <Dependent Role="Order_Invoice">
+              <PropertyRef Name="PaymentTerms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Inv__RefOr__14E61A24">
+          <End Role="TBL_Leads" Type="Self.TBL_Leads" Multiplicity="0..1" />
+          <End Role="Order_Invoice" Type="Self.Order_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Leads">
+              <PropertyRef Name="LeadId" />
+            </Principal>
+            <Dependent Role="Order_Invoice">
+              <PropertyRef Name="RefOrder_InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Inv__Shipp__16CE6296">
+          <End Role="TBL_ShippingMethod" Type="Self.TBL_ShippingMethod" Multiplicity="1" />
+          <End Role="Order_Invoice" Type="Self.Order_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ShippingMethod">
+              <PropertyRef Name="ShippingMethod_Id" />
+            </Principal>
+            <Dependent Role="Order_Invoice">
+              <PropertyRef Name="ShippingMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Citie__State__693CA210">
+          <End Role="TBL_States" Type="Self.TBL_States" Multiplicity="1" />
+          <End Role="TBL_Cities" Type="Self.TBL_Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TBL_Cities">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Leads__LeadS__6A30C649">
+          <End Role="TBL_LeadSource" Type="Self.TBL_LeadSource" Multiplicity="0..1" />
+          <End Role="TBL_Leads" Type="Self.TBL_Leads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_LeadSource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TBL_Leads">
+              <PropertyRef Name="LeadSource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Leads__Type__2DE6D218">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="TBL_Leads" Type="Self.TBL_Leads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="TBL_Leads">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Oppor__Curre__6B24EA82">
+          <End Role="TBL_Currency" Type="Self.TBL_Currency" Multiplicity="1" />
+          <End Role="TBL_Opportunity" Type="Self.TBL_Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Currency">
+              <PropertyRef Name="Currency_Id" />
+            </Principal>
+            <Dependent Role="TBL_Opportunity">
+              <PropertyRef Name="Currency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Oppor__Forec__6C190EBB">
+          <End Role="TBL_ForecastCategory" Type="Self.TBL_ForecastCategory" Multiplicity="1" />
+          <End Role="TBL_Opportunity" Type="Self.TBL_Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ForecastCategory">
+              <PropertyRef Name="ForecastCategory_Id" />
+            </Principal>
+            <Dependent Role="TBL_Opportunity">
+              <PropertyRef Name="ForecastCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Oppor__Purch__6D0D32F4">
+          <End Role="TBL_PurchaseTimeForm" Type="Self.TBL_PurchaseTimeForm" Multiplicity="1" />
+          <End Role="TBL_Opportunity" Type="Self.TBL_Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PurchaseTimeForm">
+              <PropertyRef Name="PT_Id" />
+            </Principal>
+            <Dependent Role="TBL_Opportunity">
+              <PropertyRef Name="PurchaseTimeForm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Oppor__Purch__6E01572D">
+          <End Role="TBL_PurchesProcess" Type="Self.TBL_PurchesProcess" Multiplicity="1" />
+          <End Role="TBL_Opportunity" Type="Self.TBL_Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PurchesProcess">
+              <PropertyRef Name="PurchesProcess_Id" />
+            </Principal>
+            <Dependent Role="TBL_Opportunity">
+              <PropertyRef Name="PurchesProcess" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Oppor__RefOp__1AD3FDA4">
+          <End Role="TBL_Leads" Type="Self.TBL_Leads" Multiplicity="0..1" />
+          <End Role="TBL_Opportunity" Type="Self.TBL_Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Leads">
+              <PropertyRef Name="LeadId" />
+            </Principal>
+            <Dependent Role="TBL_Opportunity">
+              <PropertyRef Name="RefOppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__Curre__6EF57B66">
+          <End Role="TBL_CurrencyForQuote" Type="Self.TBL_CurrencyForQuote" Multiplicity="1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CurrencyForQuote">
+              <PropertyRef Name="Currency_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="Currency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__Freig__6FE99F9F">
+          <End Role="TBL_FreightTerms" Type="Self.TBL_FreightTerms" Multiplicity="1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_FreightTerms">
+              <PropertyRef Name="Freight_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="FreightTerms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__Payme__70DDC3D8">
+          <End Role="TBL_PaymentTerms" Type="Self.TBL_PaymentTerms" Multiplicity="1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PaymentTerms">
+              <PropertyRef Name="Payment_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="PaymentTerms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__RefQu__1BC821DD">
+          <End Role="TBL_Leads" Type="Self.TBL_Leads" Multiplicity="0..1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Leads">
+              <PropertyRef Name="LeadId" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="RefQuoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__Shipp__71D1E811">
+          <End Role="TBL_ShippingMethod" Type="Self.TBL_ShippingMethod" Multiplicity="1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ShippingMethod">
+              <PropertyRef Name="ShippingMethod_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="ShippingMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__ShipT__72C60C4A">
+          <End Role="TBL_ShipTo" Type="Self.TBL_ShipTo" Multiplicity="0..1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ShipTo">
+              <PropertyRef Name="ShipTo_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="ShipTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__Statu__73BA3083">
+          <End Role="TBL_StatusReason" Type="Self.TBL_StatusReason" Multiplicity="0..1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_StatusReason">
+              <PropertyRef Name="StatusReason_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="StatusReason" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_State__Count__1F98B2C1">
+          <End Role="TBL_Countries" Type="Self.TBL_Countries" Multiplicity="1" />
+          <End Role="TBL_States" Type="Self.TBL_States" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TBL_States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_credntials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="UserDepartment" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Currency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_dropdown" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_ForecastCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_gridview" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="Gender" Type="varchar" Mode="In" />
+          <Parameter Name="EmailAddress" Type="varchar" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="Photo" Type="varchar" Mode="In" />
+          <Parameter Name="AadharNumber" Type="bigint" Mode="In" />
+          <Parameter Name="FathersName" Type="varchar" Mode="In" />
+          <Parameter Name="MaritalStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Lead_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Photo" Type="varchar" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="DateOfBirth" Type="date" Mode="In" />
+          <Parameter Name="Gender" Type="varchar" Mode="In" />
+          <Parameter Name="CurrentAddress" Type="varchar" Mode="In" />
+          <Parameter Name="PermanentAddress" Type="varchar" Mode="In" />
+          <Parameter Name="MobileNumber" Type="bigint" Mode="In" />
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="City" Type="int" Mode="In" />
+          <Parameter Name="State" Type="int" Mode="In" />
+          <Parameter Name="Country" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="LeadSource" Type="varchar" Mode="In" />
+          <Parameter Name="MeetingDate" Type="datetime" Mode="In" />
+          <Parameter Name="Type" Type="int" Mode="In" />
+          <Parameter Name="JobTitle" Type="varchar" Mode="In" />
+          <Parameter Name="CompanyName" Type="varchar" Mode="In" />
+          <Parameter Name="CompanyWebsite" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Admin_id" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Isvalid" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="SP_Opportunity_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefOppId" Type="int" Mode="In" />
+          <Parameter Name="Topic" Type="varchar" Mode="In" />
+          <Parameter Name="Contact" Type="bigint" Mode="In" />
+          <Parameter Name="Account" Type="varchar" Mode="In" />
+          <Parameter Name="PurchaseTimeForm" Type="varchar" Mode="In" />
+          <Parameter Name="Currency" Type="varchar" Mode="In" />
+          <Parameter Name="BudgetAmount" Type="bigint" Mode="In" />
+          <Parameter Name="PurchesProcess" Type="varchar" Mode="In" />
+          <Parameter Name="ForecastCategory" Type="varchar" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="CurrentSuitation" Type="varchar" Mode="In" />
+          <Parameter Name="CustommerNeed" Type="varchar" Mode="In" />
+          <Parameter Name="ProposedSolution" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Opportunity_SelectAllbyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefOppId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Opportunity_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Topic" Type="varchar" Mode="In" />
+          <Parameter Name="Contact" Type="bigint" Mode="In" />
+          <Parameter Name="Account" Type="varchar" Mode="In" />
+          <Parameter Name="BudgetAmount" Type="bigint" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="CurrentSuitation" Type="varchar" Mode="In" />
+          <Parameter Name="CustommerNeed" Type="varchar" Mode="In" />
+          <Parameter Name="ProposedSolution" Type="varchar" Mode="In" />
+          <Parameter Name="PurchaseTimeForm" Type="int" Mode="In" />
+          <Parameter Name="Currency" Type="int" Mode="In" />
+          <Parameter Name="ForecastCategory" Type="int" Mode="In" />
+          <Parameter Name="PurchesProcess" Type="int" Mode="In" />
+          <Parameter Name="RefOppId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_OpportunityQualify_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefOppId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Opprtunity_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefOppId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Order_Invoice_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_OrderInvoice_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefOrder_InvoiceId" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="Currency" Type="int" Mode="In" />
+          <Parameter Name="Opportunity" Type="varchar" Mode="In" />
+          <Parameter Name="PriceList" Type="varchar" Mode="In" />
+          <Parameter Name="PriceLocked" Type="char" Mode="In" />
+          <Parameter Name="RequestedDelivery" Type="date" Mode="In" />
+          <Parameter Name="DateFullfilled" Type="date" Mode="In" />
+          <Parameter Name="ShippingMethod" Type="int" Mode="In" />
+          <Parameter Name="PaymentTerms" Type="int" Mode="In" />
+          <Parameter Name="FreightTerms" Type="int" Mode="In" />
+          <Parameter Name="BillToStreet" Type="varchar" Mode="In" />
+          <Parameter Name="BillToCity" Type="varchar" Mode="In" />
+          <Parameter Name="BillToState" Type="varchar" Mode="In" />
+          <Parameter Name="BillingPostalCode" Type="bigint" Mode="In" />
+          <Parameter Name="BillToCountry" Type="varchar" Mode="In" />
+          <Parameter Name="ShipToStreet" Type="varchar" Mode="In" />
+          <Parameter Name="ShipToCity" Type="varchar" Mode="In" />
+          <Parameter Name="ShipToState" Type="varchar" Mode="In" />
+          <Parameter Name="ShipingPostalCodes" Type="bigint" Mode="In" />
+          <Parameter Name="ShipToCountry" Type="varchar" Mode="In" />
+          <Parameter Name="PotentialCustomer" Type="varchar" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_password_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_PurchaseTimeForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_PurchesProcess" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Qialify_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LeadId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_QualifiedQuote_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_QuortesQialify_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefQuoteId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Quote_DropDownForQuoteCurrency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Quote_DropDownFreightTerms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Quote_DropDownPaymentTerms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Quote_DropDownShippingMethod" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Quote_DropDownShipTo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Quote_DropDownStatusReason" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Quote_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefQuoteId" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Currency" Type="int" Mode="In" />
+          <Parameter Name="Opportunity" Type="varchar" Mode="In" />
+          <Parameter Name="PriceList" Type="varchar" Mode="In" />
+          <Parameter Name="ShippingMethod" Type="int" Mode="In" />
+          <Parameter Name="PaymentTerms" Type="int" Mode="In" />
+          <Parameter Name="FreightTerms" Type="int" Mode="In" />
+          <Parameter Name="BillToStreet" Type="varchar" Mode="In" />
+          <Parameter Name="BillToCity" Type="varchar" Mode="In" />
+          <Parameter Name="BillToState" Type="varchar" Mode="In" />
+          <Parameter Name="BillingPostalCode" Type="bigint" Mode="In" />
+          <Parameter Name="BillToCountry" Type="varchar" Mode="In" />
+          <Parameter Name="ShipTo" Type="int" Mode="In" />
+          <Parameter Name="ShipToStreet" Type="varchar" Mode="In" />
+          <Parameter Name="ShipToCity" Type="varchar" Mode="In" />
+          <Parameter Name="ShipToState" Type="varchar" Mode="In" />
+          <Parameter Name="ShipingPostalCodes" Type="bigint" Mode="In" />
+          <Parameter Name="ShipToCountry" Type="varchar" Mode="In" />
+          <Parameter Name="PotentialCustomer" Type="varchar" Mode="In" />
+          <Parameter Name="StatusReason" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="QuoteExpiresOn" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_Quote_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Quotes_SelectAllbyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefQuoteId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_remote_email" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_SALES_MANAGEMENT_Lead_Type" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_select_department" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_SelectAll_OpportunityQualify" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_SelectAll_Opprtunity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_selectcredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UserLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Emailid" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="USP_Quortes_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RefQuoteId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_SALES_MANAGEMENT_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LeadId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_SALES_MANAGEMENT_FilterByCityName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StateId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="USP_SALES_MANAGEMENT_FilterByCountryName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_SALES_MANAGEMENT_FilterByStateName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CountryId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="USP_SALES_MANAGEMENT_Op_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_SALES_MANAGEMENT_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_SALES_MANAGEMENT_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SortingCol" Type="varchar" Mode="In" />
+          <Parameter Name="SortType" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="USP_SALES_MANAGEMENT_SelectAllbyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LeadId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USP_SALES_MANAGEMENT_SelectAllCityName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_SALES_MANAGEMENT_SelectAllLeadSource" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_SALES_MANAGEMENT_SelectAllStateName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_SALES_MANAGEMENT_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LeadId" Type="int" Mode="In" />
+          <Parameter Name="Photo" Type="varchar" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="DateOfBirth" Type="date" Mode="In" />
+          <Parameter Name="Gender" Type="varchar" Mode="In" />
+          <Parameter Name="CurrentAddress" Type="varchar" Mode="In" />
+          <Parameter Name="PermanentAddress" Type="varchar" Mode="In" />
+          <Parameter Name="MobileNumber" Type="bigint" Mode="In" />
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="City" Type="int" Mode="In" />
+          <Parameter Name="State" Type="int" Mode="In" />
+          <Parameter Name="Country" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="LeadSource" Type="varchar" Mode="In" />
+          <Parameter Name="MeetingDate" Type="datetime" Mode="In" />
+          <Parameter Name="Type" Type="int" Mode="In" />
+          <Parameter Name="JobTitle" Type="varchar" Mode="In" />
+          <Parameter Name="CompanyWebsite" Type="varchar" Mode="In" />
+          <Parameter Name="CompanyName" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="SaleModel1StoreContainer">
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Invoice" EntityType="Self.Order_Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Cities" EntityType="Self.TBL_Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Countries" EntityType="Self.TBL_Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_credentials" EntityType="Self.tbl_credentials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Currency" EntityType="Self.TBL_Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_CurrencyForQuote" EntityType="Self.TBL_CurrencyForQuote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ForecastCategory" EntityType="Self.TBL_ForecastCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_FreightTerms" EntityType="Self.TBL_FreightTerms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Leads" EntityType="Self.TBL_Leads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_LeadSource" EntityType="Self.TBL_LeadSource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Opportunity" EntityType="Self.TBL_Opportunity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_PaymentTerms" EntityType="Self.TBL_PaymentTerms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_PurchaseTimeForm" EntityType="Self.TBL_PurchaseTimeForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_PurchesProcess" EntityType="Self.TBL_PurchesProcess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Quote" EntityType="Self.TBL_Quote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ShippingMethod" EntityType="Self.TBL_ShippingMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_ShipTo" EntityType="Self.TBL_ShipTo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_States" EntityType="Self.TBL_States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_StatusReason" EntityType="Self.TBL_StatusReason" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Order_Inv__Curre__15DA3E5D" Association="Self.FK__Order_Inv__Curre__15DA3E5D">
+            <End Role="TBL_Countries" EntitySet="TBL_Countries" />
+            <End Role="Order_Invoice" EntitySet="Order_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Inv__Freig__18B6AB08" Association="Self.FK__Order_Inv__Freig__18B6AB08">
+            <End Role="TBL_FreightTerms" EntitySet="TBL_FreightTerms" />
+            <End Role="Order_Invoice" EntitySet="Order_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Inv__Payme__17C286CF" Association="Self.FK__Order_Inv__Payme__17C286CF">
+            <End Role="TBL_PaymentTerms" EntitySet="TBL_PaymentTerms" />
+            <End Role="Order_Invoice" EntitySet="Order_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Inv__RefOr__14E61A24" Association="Self.FK__Order_Inv__RefOr__14E61A24">
+            <End Role="TBL_Leads" EntitySet="TBL_Leads" />
+            <End Role="Order_Invoice" EntitySet="Order_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Inv__Shipp__16CE6296" Association="Self.FK__Order_Inv__Shipp__16CE6296">
+            <End Role="TBL_ShippingMethod" EntitySet="TBL_ShippingMethod" />
+            <End Role="Order_Invoice" EntitySet="Order_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Citie__State__693CA210" Association="Self.FK__TBL_Citie__State__693CA210">
+            <End Role="TBL_States" EntitySet="TBL_States" />
+            <End Role="TBL_Cities" EntitySet="TBL_Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Leads__LeadS__6A30C649" Association="Self.FK__TBL_Leads__LeadS__6A30C649">
+            <End Role="TBL_LeadSource" EntitySet="TBL_LeadSource" />
+            <End Role="TBL_Leads" EntitySet="TBL_Leads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Leads__Type__2DE6D218" Association="Self.FK__TBL_Leads__Type__2DE6D218">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="TBL_Leads" EntitySet="TBL_Leads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Oppor__Curre__6B24EA82" Association="Self.FK__TBL_Oppor__Curre__6B24EA82">
+            <End Role="TBL_Currency" EntitySet="TBL_Currency" />
+            <End Role="TBL_Opportunity" EntitySet="TBL_Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Oppor__Forec__6C190EBB" Association="Self.FK__TBL_Oppor__Forec__6C190EBB">
+            <End Role="TBL_ForecastCategory" EntitySet="TBL_ForecastCategory" />
+            <End Role="TBL_Opportunity" EntitySet="TBL_Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Oppor__Purch__6D0D32F4" Association="Self.FK__TBL_Oppor__Purch__6D0D32F4">
+            <End Role="TBL_PurchaseTimeForm" EntitySet="TBL_PurchaseTimeForm" />
+            <End Role="TBL_Opportunity" EntitySet="TBL_Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Oppor__Purch__6E01572D" Association="Self.FK__TBL_Oppor__Purch__6E01572D">
+            <End Role="TBL_PurchesProcess" EntitySet="TBL_PurchesProcess" />
+            <End Role="TBL_Opportunity" EntitySet="TBL_Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Oppor__RefOp__1AD3FDA4" Association="Self.FK__TBL_Oppor__RefOp__1AD3FDA4">
+            <End Role="TBL_Leads" EntitySet="TBL_Leads" />
+            <End Role="TBL_Opportunity" EntitySet="TBL_Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__Curre__6EF57B66" Association="Self.FK__TBL_Quote__Curre__6EF57B66">
+            <End Role="TBL_CurrencyForQuote" EntitySet="TBL_CurrencyForQuote" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__Freig__6FE99F9F" Association="Self.FK__TBL_Quote__Freig__6FE99F9F">
+            <End Role="TBL_FreightTerms" EntitySet="TBL_FreightTerms" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__Payme__70DDC3D8" Association="Self.FK__TBL_Quote__Payme__70DDC3D8">
+            <End Role="TBL_PaymentTerms" EntitySet="TBL_PaymentTerms" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__RefQu__1BC821DD" Association="Self.FK__TBL_Quote__RefQu__1BC821DD">
+            <End Role="TBL_Leads" EntitySet="TBL_Leads" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__Shipp__71D1E811" Association="Self.FK__TBL_Quote__Shipp__71D1E811">
+            <End Role="TBL_ShippingMethod" EntitySet="TBL_ShippingMethod" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__ShipT__72C60C4A" Association="Self.FK__TBL_Quote__ShipT__72C60C4A">
+            <End Role="TBL_ShipTo" EntitySet="TBL_ShipTo" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__Statu__73BA3083" Association="Self.FK__TBL_Quote__Statu__73BA3083">
+            <End Role="TBL_StatusReason" EntitySet="TBL_StatusReason" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_State__Count__1F98B2C1" Association="Self.FK__TBL_State__Count__1F98B2C1">
+            <End Role="TBL_Countries" EntitySet="TBL_Countries" />
+            <End Role="TBL_States" EntitySet="TBL_States" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SaleModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Order_Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefOrder_InvoiceId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Currency" Type="Int32" Nullable="false" />
+          <Property Name="Opportunity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PriceList" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PriceLocked" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="RequestedDelivery" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateFullfilled" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ShippingMethod" Type="Int32" Nullable="false" />
+          <Property Name="PaymentTerms" Type="Int32" Nullable="false" />
+          <Property Name="FreightTerms" Type="Int32" Nullable="false" />
+          <Property Name="BillToStreet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BillToCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BillToState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BillingPostalCode" Type="Int64" Nullable="false" />
+          <Property Name="BillToCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShipToStreet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShipToCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShipToState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShipingPostalCodes" Type="Int64" Nullable="false" />
+          <Property Name="ShipToCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PotentialCustomer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_Countries" Relationship="Self.FK__Order_Inv__Curre__15DA3E5D" FromRole="Order_Invoice" ToRole="TBL_Countries" />
+          <NavigationProperty Name="TBL_FreightTerms" Relationship="Self.FK__Order_Inv__Freig__18B6AB08" FromRole="Order_Invoice" ToRole="TBL_FreightTerms" />
+          <NavigationProperty Name="TBL_PaymentTerms" Relationship="Self.FK__Order_Inv__Payme__17C286CF" FromRole="Order_Invoice" ToRole="TBL_PaymentTerms" />
+          <NavigationProperty Name="TBL_Leads" Relationship="Self.FK__Order_Inv__RefOr__14E61A24" FromRole="Order_Invoice" ToRole="TBL_Leads" />
+          <NavigationProperty Name="TBL_ShippingMethod" Relationship="Self.FK__Order_Inv__Shipp__16CE6296" FromRole="Order_Invoice" ToRole="TBL_ShippingMethod" />
+        </EntityType>
+        <EntityType Name="TBL_Cities">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StateId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="TBL_States" Relationship="Self.FK__TBL_Citie__State__693CA210" FromRole="TBL_Cities" ToRole="TBL_States" />
+        </EntityType>
+        <EntityType Name="TBL_Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="SortName" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneCode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order_Invoice" Relationship="Self.FK__Order_Inv__Curre__15DA3E5D" FromRole="TBL_Countries" ToRole="Order_Invoice" />
+          <NavigationProperty Name="TBL_States" Relationship="Self.FK__TBL_State__Count__1F98B2C1" FromRole="TBL_Countries" ToRole="TBL_States" />
+        </EntityType>
+        <EntityType Name="tbl_credentials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emailid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsPasswordChanged" Type="Boolean" />
+          <Property Name="UserDepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TBL_Currency">
+          <Key>
+            <PropertyRef Name="Currency_Id" />
+          </Key>
+          <Property Name="Currency_Id" Type="Int32" Nullable="false" />
+          <Property Name="Currency_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_Opportunity" Relationship="Self.FK__TBL_Oppor__Curre__6B24EA82" FromRole="TBL_Currency" ToRole="TBL_Opportunity" />
+        </EntityType>
+        <EntityType Name="TBL_CurrencyForQuote">
+          <Key>
+            <PropertyRef Name="Currency_Id" />
+          </Key>
+          <Property Name="Currency_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Currency_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_Quote" Relationship="Self.FK__TBL_Quote__Curre__6EF57B66" FromRole="TBL_CurrencyForQuote" ToRole="TBL_Quote" />
+        </EntityType>
+        <EntityType Name="TBL_ForecastCategory">
+          <Key>
+            <PropertyRef Name="ForecastCategory_Id" />
+          </Key>
+          <Property Name="ForecastCategory_Id" Type="Int32" Nullable="false" />
+          <Property Name="ForecastCategory_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_Opportunity" Relationship="Self.FK__TBL_Oppor__Forec__6C190EBB" FromRole="TBL_ForecastCategory" ToRole="TBL_Opportunity" />
+        </EntityType>
+        <EntityType Name="TBL_FreightTerms">
+          <Key>
+            <PropertyRef Name="Freight_Id" />
+          </Key>
+          <Property Name="Freight_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FreightTerm_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Order_Invoice" Relationship="Self.FK__Order_Inv__Freig__18B6AB08" FromRole="TBL_FreightTerms" ToRole="Order_Invoice" />
+          <NavigationProperty Name="TBL_Quote" Relationship="Self.FK__TBL_Quote__Freig__6FE99F9F" FromRole="TBL_FreightTerms" ToRole="TBL_Quote" />
+        </EntityType>
+        <EntityType Name="TBL_Leads">
+          <Key>
+            <PropertyRef Name="LeadId" />
+          </Key>
+          <Property Name="LeadId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CurrentAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MobileNumber" Type="Int64" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="Country" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LeadSource" Type="Int32" />
+          <Property Name="MeetingDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsQualify" Type="Boolean" Nullable="false" />
+          <Property Name="CompanyWebsite" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Order_Invoice" Relationship="Self.FK__Order_Inv__RefOr__14E61A24" FromRole="TBL_Leads" ToRole="Order_Invoice" />
+          <NavigationProperty Name="TBL_LeadSource" Relationship="Self.FK__TBL_Leads__LeadS__6A30C649" FromRole="TBL_Leads" ToRole="TBL_LeadSource" />
+          <NavigationProperty Name="Type1" Relationship="Self.FK__TBL_Leads__Type__2DE6D218" FromRole="TBL_Leads" ToRole="Type" />
+          <NavigationProperty Name="TBL_Opportunity" Relationship="Self.FK__TBL_Oppor__RefOp__1AD3FDA4" FromRole="TBL_Leads" ToRole="TBL_Opportunity" />
+          <NavigationProperty Name="TBL_Quote" Relationship="Self.FK__TBL_Quote__RefQu__1BC821DD" FromRole="TBL_Leads" ToRole="TBL_Quote" />
+        </EntityType>
+        <EntityType Name="TBL_LeadSource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeadSourceName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_Leads" Relationship="Self.FK__TBL_Leads__LeadS__6A30C649" FromRole="TBL_LeadSource" ToRole="TBL_Leads" />
+        </EntityType>
+        <EntityType Name="TBL_Opportunity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Topic" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contact" Type="Int64" Nullable="false" />
+          <Property Name="Account" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PurchaseTimeForm" Type="Int32" Nullable="false" />
+          <Property Name="Currency" Type="Int32" Nullable="false" />
+          <Property Name="BudgetAmount" Type="Int64" Nullable="false" />
+          <Property Name="PurchesProcess" Type="Int32" Nullable="false" />
+          <Property Name="ForecastCategory" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CurrentSuitation" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustommerNeed" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProposedSolution" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsOpportunityQualify" Type="Boolean" Nullable="false" />
+          <Property Name="RefOppId" Type="Int32" />
+          <NavigationProperty Name="TBL_Currency" Relationship="Self.FK__TBL_Oppor__Curre__6B24EA82" FromRole="TBL_Opportunity" ToRole="TBL_Currency" />
+          <NavigationProperty Name="TBL_ForecastCategory" Relationship="Self.FK__TBL_Oppor__Forec__6C190EBB" FromRole="TBL_Opportunity" ToRole="TBL_ForecastCategory" />
+          <NavigationProperty Name="TBL_Leads" Relationship="Self.FK__TBL_Oppor__RefOp__1AD3FDA4" FromRole="TBL_Opportunity" ToRole="TBL_Leads" />
+          <NavigationProperty Name="TBL_PurchaseTimeForm" Relationship="Self.FK__TBL_Oppor__Purch__6D0D32F4" FromRole="TBL_Opportunity" ToRole="TBL_PurchaseTimeForm" />
+          <NavigationProperty Name="TBL_PurchesProcess" Relationship="Self.FK__TBL_Oppor__Purch__6E01572D" FromRole="TBL_Opportunity" ToRole="TBL_PurchesProcess" />
+        </EntityType>
+        <EntityType Name="TBL_PaymentTerms">
+          <Key>
+            <PropertyRef Name="Payment_Id" />
+          </Key>
+          <Property Name="Payment_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentTerm_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Order_Invoice" Relationship="Self.FK__Order_Inv__Payme__17C286CF" FromRole="TBL_PaymentTerms" ToRole="Order_Invoice" />
+          <NavigationProperty Name="TBL_Quote" Relationship="Self.FK__TBL_Quote__Payme__70DDC3D8" FromRole="TBL_PaymentTerms" ToRole="TBL_Quote" />
+        </EntityType>
+        <EntityType Name="TBL_PurchaseTimeForm">
+          <Key>
+            <PropertyRef Name="PT_Id" />
+          </Key>
+          <Property Name="PT_Id" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseTimeForm_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_Opportunity" Relationship="Self.FK__TBL_Oppor__Purch__6D0D32F4" FromRole="TBL_PurchaseTimeForm" ToRole="TBL_Opportunity" />
+        </EntityType>
+        <EntityType Name="TBL_PurchesProcess">
+          <Key>
+            <PropertyRef Name="PurchesProcess_Id" />
+          </Key>
+          <Property Name="PurchesProcess_Id" Type="Int32" Nullable="false" />
+          <Property Name="PurchesProcess_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_Opportunity" Relationship="Self.FK__TBL_Oppor__Purch__6E01572D" FromRole="TBL_PurchesProcess" ToRole="TBL_Opportunity" />
+        </EntityType>
+        <EntityType Name="TBL_Quote">
+          <Key>
+            <PropertyRef Name="QuoteId" />
+          </Key>
+          <Property Name="QuoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Currency" Type="Int32" Nullable="false" />
+          <Property Name="PriceList" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShippingMethod" Type="Int32" Nullable="false" />
+          <Property Name="PaymentTerms" Type="Int32" Nullable="false" />
+          <Property Name="FreightTerms" Type="Int32" Nullable="false" />
+          <Property Name="BillToStreet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BillToCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BillToState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BillingPostalCode" Type="Int64" Nullable="false" />
+          <Property Name="BillToCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShipToStreet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShipToState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShipToCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ShipingPostalCodes" Type="Int64" Nullable="false" />
+          <Property Name="ShipToCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PotentialCustomer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Opportunity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StatusReason" Type="Int32" />
+          <Property Name="ShipTo" Type="Int32" />
+          <Property Name="QuoteExpiresOn" Type="DateTime" Precision="0" />
+          <Property Name="RefQuoteId" Type="Int32" />
+          <Property Name="IsQuoteQualify" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TBL_CurrencyForQuote" Relationship="Self.FK__TBL_Quote__Curre__6EF57B66" FromRole="TBL_Quote" ToRole="TBL_CurrencyForQuote" />
+          <NavigationProperty Name="TBL_FreightTerms" Relationship="Self.FK__TBL_Quote__Freig__6FE99F9F" FromRole="TBL_Quote" ToRole="TBL_FreightTerms" />
+          <NavigationProperty Name="TBL_Leads" Relationship="Self.FK__TBL_Quote__RefQu__1BC821DD" FromRole="TBL_Quote" ToRole="TBL_Leads" />
+          <NavigationProperty Name="TBL_PaymentTerms" Relationship="Self.FK__TBL_Quote__Payme__70DDC3D8" FromRole="TBL_Quote" ToRole="TBL_PaymentTerms" />
+          <NavigationProperty Name="TBL_ShippingMethod" Relationship="Self.FK__TBL_Quote__Shipp__71D1E811" FromRole="TBL_Quote" ToRole="TBL_ShippingMethod" />
+          <NavigationProperty Name="TBL_ShipTo" Relationship="Self.FK__TBL_Quote__ShipT__72C60C4A" FromRole="TBL_Quote" ToRole="TBL_ShipTo" />
+          <NavigationProperty Name="TBL_StatusReason" Relationship="Self.FK__TBL_Quote__Statu__73BA3083" FromRole="TBL_Quote" ToRole="TBL_StatusReason" />
+        </EntityType>
+        <EntityType Name="TBL_ShippingMethod">
+          <Key>
+            <PropertyRef Name="ShippingMethod_Id" />
+          </Key>
+          <Property Name="ShippingMethod_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShippingMethod_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Order_Invoice" Relationship="Self.FK__Order_Inv__Shipp__16CE6296" FromRole="TBL_ShippingMethod" ToRole="Order_Invoice" />
+          <NavigationProperty Name="TBL_Quote" Relationship="Self.FK__TBL_Quote__Shipp__71D1E811" FromRole="TBL_ShippingMethod" ToRole="TBL_Quote" />
+        </EntityType>
+        <EntityType Name="TBL_ShipTo">
+          <Key>
+            <PropertyRef Name="ShipTo_Id" />
+          </Key>
+          <Property Name="ShipTo_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShipTo_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_Quote" Relationship="Self.FK__TBL_Quote__ShipT__72C60C4A" FromRole="TBL_ShipTo" ToRole="TBL_Quote" />
+        </EntityType>
+        <EntityType Name="TBL_States">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBL_Cities" Relationship="Self.FK__TBL_Citie__State__693CA210" FromRole="TBL_States" ToRole="TBL_Cities" />
+          <NavigationProperty Name="TBL_Countries" Relationship="Self.FK__TBL_State__Count__1F98B2C1" FromRole="TBL_States" ToRole="TBL_Countries" />
+        </EntityType>
+        <EntityType Name="TBL_StatusReason">
+          <Key>
+            <PropertyRef Name="StatusReason_Id" />
+          </Key>
+          <Property Name="StatusReason_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusReason_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TBL_Quote" Relationship="Self.FK__TBL_Quote__Statu__73BA3083" FromRole="TBL_StatusReason" ToRole="TBL_Quote" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBL_Leads" Relationship="Self.FK__TBL_Leads__Type__2DE6D218" FromRole="Type" ToRole="TBL_Leads" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Int64" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AadharNumber" Type="Int64" Nullable="false" />
+          <Property Name="FathersName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaritialStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Order_Inv__Curre__15DA3E5D">
+          <End Role="TBL_Countries" Type="Self.TBL_Countries" Multiplicity="1" />
+          <End Role="Order_Invoice" Type="Self.Order_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order_Invoice">
+              <PropertyRef Name="Currency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Inv__Freig__18B6AB08">
+          <End Role="TBL_FreightTerms" Type="Self.TBL_FreightTerms" Multiplicity="1" />
+          <End Role="Order_Invoice" Type="Self.Order_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_FreightTerms">
+              <PropertyRef Name="Freight_Id" />
+            </Principal>
+            <Dependent Role="Order_Invoice">
+              <PropertyRef Name="FreightTerms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Inv__Payme__17C286CF">
+          <End Role="TBL_PaymentTerms" Type="Self.TBL_PaymentTerms" Multiplicity="1" />
+          <End Role="Order_Invoice" Type="Self.Order_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PaymentTerms">
+              <PropertyRef Name="Payment_Id" />
+            </Principal>
+            <Dependent Role="Order_Invoice">
+              <PropertyRef Name="PaymentTerms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Inv__RefOr__14E61A24">
+          <End Role="TBL_Leads" Type="Self.TBL_Leads" Multiplicity="0..1" />
+          <End Role="Order_Invoice" Type="Self.Order_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Leads">
+              <PropertyRef Name="LeadId" />
+            </Principal>
+            <Dependent Role="Order_Invoice">
+              <PropertyRef Name="RefOrder_InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Inv__Shipp__16CE6296">
+          <End Role="TBL_ShippingMethod" Type="Self.TBL_ShippingMethod" Multiplicity="1" />
+          <End Role="Order_Invoice" Type="Self.Order_Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ShippingMethod">
+              <PropertyRef Name="ShippingMethod_Id" />
+            </Principal>
+            <Dependent Role="Order_Invoice">
+              <PropertyRef Name="ShippingMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Citie__State__693CA210">
+          <End Role="TBL_States" Type="Self.TBL_States" Multiplicity="1" />
+          <End Role="TBL_Cities" Type="Self.TBL_Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_States">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TBL_Cities">
+              <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_State__Count__1F98B2C1">
+          <End Role="TBL_Countries" Type="Self.TBL_Countries" Multiplicity="1" />
+          <End Role="TBL_States" Type="Self.TBL_States" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TBL_States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Oppor__Curre__6B24EA82">
+          <End Role="TBL_Currency" Type="Self.TBL_Currency" Multiplicity="1" />
+          <End Role="TBL_Opportunity" Type="Self.TBL_Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Currency">
+              <PropertyRef Name="Currency_Id" />
+            </Principal>
+            <Dependent Role="TBL_Opportunity">
+              <PropertyRef Name="Currency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__Curre__6EF57B66">
+          <End Role="TBL_CurrencyForQuote" Type="Self.TBL_CurrencyForQuote" Multiplicity="1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_CurrencyForQuote">
+              <PropertyRef Name="Currency_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="Currency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Oppor__Forec__6C190EBB">
+          <End Role="TBL_ForecastCategory" Type="Self.TBL_ForecastCategory" Multiplicity="1" />
+          <End Role="TBL_Opportunity" Type="Self.TBL_Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ForecastCategory">
+              <PropertyRef Name="ForecastCategory_Id" />
+            </Principal>
+            <Dependent Role="TBL_Opportunity">
+              <PropertyRef Name="ForecastCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__Freig__6FE99F9F">
+          <End Role="TBL_FreightTerms" Type="Self.TBL_FreightTerms" Multiplicity="1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_FreightTerms">
+              <PropertyRef Name="Freight_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="FreightTerms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Leads__LeadS__6A30C649">
+          <End Role="TBL_LeadSource" Type="Self.TBL_LeadSource" Multiplicity="0..1" />
+          <End Role="TBL_Leads" Type="Self.TBL_Leads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_LeadSource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TBL_Leads">
+              <PropertyRef Name="LeadSource" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Leads__Type__2DE6D218">
+          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="TBL_Leads" Type="Self.TBL_Leads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="TBL_Leads">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Oppor__RefOp__1AD3FDA4">
+          <End Role="TBL_Leads" Type="Self.TBL_Leads" Multiplicity="0..1" />
+          <End Role="TBL_Opportunity" Type="Self.TBL_Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Leads">
+              <PropertyRef Name="LeadId" />
+            </Principal>
+            <Dependent Role="TBL_Opportunity">
+              <PropertyRef Name="RefOppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__RefQu__1BC821DD">
+          <End Role="TBL_Leads" Type="Self.TBL_Leads" Multiplicity="0..1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_Leads">
+              <PropertyRef Name="LeadId" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="RefQuoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Oppor__Purch__6D0D32F4">
+          <End Role="TBL_PurchaseTimeForm" Type="Self.TBL_PurchaseTimeForm" Multiplicity="1" />
+          <End Role="TBL_Opportunity" Type="Self.TBL_Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PurchaseTimeForm">
+              <PropertyRef Name="PT_Id" />
+            </Principal>
+            <Dependent Role="TBL_Opportunity">
+              <PropertyRef Name="PurchaseTimeForm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Oppor__Purch__6E01572D">
+          <End Role="TBL_PurchesProcess" Type="Self.TBL_PurchesProcess" Multiplicity="1" />
+          <End Role="TBL_Opportunity" Type="Self.TBL_Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PurchesProcess">
+              <PropertyRef Name="PurchesProcess_Id" />
+            </Principal>
+            <Dependent Role="TBL_Opportunity">
+              <PropertyRef Name="PurchesProcess" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__Payme__70DDC3D8">
+          <End Role="TBL_PaymentTerms" Type="Self.TBL_PaymentTerms" Multiplicity="1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PaymentTerms">
+              <PropertyRef Name="Payment_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="PaymentTerms" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__Shipp__71D1E811">
+          <End Role="TBL_ShippingMethod" Type="Self.TBL_ShippingMethod" Multiplicity="1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ShippingMethod">
+              <PropertyRef Name="ShippingMethod_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="ShippingMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__ShipT__72C60C4A">
+          <End Role="TBL_ShipTo" Type="Self.TBL_ShipTo" Multiplicity="0..1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_ShipTo">
+              <PropertyRef Name="ShipTo_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="ShipTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_Quote__Statu__73BA3083">
+          <End Role="TBL_StatusReason" Type="Self.TBL_StatusReason" Multiplicity="0..1" />
+          <End Role="TBL_Quote" Type="Self.TBL_Quote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_StatusReason">
+              <PropertyRef Name="StatusReason_Id" />
+            </Principal>
+            <Dependent Role="TBL_Quote">
+              <PropertyRef Name="StatusReason" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SaleEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Order_Invoice" EntityType="Self.Order_Invoice" />
+          <EntitySet Name="TBL_Cities" EntityType="Self.TBL_Cities" />
+          <EntitySet Name="TBL_Countries" EntityType="Self.TBL_Countries" />
+          <EntitySet Name="tbl_credentials" EntityType="Self.tbl_credentials" />
+          <EntitySet Name="TBL_Currency" EntityType="Self.TBL_Currency" />
+          <EntitySet Name="TBL_CurrencyForQuote" EntityType="Self.TBL_CurrencyForQuote" />
+          <EntitySet Name="TBL_ForecastCategory" EntityType="Self.TBL_ForecastCategory" />
+          <EntitySet Name="TBL_FreightTerms" EntityType="Self.TBL_FreightTerms" />
+          <EntitySet Name="TBL_Leads" EntityType="Self.TBL_Leads" />
+          <EntitySet Name="TBL_LeadSource" EntityType="Self.TBL_LeadSource" />
+          <EntitySet Name="TBL_Opportunity" EntityType="Self.TBL_Opportunity" />
+          <EntitySet Name="TBL_PaymentTerms" EntityType="Self.TBL_PaymentTerms" />
+          <EntitySet Name="TBL_PurchaseTimeForm" EntityType="Self.TBL_PurchaseTimeForm" />
+          <EntitySet Name="TBL_PurchesProcess" EntityType="Self.TBL_PurchesProcess" />
+          <EntitySet Name="TBL_Quote" EntityType="Self.TBL_Quote" />
+          <EntitySet Name="TBL_ShippingMethod" EntityType="Self.TBL_ShippingMethod" />
+          <EntitySet Name="TBL_ShipTo" EntityType="Self.TBL_ShipTo" />
+          <EntitySet Name="TBL_States" EntityType="Self.TBL_States" />
+          <EntitySet Name="TBL_StatusReason" EntityType="Self.TBL_StatusReason" />
+          <EntitySet Name="Types" EntityType="Self.Type" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <AssociationSet Name="FK__Order_Inv__Curre__15DA3E5D" Association="Self.FK__Order_Inv__Curre__15DA3E5D">
+            <End Role="TBL_Countries" EntitySet="TBL_Countries" />
+            <End Role="Order_Invoice" EntitySet="Order_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Inv__Freig__18B6AB08" Association="Self.FK__Order_Inv__Freig__18B6AB08">
+            <End Role="TBL_FreightTerms" EntitySet="TBL_FreightTerms" />
+            <End Role="Order_Invoice" EntitySet="Order_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Inv__Payme__17C286CF" Association="Self.FK__Order_Inv__Payme__17C286CF">
+            <End Role="TBL_PaymentTerms" EntitySet="TBL_PaymentTerms" />
+            <End Role="Order_Invoice" EntitySet="Order_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Inv__RefOr__14E61A24" Association="Self.FK__Order_Inv__RefOr__14E61A24">
+            <End Role="TBL_Leads" EntitySet="TBL_Leads" />
+            <End Role="Order_Invoice" EntitySet="Order_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Inv__Shipp__16CE6296" Association="Self.FK__Order_Inv__Shipp__16CE6296">
+            <End Role="TBL_ShippingMethod" EntitySet="TBL_ShippingMethod" />
+            <End Role="Order_Invoice" EntitySet="Order_Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Citie__State__693CA210" Association="Self.FK__TBL_Citie__State__693CA210">
+            <End Role="TBL_States" EntitySet="TBL_States" />
+            <End Role="TBL_Cities" EntitySet="TBL_Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_State__Count__1F98B2C1" Association="Self.FK__TBL_State__Count__1F98B2C1">
+            <End Role="TBL_Countries" EntitySet="TBL_Countries" />
+            <End Role="TBL_States" EntitySet="TBL_States" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Oppor__Curre__6B24EA82" Association="Self.FK__TBL_Oppor__Curre__6B24EA82">
+            <End Role="TBL_Currency" EntitySet="TBL_Currency" />
+            <End Role="TBL_Opportunity" EntitySet="TBL_Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__Curre__6EF57B66" Association="Self.FK__TBL_Quote__Curre__6EF57B66">
+            <End Role="TBL_CurrencyForQuote" EntitySet="TBL_CurrencyForQuote" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Oppor__Forec__6C190EBB" Association="Self.FK__TBL_Oppor__Forec__6C190EBB">
+            <End Role="TBL_ForecastCategory" EntitySet="TBL_ForecastCategory" />
+            <End Role="TBL_Opportunity" EntitySet="TBL_Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__Freig__6FE99F9F" Association="Self.FK__TBL_Quote__Freig__6FE99F9F">
+            <End Role="TBL_FreightTerms" EntitySet="TBL_FreightTerms" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Leads__LeadS__6A30C649" Association="Self.FK__TBL_Leads__LeadS__6A30C649">
+            <End Role="TBL_LeadSource" EntitySet="TBL_LeadSource" />
+            <End Role="TBL_Leads" EntitySet="TBL_Leads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Leads__Type__2DE6D218" Association="Self.FK__TBL_Leads__Type__2DE6D218">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="TBL_Leads" EntitySet="TBL_Leads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Oppor__RefOp__1AD3FDA4" Association="Self.FK__TBL_Oppor__RefOp__1AD3FDA4">
+            <End Role="TBL_Leads" EntitySet="TBL_Leads" />
+            <End Role="TBL_Opportunity" EntitySet="TBL_Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__RefQu__1BC821DD" Association="Self.FK__TBL_Quote__RefQu__1BC821DD">
+            <End Role="TBL_Leads" EntitySet="TBL_Leads" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Oppor__Purch__6D0D32F4" Association="Self.FK__TBL_Oppor__Purch__6D0D32F4">
+            <End Role="TBL_PurchaseTimeForm" EntitySet="TBL_PurchaseTimeForm" />
+            <End Role="TBL_Opportunity" EntitySet="TBL_Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Oppor__Purch__6E01572D" Association="Self.FK__TBL_Oppor__Purch__6E01572D">
+            <End Role="TBL_PurchesProcess" EntitySet="TBL_PurchesProcess" />
+            <End Role="TBL_Opportunity" EntitySet="TBL_Opportunity" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__Payme__70DDC3D8" Association="Self.FK__TBL_Quote__Payme__70DDC3D8">
+            <End Role="TBL_PaymentTerms" EntitySet="TBL_PaymentTerms" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__Shipp__71D1E811" Association="Self.FK__TBL_Quote__Shipp__71D1E811">
+            <End Role="TBL_ShippingMethod" EntitySet="TBL_ShippingMethod" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__ShipT__72C60C4A" Association="Self.FK__TBL_Quote__ShipT__72C60C4A">
+            <End Role="TBL_ShipTo" EntitySet="TBL_ShipTo" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_Quote__Statu__73BA3083" Association="Self.FK__TBL_Quote__Statu__73BA3083">
+            <End Role="TBL_StatusReason" EntitySet="TBL_StatusReason" />
+            <End Role="TBL_Quote" EntitySet="TBL_Quote" />
+          </AssociationSet>
+          <FunctionImport Name="sp_credntials">
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="UserDepartment" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Currency" ReturnType="Collection(SaleModel1.SP_Currency_Result)" />
+          <FunctionImport Name="sp_dropdown" ReturnType="Collection(SaleModel1.sp_dropdown_Result)" />
+          <FunctionImport Name="SP_ForecastCategory" ReturnType="Collection(SaleModel1.SP_ForecastCategory_Result)" />
+          <FunctionImport Name="sp_gridview" ReturnType="Collection(SaleModel1.sp_gridview_Result)" />
+          <FunctionImport Name="sp_insert">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Photo" Mode="In" Type="String" />
+            <Parameter Name="AadharNumber" Mode="In" Type="Int64" />
+            <Parameter Name="FathersName" Mode="In" Type="String" />
+            <Parameter Name="MaritalStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Lead_Insert">
+            <Parameter Name="Photo" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="CurrentAddress" Mode="In" Type="String" />
+            <Parameter Name="PermanentAddress" Mode="In" Type="String" />
+            <Parameter Name="MobileNumber" Mode="In" Type="Int64" />
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="Int32" />
+            <Parameter Name="State" Mode="In" Type="Int32" />
+            <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="LeadSource" Mode="In" Type="String" />
+            <Parameter Name="MeetingDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Type" Mode="In" Type="Int32" />
+            <Parameter Name="JobTitle" Mode="In" Type="String" />
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+            <Parameter Name="CompanyWebsite" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Login">
+            <Parameter Name="Admin_id" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+            <Parameter Name="Isvalid" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Opportunity_Insert">
+            <Parameter Name="RefOppId" Mode="In" Type="Int32" />
+            <Parameter Name="Topic" Mode="In" Type="String" />
+            <Parameter Name="Contact" Mode="In" Type="Int64" />
+            <Parameter Name="Account" Mode="In" Type="String" />
+            <Parameter Name="PurchaseTimeForm" Mode="In" Type="String" />
+            <Parameter Name="Currency" Mode="In" Type="String" />
+            <Parameter Name="BudgetAmount" Mode="In" Type="Int64" />
+            <Parameter Name="PurchesProcess" Mode="In" Type="String" />
+            <Parameter Name="ForecastCategory" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="CurrentSuitation" Mode="In" Type="String" />
+            <Parameter Name="CustommerNeed" Mode="In" Type="String" />
+            <Parameter Name="ProposedSolution" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Opportunity_SelectAllbyId" ReturnType="Collection(SaleModel1.SP_Opportunity_SelectAllbyId_Result)">
+            <Parameter Name="RefOppId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Opportunity_Update">
+            <Parameter Name="Topic" Mode="In" Type="String" />
+            <Parameter Name="Contact" Mode="In" Type="Int64" />
+            <Parameter Name="Account" Mode="In" Type="String" />
+            <Parameter Name="BudgetAmount" Mode="In" Type="Int64" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="CurrentSuitation" Mode="In" Type="String" />
+            <Parameter Name="CustommerNeed" Mode="In" Type="String" />
+            <Parameter Name="ProposedSolution" Mode="In" Type="String" />
+            <Parameter Name="PurchaseTimeForm" Mode="In" Type="Int32" />
+            <Parameter Name="Currency" Mode="In" Type="Int32" />
+            <Parameter Name="ForecastCategory" Mode="In" Type="Int32" />
+            <Parameter Name="PurchesProcess" Mode="In" Type="Int32" />
+            <Parameter Name="RefOppId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_OpportunityQualify_Update">
+            <Parameter Name="RefOppId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Opprtunity_Delete">
+            <Parameter Name="RefOppId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Order_Invoice_SelectAll" ReturnType="Collection(SaleModel1.SP_Order_Invoice_SelectAll_Result)" />
+          <FunctionImport Name="SP_OrderInvoice_Insert">
+            <Parameter Name="RefOrder_InvoiceId" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="Currency" Mode="In" Type="Int32" />
+            <Parameter Name="Opportunity" Mode="In" Type="String" />
+            <Parameter Name="PriceList" Mode="In" Type="String" />
+            <Parameter Name="PriceLocked" Mode="In" Type="String" />
+            <Parameter Name="RequestedDelivery" Mode="In" Type="DateTime" />
+            <Parameter Name="DateFullfilled" Mode="In" Type="DateTime" />
+            <Parameter Name="ShippingMethod" Mode="In" Type="Int32" />
+            <Parameter Name="PaymentTerms" Mode="In" Type="Int32" />
+            <Parameter Name="FreightTerms" Mode="In" Type="Int32" />
+            <Parameter Name="BillToStreet" Mode="In" Type="String" />
+            <Parameter Name="BillToCity" Mode="In" Type="String" />
+            <Parameter Name="BillToState" Mode="In" Type="String" />
+            <Parameter Name="BillingPostalCode" Mode="In" Type="Int64" />
+            <Parameter Name="BillToCountry" Mode="In" Type="String" />
+            <Parameter Name="ShipToStreet" Mode="In" Type="String" />
+            <Parameter Name="ShipToCity" Mode="In" Type="String" />
+            <Parameter Name="ShipToState" Mode="In" Type="String" />
+            <Parameter Name="ShipingPostalCodes" Mode="In" Type="Int64" />
+            <Parameter Name="ShipToCountry" Mode="In" Type="String" />
+            <Parameter Name="PotentialCustomer" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_password_update">
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_PurchaseTimeForm" ReturnType="Collection(SaleModel1.SP_PurchaseTimeForm_Result)" />
+          <FunctionImport Name="SP_PurchesProcess" ReturnType="Collection(SaleModel1.SP_PurchesProcess_Result)" />
+          <FunctionImport Name="SP_Qialify_Update">
+            <Parameter Name="LeadId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_QualifiedQuote_SelectAll" ReturnType="Collection(SaleModel1.SP_QualifiedQuote_SelectAll_Result)" />
+          <FunctionImport Name="SP_QuortesQialify_Update">
+            <Parameter Name="RefQuoteId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Quote_DropDownForQuoteCurrency" ReturnType="Collection(SaleModel1.SP_Quote_DropDownForQuoteCurrency_Result)" />
+          <FunctionImport Name="SP_Quote_DropDownFreightTerms" ReturnType="Collection(SaleModel1.SP_Quote_DropDownFreightTerms_Result)" />
+          <FunctionImport Name="SP_Quote_DropDownPaymentTerms" ReturnType="Collection(SaleModel1.SP_Quote_DropDownPaymentTerms_Result)" />
+          <FunctionImport Name="SP_Quote_DropDownShippingMethod" ReturnType="Collection(SaleModel1.SP_Quote_DropDownShippingMethod_Result)" />
+          <FunctionImport Name="SP_Quote_DropDownShipTo" ReturnType="Collection(SaleModel1.SP_Quote_DropDownShipTo_Result)" />
+          <FunctionImport Name="SP_Quote_DropDownStatusReason" ReturnType="Collection(SaleModel1.SP_Quote_DropDownStatusReason_Result)" />
+          <FunctionImport Name="SP_Quote_Insert">
+            <Parameter Name="RefQuoteId" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Currency" Mode="In" Type="Int32" />
+            <Parameter Name="Opportunity" Mode="In" Type="String" />
+            <Parameter Name="PriceList" Mode="In" Type="String" />
+            <Parameter Name="ShippingMethod" Mode="In" Type="Int32" />
+            <Parameter Name="PaymentTerms" Mode="In" Type="Int32" />
+            <Parameter Name="FreightTerms" Mode="In" Type="Int32" />
+            <Parameter Name="BillToStreet" Mode="In" Type="String" />
+            <Parameter Name="BillToCity" Mode="In" Type="String" />
+            <Parameter Name="BillToState" Mode="In" Type="String" />
+            <Parameter Name="BillingPostalCode" Mode="In" Type="Int64" />
+            <Parameter Name="BillToCountry" Mode="In" Type="String" />
+            <Parameter Name="ShipTo" Mode="In" Type="Int32" />
+            <Parameter Name="ShipToStreet" Mode="In" Type="String" />
+            <Parameter Name="ShipToCity" Mode="In" Type="String" />
+            <Parameter Name="ShipToState" Mode="In" Type="String" />
+            <Parameter Name="ShipingPostalCodes" Mode="In" Type="Int64" />
+            <Parameter Name="ShipToCountry" Mode="In" Type="String" />
+            <Parameter Name="PotentialCustomer" Mode="In" Type="String" />
+            <Parameter Name="StatusReason" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="QuoteExpiresOn" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Quote_SelectAll" ReturnType="Collection(SaleModel1.SP_Quote_SelectAll_Result)" />
+          <FunctionImport Name="SP_Quotes_SelectAllbyId" ReturnType="Collection(SaleModel1.SP_Quotes_SelectAllbyId_Result)">
+            <Parameter Name="RefQuoteId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_remote_email" ReturnType="Collection(String)" />
+          <FunctionImport Name="SP_SALES_MANAGEMENT_Lead_Type" ReturnType="Collection(SaleModel1.SP_SALES_MANAGEMENT_Lead_Type_Result)" />
+          <FunctionImport Name="sp_select_department" ReturnType="Collection(SaleModel1.sp_select_department_Result)" />
+          <FunctionImport Name="SP_SelectAll_OpportunityQualify" ReturnType="Collection(SaleModel1.SP_SelectAll_OpportunityQualify_Result)" />
+          <FunctionImport Name="SP_SelectAll_Opprtunity" ReturnType="Collection(SaleModel1.SP_SelectAll_Opprtunity_Result)" />
+          <FunctionImport Name="sp_selectcredentials" ReturnType="Collection(SaleModel1.sp_selectcredentials_Result)" />
+          <FunctionImport Name="UserLogin" ReturnType="Collection(SaleModel1.UserLogin_Result)">
+            <Parameter Name="Emailid" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_Quortes_Delete">
+            <Parameter Name="RefQuoteId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="USP_SALES_MANAGEMENT_Delete">
+            <Parameter Name="LeadId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="USP_SALES_MANAGEMENT_FilterByCityName" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_FilterByCityName_Result)">
+            <Parameter Name="StateId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="USP_SALES_MANAGEMENT_FilterByCountryName" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_FilterByCountryName_Result)" />
+          <FunctionImport Name="USP_SALES_MANAGEMENT_FilterByStateName" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_FilterByStateName_Result)">
+            <Parameter Name="CountryId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="USP_SALES_MANAGEMENT_Op_SelectAll" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_Op_SelectAll_Result)" />
+          <FunctionImport Name="USP_SALES_MANAGEMENT_Select" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_Select_Result)" />
+          <FunctionImport Name="USP_SALES_MANAGEMENT_SelectAll" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_SelectAll_Result)">
+            <Parameter Name="SortingCol" Mode="In" Type="String" />
+            <Parameter Name="SortType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USP_SALES_MANAGEMENT_SelectAllbyId" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_SelectAllbyId_Result)">
+            <Parameter Name="LeadId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="USP_SALES_MANAGEMENT_SelectAllCityName" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_SelectAllCityName_Result)" />
+          <FunctionImport Name="USP_SALES_MANAGEMENT_SelectAllLeadSource" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_SelectAllLeadSource_Result)" />
+          <FunctionImport Name="USP_SALES_MANAGEMENT_SelectAllStateName" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_SelectAllStateName_Result)" />
+          <FunctionImport Name="USP_SALES_MANAGEMENT_Update">
+            <Parameter Name="LeadId" Mode="In" Type="Int32" />
+            <Parameter Name="Photo" Mode="In" Type="String" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="CurrentAddress" Mode="In" Type="String" />
+            <Parameter Name="PermanentAddress" Mode="In" Type="String" />
+            <Parameter Name="MobileNumber" Mode="In" Type="Int64" />
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="City" Mode="In" Type="Int32" />
+            <Parameter Name="State" Mode="In" Type="Int32" />
+            <Parameter Name="Country" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="LeadSource" Mode="In" Type="String" />
+            <Parameter Name="MeetingDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Type" Mode="In" Type="Int32" />
+            <Parameter Name="JobTitle" Mode="In" Type="String" />
+            <Parameter Name="CompanyWebsite" Mode="In" Type="String" />
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SP_Currency_Result">
+          <Property Type="Int32" Name="Currency_Id" Nullable="false" />
+          <Property Type="String" Name="Currency_Name" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_dropdown_Result">
+          <Property Type="Int64" Name="DepartmentId" Nullable="false" />
+          <Property Type="String" Name="DepartmentName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_ForecastCategory_Result">
+          <Property Type="Int32" Name="ForecastCategory_Id" Nullable="false" />
+          <Property Type="String" Name="ForecastCategory_Name" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_gridview_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Emailid" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsPasswordChanged" Nullable="true" />
+          <Property Type="String" Name="UserDepartment" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Opportunity_SelectAllbyId_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Topic" Nullable="false" MaxLength="250" />
+          <Property Type="Int64" Name="Contact" Nullable="false" />
+          <Property Type="String" Name="Account" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="PurchaseTimeForm" Nullable="false" />
+          <Property Type="Int32" Name="Currency" Nullable="false" />
+          <Property Type="Int64" Name="BudgetAmount" Nullable="false" />
+          <Property Type="Int32" Name="PurchesProcess" Nullable="false" />
+          <Property Type="Int32" Name="ForecastCategory" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CurrentSuitation" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CustommerNeed" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="ProposedSolution" Nullable="false" MaxLength="250" />
+          <Property Type="Boolean" Name="IsOpportunityQualify" Nullable="false" />
+          <Property Type="Int32" Name="RefOppId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Order_Invoice_SelectAll_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Opportunity" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PotentialCustomer" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PriceList" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EmailId" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="PriceLocked" Nullable="false" MaxLength="5" />
+          <Property Type="DateTime" Name="RequestedDelivery" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DateFullfilled" Nullable="false" Precision="23" />
+          <Property Type="String" Name="BillToStreet" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BillToCity" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BillToState" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="BillingPostalCode" Nullable="false" />
+          <Property Type="String" Name="BillToCountry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipToStreet" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipToCity" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipToState" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="ShipingPostalCodes" Nullable="false" />
+          <Property Type="String" Name="ShipToCountry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Currency" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ShippingMethod" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PaymentTerms" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FreightTerms" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_PurchaseTimeForm_Result">
+          <Property Type="Int32" Name="PT_Id" Nullable="false" />
+          <Property Type="String" Name="PurchaseTimeForm_Name" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_PurchesProcess_Result">
+          <Property Type="Int32" Name="PurchesProcess_Id" Nullable="false" />
+          <Property Type="String" Name="PurchesProcess_Name" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_QualifiedQuote_SelectAll_Result">
+          <Property Type="Int32" Name="RefQuoteId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Opportunity" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PotentialCustomer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PriceList" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Currency" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ShippingMethod" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PaymentTerms" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FrieghtTerms" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BillToStreet" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BillToCity" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BillToState" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="BillingPostalCode" Nullable="false" />
+          <Property Type="String" Name="BillToCountry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipTo" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ShipToStreet" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipToCity" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipToState" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="ShipingPostalCodes" Nullable="false" />
+          <Property Type="String" Name="ShipToCountry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StatusReason" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="QuoteExpiresOn" Nullable="true" />
+          <Property Type="Boolean" Name="IsQuoteQualify" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_Quote_DropDownForQuoteCurrency_Result">
+          <Property Type="Int32" Name="Currency_Id" Nullable="false" />
+          <Property Type="String" Name="Currency_Name" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_Quote_DropDownFreightTerms_Result">
+          <Property Type="Int32" Name="Freight_Id" Nullable="false" />
+          <Property Type="String" Name="FreightTerm_Name" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_Quote_DropDownPaymentTerms_Result">
+          <Property Type="Int32" Name="Payment_Id" Nullable="false" />
+          <Property Type="String" Name="PaymentTerm_Name" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_Quote_DropDownShippingMethod_Result">
+          <Property Type="Int32" Name="ShippingMethod_Id" Nullable="false" />
+          <Property Type="String" Name="ShippingMethod_Name" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_Quote_DropDownShipTo_Result">
+          <Property Type="Int32" Name="ShipTo_Id" Nullable="false" />
+          <Property Type="String" Name="ShipTo_NAME" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="SP_Quote_DropDownStatusReason_Result">
+          <Property Type="Int32" Name="StatusReason_Id" Nullable="false" />
+          <Property Type="String" Name="StatusReason_NAME" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="SP_Quote_SelectAll_Result">
+          <Property Type="Int32" Name="RefQuoteId" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Opportunity" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PotentialCustomer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PriceList" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Currency" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ShippingMethod" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PaymentTerms" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FreightTerms" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BillToStreet" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BillToCity" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BillToState" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="BillingPostalCode" Nullable="false" />
+          <Property Type="String" Name="BillToCountry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipTo" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ShipToStreet" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipToCity" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipToState" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="ShipingPostalCodes" Nullable="false" />
+          <Property Type="String" Name="ShipToCountry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StatusReason" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="QuoteExpiresOn" Nullable="true" />
+          <Property Type="Boolean" Name="IsQuoteQualify" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_Quotes_SelectAllbyId_Result">
+          <Property Type="Int32" Name="QuoteId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="Currency" Nullable="false" />
+          <Property Type="String" Name="PriceList" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ShippingMethod" Nullable="false" />
+          <Property Type="Int32" Name="PaymentTerms" Nullable="false" />
+          <Property Type="Int32" Name="FreightTerms" Nullable="false" />
+          <Property Type="String" Name="BillToStreet" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BillToCity" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BillToState" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="BillingPostalCode" Nullable="false" />
+          <Property Type="String" Name="BillToCountry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipToStreet" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipToState" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ShipToCity" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="ShipingPostalCodes" Nullable="false" />
+          <Property Type="String" Name="ShipToCountry" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PotentialCustomer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Opportunity" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="StatusReason" Nullable="true" />
+          <Property Type="Int32" Name="ShipTo" Nullable="true" />
+          <Property Type="DateTime" Name="QuoteExpiresOn" Nullable="true" />
+          <Property Type="Int32" Name="RefQuoteId" Nullable="true" />
+          <Property Type="Boolean" Name="IsQuoteQualify" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_SALES_MANAGEMENT_Lead_Type_Result">
+          <Property Type="Int32" Name="TypeId" Nullable="false" />
+          <Property Type="String" Name="TypeName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_select_department_Result">
+          <Property Type="Int64" Name="DepartmentId" Nullable="false" />
+          <Property Type="String" Name="DepartmentName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_SelectAll_OpportunityQualify_Result">
+          <Property Type="Int32" Name="RefOppId" Nullable="true" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Topic" Nullable="false" MaxLength="250" />
+          <Property Type="Int64" Name="Contact" Nullable="false" />
+          <Property Type="String" Name="Account" Nullable="false" MaxLength="100" />
+          <Property Type="Int64" Name="BudgetAmount" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CurrentSuitation" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CustommerNeed" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="ProposedSolution" Nullable="false" MaxLength="250" />
+          <Property Type="Boolean" Name="IsOpportunityQualify" Nullable="false" />
+          <Property Type="String" Name="PurchaseTimeForm" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Currency" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ForecastCategory" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PurchesProcess" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_SelectAll_Opprtunity_Result">
+          <Property Type="Int32" Name="RefOppId" Nullable="true" />
+          <Property Type="String" Name="Topic" Nullable="false" MaxLength="250" />
+          <Property Type="Int64" Name="Contact" Nullable="false" />
+          <Property Type="String" Name="Account" Nullable="false" MaxLength="100" />
+          <Property Type="Int64" Name="BudgetAmount" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CurrentSuitation" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="CustommerNeed" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="ProposedSolution" Nullable="false" MaxLength="250" />
+          <Property Type="Boolean" Name="IsOpportunityQualify" Nullable="false" />
+          <Property Type="String" Name="PurchaseTimeForm" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Currency" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ForecastCategory" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PurchesProcess" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_selectcredentials_Result">
+          <Property Type="String" Name="Emailid" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UserDepartment" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="UserLogin_Result">
+          <Property Type="String" Name="Emailid" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="USP_SALES_MANAGEMENT_FilterByCityName_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="CityName" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="USP_SALES_MANAGEMENT_FilterByCountryName_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="CountryName" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="USP_SALES_MANAGEMENT_FilterByStateName_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="StateName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="USP_SALES_MANAGEMENT_Op_SelectAll_Result">
+          <Property Type="Int32" Name="LeadId" Nullable="false" />
+          <Property Type="String" Name="Photo" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="CurrentAddress" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="PermanentAddress" Nullable="false" MaxLength="250" />
+          <Property Type="Int64" Name="MobileNumber" Nullable="false" />
+          <Property Type="String" Name="EmailId" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="LeadSource" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="MeetingDate" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyWebsite" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsQualify" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="USP_SALES_MANAGEMENT_Select_Result">
+          <Property Type="Int32" Name="Photo" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="CurrentAddress" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="PermanentAddress" Nullable="false" MaxLength="250" />
+          <Property Type="Int64" Name="MobileNumber" Nullable="false" />
+          <Property Type="String" Name="EmailId" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="LeadSource" Nullable="true" />
+          <Property Type="DateTime" Name="MeetingDate" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USP_SALES_MANAGEMENT_SelectAll_Result">
+          <Property Type="Int32" Name="LeadId" Nullable="false" />
+          <Property Type="String" Name="Photo" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="CurrentAddress" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="PermanentAddress" Nullable="false" MaxLength="250" />
+          <Property Type="Int64" Name="MobileNumber" Nullable="false" />
+          <Property Type="String" Name="EmailId" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="LeadSource" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="MeetingDate" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyWebsite" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsQualify" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="USP_SALES_MANAGEMENT_SelectAllbyId_Result">
+          <Property Type="Int32" Name="LeadId" Nullable="false" />
+          <Property Type="String" Name="Photo" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="CurrentAddress" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="PermanentAddress" Nullable="false" MaxLength="250" />
+          <Property Type="Int64" Name="MobileNumber" Nullable="false" />
+          <Property Type="String" Name="EmailId" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Country" Nullable="false" />
+          <Property Type="Int32" Name="State" Nullable="false" />
+          <Property Type="Int32" Name="City" Nullable="false" />
+          <Property Type="Int32" Name="LeadSource" Nullable="true" />
+          <Property Type="Int32" Name="Type" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="MeetingDate" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" />
+          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyWebsite" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TypeName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CityName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="StateName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CountryName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="LeadSourceName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="USP_SALES_MANAGEMENT_SelectAllCityName_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="CityName" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="USP_SALES_MANAGEMENT_SelectAllLeadSource_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="LeadSourceName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="USP_SALES_MANAGEMENT_SelectAllStateName_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="StateName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SaleModel1StoreContainer" CdmEntityContainer="SaleEntities1">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="SaleModel1.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Invoice">
+            <EntityTypeMapping TypeName="SaleModel1.Order_Invoice">
+              <MappingFragment StoreEntitySet="Order_Invoice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RefOrder_InvoiceId" ColumnName="RefOrder_InvoiceId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Opportunity" ColumnName="Opportunity" />
+                <ScalarProperty Name="PriceList" ColumnName="PriceList" />
+                <ScalarProperty Name="PriceLocked" ColumnName="PriceLocked" />
+                <ScalarProperty Name="RequestedDelivery" ColumnName="RequestedDelivery" />
+                <ScalarProperty Name="DateFullfilled" ColumnName="DateFullfilled" />
+                <ScalarProperty Name="ShippingMethod" ColumnName="ShippingMethod" />
+                <ScalarProperty Name="PaymentTerms" ColumnName="PaymentTerms" />
+                <ScalarProperty Name="FreightTerms" ColumnName="FreightTerms" />
+                <ScalarProperty Name="BillToStreet" ColumnName="BillToStreet" />
+                <ScalarProperty Name="BillToCity" ColumnName="BillToCity" />
+                <ScalarProperty Name="BillToState" ColumnName="BillToState" />
+                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+                <ScalarProperty Name="BillToCountry" ColumnName="BillToCountry" />
+                <ScalarProperty Name="ShipToStreet" ColumnName="ShipToStreet" />
+                <ScalarProperty Name="ShipToCity" ColumnName="ShipToCity" />
+                <ScalarProperty Name="ShipToState" ColumnName="ShipToState" />
+                <ScalarProperty Name="ShipingPostalCodes" ColumnName="ShipingPostalCodes" />
+                <ScalarProperty Name="ShipToCountry" ColumnName="ShipToCountry" />
+                <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Cities">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_Cities">
+              <MappingFragment StoreEntitySet="TBL_Cities">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Countries">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_Countries">
+              <MappingFragment StoreEntitySet="TBL_Countries">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SortName" ColumnName="SortName" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="PhoneCode" ColumnName="PhoneCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_credentials">
+            <EntityTypeMapping TypeName="SaleModel1.tbl_credentials">
+              <MappingFragment StoreEntitySet="tbl_credentials">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Emailid" ColumnName="Emailid" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsPasswordChanged" ColumnName="IsPasswordChanged" />
+                <ScalarProperty Name="UserDepartment" ColumnName="UserDepartment" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Currency">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_Currency">
+              <MappingFragment StoreEntitySet="TBL_Currency">
+                <ScalarProperty Name="Currency_Id" ColumnName="Currency_Id" />
+                <ScalarProperty Name="Currency_Name" ColumnName="Currency_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_CurrencyForQuote">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_CurrencyForQuote">
+              <MappingFragment StoreEntitySet="TBL_CurrencyForQuote">
+                <ScalarProperty Name="Currency_Id" ColumnName="Currency_Id" />
+                <ScalarProperty Name="Currency_Name" ColumnName="Currency_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ForecastCategory">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_ForecastCategory">
+              <MappingFragment StoreEntitySet="TBL_ForecastCategory">
+                <ScalarProperty Name="ForecastCategory_Id" ColumnName="ForecastCategory_Id" />
+                <ScalarProperty Name="ForecastCategory_Name" ColumnName="ForecastCategory_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_FreightTerms">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_FreightTerms">
+              <MappingFragment StoreEntitySet="TBL_FreightTerms">
+                <ScalarProperty Name="Freight_Id" ColumnName="Freight_Id" />
+                <ScalarProperty Name="FreightTerm_Name" ColumnName="FreightTerm_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Leads">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_Leads">
+              <MappingFragment StoreEntitySet="TBL_Leads">
+                <ScalarProperty Name="LeadId" ColumnName="LeadId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="CurrentAddress" ColumnName="CurrentAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="LeadSource" ColumnName="LeadSource" />
+                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="IsQualify" ColumnName="IsQualify" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_LeadSource">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_LeadSource">
+              <MappingFragment StoreEntitySet="TBL_LeadSource">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LeadSourceName" ColumnName="LeadSourceName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Opportunity">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_Opportunity">
+              <MappingFragment StoreEntitySet="TBL_Opportunity">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="PurchaseTimeForm" ColumnName="PurchaseTimeForm" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="BudgetAmount" ColumnName="BudgetAmount" />
+                <ScalarProperty Name="PurchesProcess" ColumnName="PurchesProcess" />
+                <ScalarProperty Name="ForecastCategory" ColumnName="ForecastCategory" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CurrentSuitation" ColumnName="CurrentSuitation" />
+                <ScalarProperty Name="CustommerNeed" ColumnName="CustommerNeed" />
+                <ScalarProperty Name="ProposedSolution" ColumnName="ProposedSolution" />
+                <ScalarProperty Name="IsOpportunityQualify" ColumnName="IsOpportunityQualify" />
+                <ScalarProperty Name="RefOppId" ColumnName="RefOppId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_PaymentTerms">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_PaymentTerms">
+              <MappingFragment StoreEntitySet="TBL_PaymentTerms">
+                <ScalarProperty Name="Payment_Id" ColumnName="Payment_Id" />
+                <ScalarProperty Name="PaymentTerm_Name" ColumnName="PaymentTerm_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_PurchaseTimeForm">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_PurchaseTimeForm">
+              <MappingFragment StoreEntitySet="TBL_PurchaseTimeForm">
+                <ScalarProperty Name="PT_Id" ColumnName="PT_Id" />
+                <ScalarProperty Name="PurchaseTimeForm_Name" ColumnName="PurchaseTimeForm_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_PurchesProcess">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_PurchesProcess">
+              <MappingFragment StoreEntitySet="TBL_PurchesProcess">
+                <ScalarProperty Name="PurchesProcess_Id" ColumnName="PurchesProcess_Id" />
+                <ScalarProperty Name="PurchesProcess_Name" ColumnName="PurchesProcess_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Quote">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_Quote">
+              <MappingFragment StoreEntitySet="TBL_Quote">
+                <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="PriceList" ColumnName="PriceList" />
+                <ScalarProperty Name="ShippingMethod" ColumnName="ShippingMethod" />
+                <ScalarProperty Name="PaymentTerms" ColumnName="PaymentTerms" />
+                <ScalarProperty Name="FreightTerms" ColumnName="FreightTerms" />
+                <ScalarProperty Name="BillToStreet" ColumnName="BillToStreet" />
+                <ScalarProperty Name="BillToCity" ColumnName="BillToCity" />
+                <ScalarProperty Name="BillToState" ColumnName="BillToState" />
+                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+                <ScalarProperty Name="BillToCountry" ColumnName="BillToCountry" />
+                <ScalarProperty Name="ShipToStreet" ColumnName="ShipToStreet" />
+                <ScalarProperty Name="ShipToState" ColumnName="ShipToState" />
+                <ScalarProperty Name="ShipToCity" ColumnName="ShipToCity" />
+                <ScalarProperty Name="ShipingPostalCodes" ColumnName="ShipingPostalCodes" />
+                <ScalarProperty Name="ShipToCountry" ColumnName="ShipToCountry" />
+                <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
+                <ScalarProperty Name="Opportunity" ColumnName="Opportunity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusReason" ColumnName="StatusReason" />
+                <ScalarProperty Name="ShipTo" ColumnName="ShipTo" />
+                <ScalarProperty Name="QuoteExpiresOn" ColumnName="QuoteExpiresOn" />
+                <ScalarProperty Name="RefQuoteId" ColumnName="RefQuoteId" />
+                <ScalarProperty Name="IsQuoteQualify" ColumnName="IsQuoteQualify" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ShippingMethod">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_ShippingMethod">
+              <MappingFragment StoreEntitySet="TBL_ShippingMethod">
+                <ScalarProperty Name="ShippingMethod_Id" ColumnName="ShippingMethod_Id" />
+                <ScalarProperty Name="ShippingMethod_Name" ColumnName="ShippingMethod_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_ShipTo">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_ShipTo">
+              <MappingFragment StoreEntitySet="TBL_ShipTo">
+                <ScalarProperty Name="ShipTo_Id" ColumnName="ShipTo_Id" />
+                <ScalarProperty Name="ShipTo_NAME" ColumnName="ShipTo_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_States">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_States">
+              <MappingFragment StoreEntitySet="TBL_States">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_StatusReason">
+            <EntityTypeMapping TypeName="SaleModel1.TBL_StatusReason">
+              <MappingFragment StoreEntitySet="TBL_StatusReason">
+                <ScalarProperty Name="StatusReason_Id" ColumnName="StatusReason_Id" />
+                <ScalarProperty Name="StatusReason_NAME" ColumnName="StatusReason_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="SaleModel1.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="SaleModel1.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="AadharNumber" ColumnName="AadharNumber" />
+                <ScalarProperty Name="FathersName" ColumnName="FathersName" />
+                <ScalarProperty Name="MaritialStatus" ColumnName="MaritialStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_credntials" FunctionName="SaleModel1.Store.sp_credntials" />
+          <FunctionImportMapping FunctionImportName="SP_Currency" FunctionName="SaleModel1.Store.SP_Currency">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Currency_Result">
+                <ScalarProperty Name="Currency_Id" ColumnName="Currency_Id" />
+                <ScalarProperty Name="Currency_Name" ColumnName="Currency_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_dropdown" FunctionName="SaleModel1.Store.sp_dropdown">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.sp_dropdown_Result">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ForecastCategory" FunctionName="SaleModel1.Store.SP_ForecastCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_ForecastCategory_Result">
+                <ScalarProperty Name="ForecastCategory_Id" ColumnName="ForecastCategory_Id" />
+                <ScalarProperty Name="ForecastCategory_Name" ColumnName="ForecastCategory_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_gridview" FunctionName="SaleModel1.Store.sp_gridview">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.sp_gridview_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Emailid" ColumnName="Emailid" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsPasswordChanged" ColumnName="IsPasswordChanged" />
+                <ScalarProperty Name="UserDepartment" ColumnName="UserDepartment" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_insert" FunctionName="SaleModel1.Store.sp_insert" />
+          <FunctionImportMapping FunctionImportName="SP_Lead_Insert" FunctionName="SaleModel1.Store.SP_Lead_Insert" />
+          <FunctionImportMapping FunctionImportName="Sp_Login" FunctionName="SaleModel1.Store.Sp_Login" />
+          <FunctionImportMapping FunctionImportName="SP_Opportunity_Insert" FunctionName="SaleModel1.Store.SP_Opportunity_Insert" />
+          <FunctionImportMapping FunctionImportName="SP_Opportunity_SelectAllbyId" FunctionName="SaleModel1.Store.SP_Opportunity_SelectAllbyId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Opportunity_SelectAllbyId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="PurchaseTimeForm" ColumnName="PurchaseTimeForm" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="BudgetAmount" ColumnName="BudgetAmount" />
+                <ScalarProperty Name="PurchesProcess" ColumnName="PurchesProcess" />
+                <ScalarProperty Name="ForecastCategory" ColumnName="ForecastCategory" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CurrentSuitation" ColumnName="CurrentSuitation" />
+                <ScalarProperty Name="CustommerNeed" ColumnName="CustommerNeed" />
+                <ScalarProperty Name="ProposedSolution" ColumnName="ProposedSolution" />
+                <ScalarProperty Name="IsOpportunityQualify" ColumnName="IsOpportunityQualify" />
+                <ScalarProperty Name="RefOppId" ColumnName="RefOppId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Opportunity_Update" FunctionName="SaleModel1.Store.SP_Opportunity_Update" />
+          <FunctionImportMapping FunctionImportName="SP_OpportunityQualify_Update" FunctionName="SaleModel1.Store.SP_OpportunityQualify_Update" />
+          <FunctionImportMapping FunctionImportName="SP_Opprtunity_Delete" FunctionName="SaleModel1.Store.SP_Opprtunity_Delete" />
+          <FunctionImportMapping FunctionImportName="SP_Order_Invoice_SelectAll" FunctionName="SaleModel1.Store.SP_Order_Invoice_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Order_Invoice_SelectAll_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Opportunity" ColumnName="Opportunity" />
+                <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
+                <ScalarProperty Name="PriceList" ColumnName="PriceList" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="PriceLocked" ColumnName="PriceLocked" />
+                <ScalarProperty Name="RequestedDelivery" ColumnName="RequestedDelivery" />
+                <ScalarProperty Name="DateFullfilled" ColumnName="DateFullfilled" />
+                <ScalarProperty Name="BillToStreet" ColumnName="BillToStreet" />
+                <ScalarProperty Name="BillToCity" ColumnName="BillToCity" />
+                <ScalarProperty Name="BillToState" ColumnName="BillToState" />
+                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+                <ScalarProperty Name="BillToCountry" ColumnName="BillToCountry" />
+                <ScalarProperty Name="ShipToStreet" ColumnName="ShipToStreet" />
+                <ScalarProperty Name="ShipToCity" ColumnName="ShipToCity" />
+                <ScalarProperty Name="ShipToState" ColumnName="ShipToState" />
+                <ScalarProperty Name="ShipingPostalCodes" ColumnName="ShipingPostalCodes" />
+                <ScalarProperty Name="ShipToCountry" ColumnName="ShipToCountry" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="ShippingMethod" ColumnName="ShippingMethod" />
+                <ScalarProperty Name="PaymentTerms" ColumnName="PaymentTerms" />
+                <ScalarProperty Name="FreightTerms" ColumnName="FreightTerms" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_OrderInvoice_Insert" FunctionName="SaleModel1.Store.SP_OrderInvoice_Insert" />
+          <FunctionImportMapping FunctionImportName="sp_password_update" FunctionName="SaleModel1.Store.sp_password_update" />
+          <FunctionImportMapping FunctionImportName="SP_PurchaseTimeForm" FunctionName="SaleModel1.Store.SP_PurchaseTimeForm">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_PurchaseTimeForm_Result">
+                <ScalarProperty Name="PT_Id" ColumnName="PT_Id" />
+                <ScalarProperty Name="PurchaseTimeForm_Name" ColumnName="PurchaseTimeForm_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_PurchesProcess" FunctionName="SaleModel1.Store.SP_PurchesProcess">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_PurchesProcess_Result">
+                <ScalarProperty Name="PurchesProcess_Id" ColumnName="PurchesProcess_Id" />
+                <ScalarProperty Name="PurchesProcess_Name" ColumnName="PurchesProcess_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Qialify_Update" FunctionName="SaleModel1.Store.SP_Qialify_Update" />
+          <FunctionImportMapping FunctionImportName="SP_QualifiedQuote_SelectAll" FunctionName="SaleModel1.Store.SP_QualifiedQuote_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_QualifiedQuote_SelectAll_Result">
+                <ScalarProperty Name="RefQuoteId" ColumnName="RefQuoteId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Opportunity" ColumnName="Opportunity" />
+                <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
+                <ScalarProperty Name="PriceList" ColumnName="PriceList" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="ShippingMethod" ColumnName="ShippingMethod" />
+                <ScalarProperty Name="PaymentTerms" ColumnName="PaymentTerms" />
+                <ScalarProperty Name="FrieghtTerms" ColumnName="FrieghtTerms" />
+                <ScalarProperty Name="BillToStreet" ColumnName="BillToStreet" />
+                <ScalarProperty Name="BillToCity" ColumnName="BillToCity" />
+                <ScalarProperty Name="BillToState" ColumnName="BillToState" />
+                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+                <ScalarProperty Name="BillToCountry" ColumnName="BillToCountry" />
+                <ScalarProperty Name="ShipTo" ColumnName="ShipTo" />
+                <ScalarProperty Name="ShipToStreet" ColumnName="ShipToStreet" />
+                <ScalarProperty Name="ShipToCity" ColumnName="ShipToCity" />
+                <ScalarProperty Name="ShipToState" ColumnName="ShipToState" />
+                <ScalarProperty Name="ShipingPostalCodes" ColumnName="ShipingPostalCodes" />
+                <ScalarProperty Name="ShipToCountry" ColumnName="ShipToCountry" />
+                <ScalarProperty Name="StatusReason" ColumnName="StatusReason" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="QuoteExpiresOn" ColumnName="QuoteExpiresOn" />
+                <ScalarProperty Name="IsQuoteQualify" ColumnName="IsQuoteQualify" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_QuortesQialify_Update" FunctionName="SaleModel1.Store.SP_QuortesQialify_Update" />
+          <FunctionImportMapping FunctionImportName="SP_Quote_DropDownForQuoteCurrency" FunctionName="SaleModel1.Store.SP_Quote_DropDownForQuoteCurrency">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Quote_DropDownForQuoteCurrency_Result">
+                <ScalarProperty Name="Currency_Id" ColumnName="Currency_Id" />
+                <ScalarProperty Name="Currency_Name" ColumnName="Currency_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Quote_DropDownFreightTerms" FunctionName="SaleModel1.Store.SP_Quote_DropDownFreightTerms">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Quote_DropDownFreightTerms_Result">
+                <ScalarProperty Name="Freight_Id" ColumnName="Freight_Id" />
+                <ScalarProperty Name="FreightTerm_Name" ColumnName="FreightTerm_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Quote_DropDownPaymentTerms" FunctionName="SaleModel1.Store.SP_Quote_DropDownPaymentTerms">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Quote_DropDownPaymentTerms_Result">
+                <ScalarProperty Name="Payment_Id" ColumnName="Payment_Id" />
+                <ScalarProperty Name="PaymentTerm_Name" ColumnName="PaymentTerm_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Quote_DropDownShippingMethod" FunctionName="SaleModel1.Store.SP_Quote_DropDownShippingMethod">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Quote_DropDownShippingMethod_Result">
+                <ScalarProperty Name="ShippingMethod_Id" ColumnName="ShippingMethod_Id" />
+                <ScalarProperty Name="ShippingMethod_Name" ColumnName="ShippingMethod_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Quote_DropDownShipTo" FunctionName="SaleModel1.Store.SP_Quote_DropDownShipTo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Quote_DropDownShipTo_Result">
+                <ScalarProperty Name="ShipTo_Id" ColumnName="ShipTo_Id" />
+                <ScalarProperty Name="ShipTo_NAME" ColumnName="ShipTo_NAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Quote_DropDownStatusReason" FunctionName="SaleModel1.Store.SP_Quote_DropDownStatusReason">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Quote_DropDownStatusReason_Result">
+                <ScalarProperty Name="StatusReason_Id" ColumnName="StatusReason_Id" />
+                <ScalarProperty Name="StatusReason_NAME" ColumnName="StatusReason_NAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Quote_Insert" FunctionName="SaleModel1.Store.SP_Quote_Insert" />
+          <FunctionImportMapping FunctionImportName="SP_Quote_SelectAll" FunctionName="SaleModel1.Store.SP_Quote_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Quote_SelectAll_Result">
+                <ScalarProperty Name="RefQuoteId" ColumnName="RefQuoteId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Opportunity" ColumnName="Opportunity" />
+                <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
+                <ScalarProperty Name="PriceList" ColumnName="PriceList" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="ShippingMethod" ColumnName="ShippingMethod" />
+                <ScalarProperty Name="PaymentTerms" ColumnName="PaymentTerms" />
+                <ScalarProperty Name="FreightTerms" ColumnName="FreightTerms" />
+                <ScalarProperty Name="BillToStreet" ColumnName="BillToStreet" />
+                <ScalarProperty Name="BillToCity" ColumnName="BillToCity" />
+                <ScalarProperty Name="BillToState" ColumnName="BillToState" />
+                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+                <ScalarProperty Name="BillToCountry" ColumnName="BillToCountry" />
+                <ScalarProperty Name="ShipTo" ColumnName="ShipTo" />
+                <ScalarProperty Name="ShipToStreet" ColumnName="ShipToStreet" />
+                <ScalarProperty Name="ShipToCity" ColumnName="ShipToCity" />
+                <ScalarProperty Name="ShipToState" ColumnName="ShipToState" />
+                <ScalarProperty Name="ShipingPostalCodes" ColumnName="ShipingPostalCodes" />
+                <ScalarProperty Name="ShipToCountry" ColumnName="ShipToCountry" />
+                <ScalarProperty Name="StatusReason" ColumnName="StatusReason" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="QuoteExpiresOn" ColumnName="QuoteExpiresOn" />
+                <ScalarProperty Name="IsQuoteQualify" ColumnName="IsQuoteQualify" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Quotes_SelectAllbyId" FunctionName="SaleModel1.Store.SP_Quotes_SelectAllbyId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_Quotes_SelectAllbyId_Result">
+                <ScalarProperty Name="QuoteId" ColumnName="QuoteId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="PriceList" ColumnName="PriceList" />
+                <ScalarProperty Name="ShippingMethod" ColumnName="ShippingMethod" />
+                <ScalarProperty Name="PaymentTerms" ColumnName="PaymentTerms" />
+                <ScalarProperty Name="FreightTerms" ColumnName="FreightTerms" />
+                <ScalarProperty Name="BillToStreet" ColumnName="BillToStreet" />
+                <ScalarProperty Name="BillToCity" ColumnName="BillToCity" />
+                <ScalarProperty Name="BillToState" ColumnName="BillToState" />
+                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+                <ScalarProperty Name="BillToCountry" ColumnName="BillToCountry" />
+                <ScalarProperty Name="ShipToStreet" ColumnName="ShipToStreet" />
+                <ScalarProperty Name="ShipToState" ColumnName="ShipToState" />
+                <ScalarProperty Name="ShipToCity" ColumnName="ShipToCity" />
+                <ScalarProperty Name="ShipingPostalCodes" ColumnName="ShipingPostalCodes" />
+                <ScalarProperty Name="ShipToCountry" ColumnName="ShipToCountry" />
+                <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
+                <ScalarProperty Name="Opportunity" ColumnName="Opportunity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusReason" ColumnName="StatusReason" />
+                <ScalarProperty Name="ShipTo" ColumnName="ShipTo" />
+                <ScalarProperty Name="QuoteExpiresOn" ColumnName="QuoteExpiresOn" />
+                <ScalarProperty Name="RefQuoteId" ColumnName="RefQuoteId" />
+                <ScalarProperty Name="IsQuoteQualify" ColumnName="IsQuoteQualify" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_remote_email" FunctionName="SaleModel1.Store.sp_remote_email" />
+          <FunctionImportMapping FunctionImportName="SP_SALES_MANAGEMENT_Lead_Type" FunctionName="SaleModel1.Store.SP_SALES_MANAGEMENT_Lead_Type">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_SALES_MANAGEMENT_Lead_Type_Result">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_select_department" FunctionName="SaleModel1.Store.sp_select_department">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.sp_select_department_Result">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SelectAll_OpportunityQualify" FunctionName="SaleModel1.Store.SP_SelectAll_OpportunityQualify">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_SelectAll_OpportunityQualify_Result">
+                <ScalarProperty Name="RefOppId" ColumnName="RefOppId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="BudgetAmount" ColumnName="BudgetAmount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CurrentSuitation" ColumnName="CurrentSuitation" />
+                <ScalarProperty Name="CustommerNeed" ColumnName="CustommerNeed" />
+                <ScalarProperty Name="ProposedSolution" ColumnName="ProposedSolution" />
+                <ScalarProperty Name="IsOpportunityQualify" ColumnName="IsOpportunityQualify" />
+                <ScalarProperty Name="PurchaseTimeForm" ColumnName="PurchaseTimeForm" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="ForecastCategory" ColumnName="ForecastCategory" />
+                <ScalarProperty Name="PurchesProcess" ColumnName="PurchesProcess" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SelectAll_Opprtunity" FunctionName="SaleModel1.Store.SP_SelectAll_Opprtunity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.SP_SelectAll_Opprtunity_Result">
+                <ScalarProperty Name="RefOppId" ColumnName="RefOppId" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="BudgetAmount" ColumnName="BudgetAmount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CurrentSuitation" ColumnName="CurrentSuitation" />
+                <ScalarProperty Name="CustommerNeed" ColumnName="CustommerNeed" />
+                <ScalarProperty Name="ProposedSolution" ColumnName="ProposedSolution" />
+                <ScalarProperty Name="IsOpportunityQualify" ColumnName="IsOpportunityQualify" />
+                <ScalarProperty Name="PurchaseTimeForm" ColumnName="PurchaseTimeForm" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="ForecastCategory" ColumnName="ForecastCategory" />
+                <ScalarProperty Name="PurchesProcess" ColumnName="PurchesProcess" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_selectcredentials" FunctionName="SaleModel1.Store.sp_selectcredentials">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.sp_selectcredentials_Result">
+                <ScalarProperty Name="Emailid" ColumnName="Emailid" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserDepartment" ColumnName="UserDepartment" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UserLogin" FunctionName="SaleModel1.Store.UserLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.UserLogin_Result">
+                <ScalarProperty Name="Emailid" ColumnName="Emailid" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_Quortes_Delete" FunctionName="SaleModel1.Store.USP_Quortes_Delete" />
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_Delete" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_Delete" />
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_FilterByCityName" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_FilterByCityName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.USP_SALES_MANAGEMENT_FilterByCityName_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_FilterByCountryName" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_FilterByCountryName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.USP_SALES_MANAGEMENT_FilterByCountryName_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_FilterByStateName" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_FilterByStateName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.USP_SALES_MANAGEMENT_FilterByStateName_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_Op_SelectAll" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_Op_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.USP_SALES_MANAGEMENT_Op_SelectAll_Result">
+                <ScalarProperty Name="LeadId" ColumnName="LeadId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="CurrentAddress" ColumnName="CurrentAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="LeadSource" ColumnName="LeadSource" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="IsQualify" ColumnName="IsQualify" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_Select" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.USP_SALES_MANAGEMENT_Select_Result">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="CurrentAddress" ColumnName="CurrentAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="LeadSource" ColumnName="LeadSource" />
+                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_SelectAll" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.USP_SALES_MANAGEMENT_SelectAll_Result">
+                <ScalarProperty Name="LeadId" ColumnName="LeadId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="CurrentAddress" ColumnName="CurrentAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="LeadSource" ColumnName="LeadSource" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="IsQualify" ColumnName="IsQualify" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_SelectAllbyId" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_SelectAllbyId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.USP_SALES_MANAGEMENT_SelectAllbyId_Result">
+                <ScalarProperty Name="LeadId" ColumnName="LeadId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="CurrentAddress" ColumnName="CurrentAddress" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="LeadSource" ColumnName="LeadSource" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="CompanyWebsite" ColumnName="CompanyWebsite" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="LeadSourceName" ColumnName="LeadSourceName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_SelectAllCityName" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_SelectAllCityName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.USP_SALES_MANAGEMENT_SelectAllCityName_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_SelectAllLeadSource" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_SelectAllLeadSource">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.USP_SALES_MANAGEMENT_SelectAllLeadSource_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LeadSourceName" ColumnName="LeadSourceName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_SelectAllStateName" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_SelectAllStateName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SaleModel1.USP_SALES_MANAGEMENT_SelectAllStateName_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_SALES_MANAGEMENT_Update" FunctionName="SaleModel1.Store.USP_SALES_MANAGEMENT_Update" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

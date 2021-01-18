@@ -1,0 +1,53 @@
+﻿@Model SALES_MANAGEMENT.models.LoginModel
+@{
+    ViewBag.Title = "Indexer";
+    Layout = null;
+}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+    <div class="w3-container w3-blue">
+        <h2>Hello User!!!</h2>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Enter the Credntials below:</h4>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="w3-container">
+                <label>Email Id</label>
+                <div class="col-md-10">
+                    <input id="Email_id" name="Email_id" class="w3-input" value="" />
+                </div>
+            </div>
+            <br /><br />
+            <div class="w3-container">
+                <label>Password</label>
+                <div class="col-md-10">
+                    <input id="Pass" name="Pass" type="password" class="w3-input" value="" />
+                </div>
+            </div>
+
+
+        </div>
+        <br /><br />
+        <div class="w3-container">
+            <div class="w3-btn w3-blue">
+                <input type="submit" value="Login" class="w3-btn w3-blue" />
+            </div>
+        </div>
+
+        <h2>@Html.ViewData["message"]</h2>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
+
+
+    }

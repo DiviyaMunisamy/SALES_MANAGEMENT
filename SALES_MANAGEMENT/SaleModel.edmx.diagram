@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2a0439752225456082b764d218ac2c87" Name="Diagram1">
+        <EntityTypeShape EntityType="SaleModel1.Department" Width="1.5" PointX="5.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.Order_Invoice" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_Cities" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_Countries" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.tbl_credentials" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_Currency" Width="1.5" PointX="3.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_CurrencyForQuote" Width="1.5" PointX="3.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_ForecastCategory" Width="1.5" PointX="3.75" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_FreightTerms" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_Leads" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_LeadSource" Width="1.5" PointX="1.5" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_Opportunity" Width="1.5" PointX="6" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_PaymentTerms" Width="1.5" PointX="0.75" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_PurchaseTimeForm" Width="1.5" PointX="3.75" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_PurchesProcess" Width="1.5" PointX="3.75" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_Quote" Width="1.5" PointX="6" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_ShippingMethod" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_ShipTo" Width="1.5" PointX="3.75" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_States" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.TBL_StatusReason" Width="1.5" PointX="3.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.Type" Width="1.5" PointX="1.5" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SaleModel1.UserDetail" Width="1.5" PointX="8.75" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="SaleModel1.FK__Order_Inv__Curre__15DA3E5D" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__Order_Inv__Freig__18B6AB08" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__Order_Inv__Payme__17C286CF" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__Order_Inv__RefOr__14E61A24" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__Order_Inv__Shipp__16CE6296" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Citie__State__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_State__Count__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Oppor__Curre__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Quote__Curre__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Oppor__Forec__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Quote__Freig__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Leads__LeadS__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Leads__Type__2DE6D218" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Oppor__RefOp__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Quote__RefQu__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Oppor__Purch__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Oppor__Purch__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Quote__Payme__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Quote__Shipp__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Quote__ShipT__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="SaleModel1.FK__TBL_Quote__Statu__73BA3083" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

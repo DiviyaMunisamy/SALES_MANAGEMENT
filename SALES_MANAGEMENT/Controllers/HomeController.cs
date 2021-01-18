@@ -15,15 +15,16 @@ namespace SALES_MANAGEMENT.Controllers
 {
     public class HomeController : Controller
     {
+        SaleEntities1 db = new SaleEntities1();
         LoginModel log = new LoginModel();
         public static string connection = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
         SqlConnection Connection = new SqlConnection(connection);
 
         public ActionResult Index()
         {
-
             return View();
         }
+
         [HttpPost]
         public ActionResult Index(LoginModel model)
         {
@@ -62,7 +63,7 @@ namespace SALES_MANAGEMENT.Controllers
         //{
         //    LoginModel objuser = new LoginModel();
         //    DataSet ds = new DataSet();
-        //    string cs = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+        //    string cs = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
         //    SqlConnection con = new SqlConnection(cs);
         //    using (SqlCommand cmd = new SqlCommand("select * from Department", con))
         //    {
@@ -86,9 +87,14 @@ namespace SALES_MANAGEMENT.Controllers
         //    return View(objuser);
         //}
 
-
+        public ActionResult getUserList()
+        {
+            var tbl_credentials = db.tbl_credentials.ToList();
+            return View(tbl_credentials);
+        }
 
         [HttpGet]
+
         public ActionResult Create()
         {
 
@@ -107,62 +113,111 @@ namespace SALES_MANAGEMENT.Controllers
             return View(dropdownValues);
 
         }
+
+        //public JsonResult Check(string userdata)
+        //{
+        //    System.Threading.Thread.Sleep(200);
+        //    var SeachData = db.tbl_credentials.Where(x => x.Emailid == userdata).SingleOrDefault();
+        //    if (SeachData != null)
+        //    {
+        //        return Json(1);
+        //    }
+        //    else
+        //    {
+        //        return Json(0);
+        //    }
+        //}
+        public JsonResult IsUserNameAvailable(string Emailid)
+        {
+            return Json(!db.tbl_credentials.Any(u => u.Emailid == Emailid), JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
+
         public ActionResult Create(LoginModel model)
         {
             LoginModel dropdownValues = new LoginModel()
             {
                 BloodList = GetBloodList(),
-
             };
             LoginModel objuser = new LoginModel();
             DataSet ds = new DataSet();
             //var LoginMod = new LoginModel();
             //LoginMod.Department = db.Departments.ToList();
-            //try
-            //{
+            try
+            {
 
-            string cs = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-            string password = Encrypt(model.UserPassword);
-            //string pass = Decrypt(model.UserPassword);
-            SqlConnection con = new SqlConnection(cs);
-            SqlCommand com = new SqlCommand("sp_credntials", con);
-            com.CommandType = CommandType.StoredProcedure;
+                string cs = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+                string password = Encrypt(model.UserPassword);
+                //string pass = Decrypt(model.UserPassword);
+                SqlConnection con = new SqlConnection(cs);
+                SqlCommand com = new SqlCommand("sp_credntials", con);
+                com.CommandType = CommandType.StoredProcedure;
 
-            com.Parameters.AddWithValue("@EmailId", model.EmailId);
-            com.Parameters.AddWithValue("@Password", password);
-            com.Parameters.AddWithValue("@UserDepartment", model.DepartmentId);
+                com.Parameters.AddWithValue("@EmailId", model.EmailId);
+                com.Parameters.AddWithValue("@Password", password);
+                com.Parameters.AddWithValue("@UserDepartment", model.DepartmentId);
+                com.Parameters.AddWithValue("@Active", "Yes");
 
-            con.Open();
-            com.ExecuteNonQuery();
+                con.Open();
+                com.ExecuteNonQuery();
 
-            ViewData["message"] = "Login Created successfully";
-            SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
-            string to = model.EmailId;
-            string from = section.From;
-            int index = to.IndexOf('@');
-            string name = to.Substring(0, index);
-            MailMessage message = new MailMessage(from, to);
-            message.Subject = "Successful Registration";
-            message.Body = "Hi " + name + " , you have been registered Successfully!!! The your user name is" + model.EmailId + " and password is " + model.UserPassword;
-            SmtpClient smtp = new SmtpClient();
-            smtp.Port = section.Network.Port;
-            smtp.EnableSsl = section.Network.EnableSsl;
-            smtp.UseDefaultCredentials = true;
-            smtp.Credentials = new NetworkCredential(section.Network.UserName, section.Network.Password);
-            smtp.Host = section.Network.Host;
-            smtp.Send(message);
+                ViewData["message"] = "Login Created successfully";
+                SmtpSection section = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+                string to = model.EmailId;
+                string from = section.From;
+                int index = to.IndexOf('@');
+                string name = to.Substring(0, index);
+                MailMessage message = new MailMessage(from, to);
+                message.Subject = "Successful Registration";
+                message.Body = "Hi " + name + " , you have been registered Successfully!!! The your user name is " + model.EmailId + " and password is " + model.UserPassword;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Port = section.Network.Port;
+                smtp.EnableSsl = section.Network.EnableSsl;
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = new NetworkCredential(section.Network.UserName, section.Network.Password);
+                smtp.Host = section.Network.Host;
+                smtp.Send(message);
 
-            con.Close();
-            return View(dropdownValues);
-            //}
-            //catch (Exception ex)
-            //{
-            //    return View("Error");
-            //}
+                con.Close();
+                return View(dropdownValues);
+            }
+            catch (Exception ex)
+            {
+                //ViewBag.Javascript = "<script language='javascript' type='text/javascript'>alert('Data Already Exists');</script>";
+                //return RedirectToAction("Create");
+                //TempData["alertMessage"] = "Account Already Exixts:";
+                //
+                return RedirectToAction("Create");
 
-
+            }
         }
+        //[HttpPost]
+        //public JsonResult IsUserNameAvailable(string EmailId)
+        //{
+        //    return Json(!db.tbl_credentials.Any(x => x.Emailid == EmailId),
+        //                                         JsonRequestBehavior.AllowGet);
+        //}
+
+        //public JsonResult CheckUserName(LoginModel model)
+        //{
+        //    string cs = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
+        //    SqlConnection con = new SqlConnection(cs);
+        //    SqlCommand com = new SqlCommand("sp_remote_email", con);
+        //    com.CommandType = CommandType.StoredProcedure;
+        //    com.Parameters.AddWithValue("@EmailId", model.EmailId);
+        //    SqlParameter oblogin = new SqlParameter();
+        //    con.Open();
+
+        //    int res = Convert.ToInt32(oblogin.Value);
+        //    if (res == 1)
+
+        //    {
+        //        return Json(res, JsonRequestBehavior.AllowGet);
+        //    }
+        //    return Json(res, JsonRequestBehavior.AllowGet);
+        //}
+
 
         public ActionResult DisplayUser(LoginModel model)
         {
@@ -181,7 +236,7 @@ namespace SALES_MANAGEMENT.Controllers
                 userdetailview.UserEmailId = Sqlreader["EmailId"].ToString();
                 userdetailview.UserDepartment = Sqlreader["UserDepartment"].ToString();
                 userdetailview.IsActive = Convert.ToInt64(Sqlreader["IsActive"]);
-                userdetailview.CreatedDate = Convert.ToDateTime(Sqlreader["CreatedDate"]);
+                userdetailview.CreatedDate = Convert.ToDateTime(Sqlreader["Created_Date"]);
                 userdetail.Add(userdetailview);
             }
             return View(userdetail);
@@ -208,7 +263,6 @@ namespace SALES_MANAGEMENT.Controllers
             con.Close();
             return StudentBlood;
         }
-
 
         #region Engrypt and Decrypt
         public string Encrypt(string sData)
@@ -247,7 +301,5 @@ namespace SALES_MANAGEMENT.Controllers
             }
         }
         #endregion
-
-
     }
 }

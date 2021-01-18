@@ -1,14 +1,55 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Mark";
     Layout = "~/Views/Shared/layoutpage.cshtml";
 }
 
+<style>
+    .container {
+        position: relative;
+        text-align: center;
+        color: white;
+    }
 
+    .bottom-left {
+        position: absolute;
+        bottom: 8px;
+        left: 16px;
+    }
 
-<div class="w3-content">
-    <img class="mySlides" src="~/ProductFeatures_desktop_01.png" alt="custom_html_banner1" style="width:100%">
-    <img class="mySlides" src="https://i.imgur.com/ZtdhrUA.jpg" alt="custom_html_banner2" style="width:100%">
+    .top-left {
+        position: absolute;
+        top: 8px;
+        left: 16px;
+    }
 
-    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-</div>
+    .top-right {
+        position: absolute;
+        top: 8px;
+        right: 16px;
+    }
+
+    .bottom-right {
+        position: absolute;
+        bottom: 8px;
+        right: 16px;
+    }
+
+    .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+<body>
+    <div class="w3-content">
+        <img class="mySlides" src="~/Sales-Strategy-Google-Slides.jpg" alt="custom_html_banner1" style="width:unset">
+        
+
+        <div class="center-block"></div>
+    </div>
+        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+    </div>
+</body>

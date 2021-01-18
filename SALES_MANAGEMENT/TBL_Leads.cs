@@ -14,6 +14,14 @@ namespace SALES_MANAGEMENT
     
     public partial class TBL_Leads
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TBL_Leads()
+        {
+            this.Order_Invoice = new HashSet<Order_Invoice>();
+            this.TBL_Opportunity = new HashSet<TBL_Opportunity>();
+            this.TBL_Quote = new HashSet<TBL_Quote>();
+        }
+    
         public int LeadId { get; set; }
         public string Photo { get; set; }
         public string FirstName { get; set; }
@@ -36,5 +44,14 @@ namespace SALES_MANAGEMENT
         public string CompanyWebsite { get; set; }
         public Nullable<int> Type { get; set; }
         public string CompanyName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order_Invoice> Order_Invoice { get; set; }
+        public virtual TBL_LeadSource TBL_LeadSource { get; set; }
+        public virtual Type Type1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_Opportunity> TBL_Opportunity { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TBL_Quote> TBL_Quote { get; set; }
     }
 }
