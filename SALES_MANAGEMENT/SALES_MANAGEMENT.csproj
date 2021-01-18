@@ -166,11 +166,27 @@
     <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadController.cs" />
+    <Compile Include="Controllers\LeadReportController.cs" />
     <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Controllers\OrderAndInvoiceController.cs" />
     <Compile Include="Controllers\QuotesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LeadReportModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeadReportModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeadReportModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeadReportModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeadReportModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LeadReportModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\LeadsModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -178,12 +194,27 @@
     <Compile Include="Models\OrderAndInvoiceModel.cs" />
     <Compile Include="Models\QuoteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SaleDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaleDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TBL_Leads.cs">
+      <DependentUpon>LeadReportModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -196,8 +227,37 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="LeadReportModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LeadReportModel.edmx</DependentUpon>
+      <LastGenOutput>LeadReportModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="LeadReportModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LeadReportModel.edmx</DependentUpon>
+      <LastGenOutput>LeadReportModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Reports\Report.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="LeadReportModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LeadReportModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="LeadReportModel.edmx.diagram">
+      <DependentUpon>LeadReportModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="SaleDataSet.xsc">
+      <DependentUpon>SaleDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="SaleDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SaleDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="SaleDataSet.xss">
+      <DependentUpon>SaleDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -244,6 +304,7 @@
     <Content Include="Views\Quotes\Edit.cshtml" />
     <Content Include="Views\OrderAndInvoice\Create.cshtml" />
     <Content Include="Views\OrderAndInvoice\QualifiedQuotesIndex.cshtml" />
+    <Content Include="Views\LeadReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -266,6 +327,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\Report.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

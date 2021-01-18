@@ -1,0 +1,85 @@
+﻿@model IEnumerable<SALES_MANAGEMENT.TBL_Leads>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: 'Times New Roman';
+            font-size: 12pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+            table th {
+                background-color: #B8DBFD;
+                color: #333;
+                font-weight: bold;
+            }
+
+            table th, table td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+
+            table, table table td {
+                border: 0px solid #ccc;
+            }
+    </style>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>LeadId</th>
+            <th>Title</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Gender</th>
+            <th>MobileNumber</th>
+            <th>EmailId</th>
+            <th>CurrentAddress</th>
+            <th>JobTitle</th>
+            <th>CompanyName</th>
+            <th>CompanyWebsite</th>
+            <th>MeetingDate</th>
+            <th>CreatedDate</th>
+            <th>IsQualify</th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>@item.LeadId</td>
+        <td>@item.Title</td>
+        <td>@item.FirstName</td>
+        <td>@item.LastName</td>
+        <td>@item.Gender</td>
+        <td>@item.MobileNumber</td>
+        <td>@item.EmailId</td>
+        <td>@item.CurrentAddress</td>
+        <td>@item.JobTitle</td>
+        <td>@item.CompanyName</td>
+        <td>@item.CompanyWebsite</td>
+        <td>@item.MeetingDate</td>
+        <td>@item.CreatedDate</td>
+        <td>@item.IsQualify</td>
+
+    </tr>
+        }
+    </table>
+    <br />
+    <a href="~/Reports/Report.aspx">View Report</a>
+</body>
+</html>
