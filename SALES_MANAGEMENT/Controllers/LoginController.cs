@@ -1,5 +1,4 @@
-﻿using SALES_MANAGEMENT.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -8,15 +7,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-
+using SALES_MANAGEMENT.Models;
 namespace SALES_MANAGEMENT.Controllers
 {
     public class LoginController : Controller
     {
+        SaleEntities1 db = new SaleEntities1();
         public SqlConnection con;
         public void CONNECTION()
         {
-            string constr = ConfigurationManager.ConnectionStrings["LeadConnection"].ToString();
+            string constr = ConfigurationManager.ConnectionStrings["myConnectionString"].ToString();
             con = new SqlConnection(constr);
         }
         // GET: Login
@@ -24,50 +24,44 @@ namespace SALES_MANAGEMENT.Controllers
         {
             return View();
         }
-        [AllowAnonymous]
         [HttpPost]
         public ActionResult Indexer(LoginModel model)
         {
 
-            CONNECTION();
-            SqlCommand cmd = new SqlCommand("UserLogin", con);
-            con.Open();
-            cmd.CommandType = CommandType.StoredProcedure;
-            DataSet dataSet = new DataSet();
-            cmd.Parameters.AddWithValue("@EmailId", model.Email_id);
+        
             string Passw = Encrypt(model.Pass);
-            cmd.Parameters.AddWithValue("@Password", Passw);
-            //hhh
-            SqlDataReader sdr = cmd.ExecuteReader();
-            if (sdr.Read())
+
+
+            if (ModelState.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(model.Email_id, true);
+                var user = db.tbl_credentials.SingleOrDefault(x => x.Emailid == model.Email_id && x.Password == Passw);
+                if (user != null)
+                {
+                    if (user.UserDepartment == 1.ToString())
+                    {
+                        return View("SalesManager");
+                    }
+                    else if (user.UserDepartment == 3.ToString())
+                    {
+                        return RedirectToAction("Create","Home");
 
-                Session["EmailId"] = model.Email_id;
+                    }
+                    else if (user.UserDepartment == 2.ToString())
+                    {
+                        return View("SeniorManager");
 
-                Session["Password"] = model.Pass;
-                Session["UserDepartment"] = 1;
-                return View("Error");
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid Login";
+                    return View();
+
+                }
+
+
             }
-            else if (sdr.Read())
-            {
-                //ViewData["message"] = "login failed";
-                FormsAuthentication.SetAuthCookie(model.Email_id, true);
-
-                Session["EmailId"] = model.Email_id;
-                Session["UserDepartment"] = 2;
-                Session["Password"] = model.Pass;
-                return View("Error");
-            }
-            else
-            {
-                return View("Error");
-                //ViewData["message"] = "login failed";
-            }
-
-            con.Close();
             return View();
-
         }
         public ActionResult Welcome()
         {

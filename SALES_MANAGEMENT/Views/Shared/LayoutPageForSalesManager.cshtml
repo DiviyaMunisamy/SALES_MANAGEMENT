@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -151,24 +152,20 @@
 </head>
 <div id="mySidenav" class="sidenav">
     <h1 style="font-family:'Times New Roman'">
-        
+
 
         <a style="font-family:Bookman Old Style" href="#">Sales:</a>
-        
-        @Html.ActionLink("Lead", "Create", "Opportunity")
+        @Html.ActionLink("Lead", "Create", "Lead")
         @Html.ActionLink("Opportunities", "Create", "Opportunity")
 
-        <a style="font-family:Bookman Old Style" href="#">Collateral:</a>
-       
+        @*<a style="font-family:Bookman Old Style" href="#">Collateral:</a>
         @Html.ActionLink("Quotes", "Create", "Quotes")
-        @Html.ActionLink("Order & Invoice", "Create", "OrderAndInvoice")
+        @Html.ActionLink("Order & Invoice", "Create", "OrderAndInvoice")*@
 
         <a style="font-family:Bookman Old Style" href="#">Tools:</a>
-       
         @Html.ActionLink("Leads Report", "Index", "LeadReport")
 
         <a style="font-family:Bookman Old Style" href="#">Other:</a>
-
         <a href="#">Clients</a>
         <a href="#">Contact</a>
     </h1>
@@ -181,6 +178,7 @@
     @*<p>Click below to navigate.</p>*@
     <span style="font-size:40px;font-family:'Times New Roman';color:black;cursor:pointer" onclick="openNav()">&#9776; MENU</span>
     <h1 style="font-family:'Bookman Old Style'; text-align: center;">SALES MANAGEMENT</h1>
+    <h2 style="font-family:'Times New Roman'; text-align: center;">Welcome Back Sales Manager</h2>
 </div>
 
 <div class="form-popup" id="myForm">

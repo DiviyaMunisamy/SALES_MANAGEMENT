@@ -50,7 +50,7 @@ namespace SALES_MANAGEMENT
         public virtual DbSet<Type> Types { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
     
-        public virtual int sp_credntials(string emailId, string password, string userDepartment)
+        public virtual int sp_credntials(string emailId, string password, string userDepartment, string active)
         {
             var emailIdParameter = emailId != null ?
                 new ObjectParameter("EmailId", emailId) :
@@ -64,7 +64,11 @@ namespace SALES_MANAGEMENT
                 new ObjectParameter("UserDepartment", userDepartment) :
                 new ObjectParameter("UserDepartment", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_credntials", emailIdParameter, passwordParameter, userDepartmentParameter);
+            var activeParameter = active != null ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_credntials", emailIdParameter, passwordParameter, userDepartmentParameter, activeParameter);
         }
     
         public virtual ObjectResult<SP_Currency_Result> SP_Currency()

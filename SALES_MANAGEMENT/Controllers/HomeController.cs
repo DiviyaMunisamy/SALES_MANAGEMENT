@@ -127,10 +127,10 @@ namespace SALES_MANAGEMENT.Controllers
         //        return Json(0);
         //    }
         //}
-        public JsonResult IsUserNameAvailable(string Emailid)
-        {
-            return Json(!db.tbl_credentials.Any(u => u.Emailid == Emailid), JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult IsUserNameAvailable(string Emailid)
+        //{
+        //    return Json(!db.tbl_credentials.Any(u => u.Emailid == Emailid), JsonRequestBehavior.AllowGet);
+        //}
 
         [HttpPost]
 

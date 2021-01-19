@@ -18,8 +18,8 @@ namespace SALES_MANAGEMENT
         public string Emailid { get; set; }
         public string Password { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public Nullable<bool> IsPasswordChanged { get; set; }
         public string UserDepartment { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public string Active { get; set; }
     }
 }

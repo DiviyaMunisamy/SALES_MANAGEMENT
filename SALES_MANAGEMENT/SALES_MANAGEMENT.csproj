@@ -197,7 +197,6 @@
     <Compile Include="Models\OpportunityModel.cs" />
     <Compile Include="Models\OrderAndInvoiceModel.cs" />
     <Compile Include="Models\QuoteModel.cs" />
-    <Compile Include="Models\tbl_credentials.cs" />
     <Compile Include="Order_Invoice.cs">
       <DependentUpon>SaleModel.tt</DependentUpon>
     </Compile>
@@ -511,6 +510,11 @@
     <Content Include="Views\LeadReport\Index.cshtml" />
     <Content Include="Views\Login\Indexer.cshtml" />
     <Content Include="Views\Shared\LayoutPage1.cshtml" />
+    <Content Include="Views\Shared\LayoutPageForAdminLogin.cshtml" />
+    <Content Include="Views\Shared\LayoutPageForSalesManager.cshtml" />
+    <Content Include="Views\Shared\LayoutPageForSeniorManager.cshtml" />
+    <Content Include="Views\Shared\SalesManager.cshtml" />
+    <Content Include="Views\Shared\SeniorManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

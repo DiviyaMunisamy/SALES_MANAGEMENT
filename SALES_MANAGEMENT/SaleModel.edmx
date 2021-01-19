@@ -42,12 +42,6 @@
           <Property Name="PotentialCustomer" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="tbl_adminlogin">
-          <Property Name="Admin_id" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="50" />
-        </EntityType>-->
         <EntityType Name="TBL_Cities">
           <Key>
             <PropertyRef Name="Id" />
@@ -76,6 +70,8 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
           <Property Name="IsPasswordChanged" Type="bit" />
           <Property Name="UserDepartment" Type="varchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="Created_Date" Type="date" />
+          <Property Name="Active" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TBL_Currency">
           <Key>
@@ -518,6 +514,7 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
           <Parameter Name="EmailId" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
           <Parameter Name="UserDepartment" Type="varchar" Mode="In" />
+          <Parameter Name="Active" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_Currency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_dropdown" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -914,9 +911,9 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
           <Property Name="Emailid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsPasswordChanged" Type="Boolean" />
-          <Property Name="UserDepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserDepartment" Type="String" Unicode="false" FixedLength="false" MaxLength="50" />
           <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Active" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TBL_Currency">
           <Key>
@@ -959,7 +956,7 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
           <Property Name="Photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfBirth" Nullable="false" Precision="0" Type="DateTime" />
           <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CurrentAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PermanentAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1500,6 +1497,7 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
             <Parameter Name="EmailId" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
             <Parameter Name="UserDepartment" Mode="In" Type="String" />
+            <Parameter Name="Active" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Currency" ReturnType="Collection(SaleModel1.SP_Currency_Result)" />
           <FunctionImport Name="sp_dropdown" ReturnType="Collection(SaleModel1.sp_dropdown_Result)" />
@@ -1559,7 +1557,7 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
             <Parameter Name="ProposedSolution" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_Opportunity_SelectAllbyId" ReturnType="Collection(SaleModel1.SP_Opportunity_SelectAllbyId_Result)">
-            <Parameter Name="RefOppId" Mode="In" Type="Int32" />
+          <Parameter Name="RefOppId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Opportunity_Update">
             <Parameter Name="Topic" Mode="In" Type="String" />
@@ -1577,10 +1575,10 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
             <Parameter Name="RefOppId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_OpportunityQualify_Update">
-            <Parameter Name="RefOppId" Mode="In" Type="Int32" />
+          <Parameter Name="RefOppId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Opprtunity_Delete">
-            <Parameter Name="RefOppId" Mode="In" Type="Int32" />
+          <Parameter Name="RefOppId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Order_Invoice_SelectAll" ReturnType="Collection(SaleModel1.SP_Order_Invoice_SelectAll_Result)" />
           <FunctionImport Name="SP_OrderInvoice_Insert">
@@ -1616,11 +1614,11 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
           <FunctionImport Name="SP_PurchaseTimeForm" ReturnType="Collection(SaleModel1.SP_PurchaseTimeForm_Result)" />
           <FunctionImport Name="SP_PurchesProcess" ReturnType="Collection(SaleModel1.SP_PurchesProcess_Result)" />
           <FunctionImport Name="SP_Qialify_Update">
-            <Parameter Name="LeadId" Mode="In" Type="Int32" />
+          <Parameter Name="LeadId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_QualifiedQuote_SelectAll" ReturnType="Collection(SaleModel1.SP_QualifiedQuote_SelectAll_Result)" />
           <FunctionImport Name="SP_QuortesQialify_Update">
-            <Parameter Name="RefQuoteId" Mode="In" Type="Int32" />
+          <Parameter Name="RefQuoteId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_Quote_DropDownForQuoteCurrency" ReturnType="Collection(SaleModel1.SP_Quote_DropDownForQuoteCurrency_Result)" />
           <FunctionImport Name="SP_Quote_DropDownFreightTerms" ReturnType="Collection(SaleModel1.SP_Quote_DropDownFreightTerms_Result)" />
@@ -1655,7 +1653,7 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
           </FunctionImport>
           <FunctionImport Name="SP_Quote_SelectAll" ReturnType="Collection(SaleModel1.SP_Quote_SelectAll_Result)" />
           <FunctionImport Name="SP_Quotes_SelectAllbyId" ReturnType="Collection(SaleModel1.SP_Quotes_SelectAllbyId_Result)">
-            <Parameter Name="RefQuoteId" Mode="In" Type="Int32" />
+          <Parameter Name="RefQuoteId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_remote_email" ReturnType="Collection(String)" />
           <FunctionImport Name="SP_SALES_MANAGEMENT_Lead_Type" ReturnType="Collection(SaleModel1.SP_SALES_MANAGEMENT_Lead_Type_Result)" />
@@ -1668,17 +1666,17 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="USP_Quortes_Delete">
-            <Parameter Name="RefQuoteId" Mode="In" Type="Int32" />
+          <Parameter Name="RefQuoteId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="USP_SALES_MANAGEMENT_Delete">
-            <Parameter Name="LeadId" Mode="In" Type="Int32" />
+          <Parameter Name="LeadId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="USP_SALES_MANAGEMENT_FilterByCityName" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_FilterByCityName_Result)">
-            <Parameter Name="StateId" Mode="In" Type="Int64" />
+          <Parameter Name="StateId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="USP_SALES_MANAGEMENT_FilterByCountryName" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_FilterByCountryName_Result)" />
           <FunctionImport Name="USP_SALES_MANAGEMENT_FilterByStateName" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_FilterByStateName_Result)">
-            <Parameter Name="CountryId" Mode="In" Type="Int64" />
+          <Parameter Name="CountryId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="USP_SALES_MANAGEMENT_Op_SelectAll" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_Op_SelectAll_Result)" />
           <FunctionImport Name="USP_SALES_MANAGEMENT_Select" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_Select_Result)" />
@@ -1687,7 +1685,7 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
             <Parameter Name="SortType" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="USP_SALES_MANAGEMENT_SelectAllbyId" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_SelectAllbyId_Result)">
-            <Parameter Name="LeadId" Mode="In" Type="Int32" />
+          <Parameter Name="LeadId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="USP_SALES_MANAGEMENT_SelectAllCityName" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_SelectAllCityName_Result)" />
           <FunctionImport Name="USP_SALES_MANAGEMENT_SelectAllLeadSource" ReturnType="Collection(SaleModel1.USP_SALES_MANAGEMENT_SelectAllLeadSource_Result)" />
@@ -2122,11 +2120,11 @@ warning 6013: The table/view 'Sale.dbo.tbl_adminlogin' does not have a primary k
           <EntitySetMapping Name="tbl_credentials">
             <EntityTypeMapping TypeName="SaleModel1.tbl_credentials">
               <MappingFragment StoreEntitySet="tbl_credentials">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Emailid" ColumnName="Emailid" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="IsPasswordChanged" ColumnName="IsPasswordChanged" />
                 <ScalarProperty Name="UserDepartment" ColumnName="UserDepartment" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>

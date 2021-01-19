@@ -1,7 +1,7 @@
 ﻿@model SALES_MANAGEMENT.Models.LoginModel
 @{
     ViewBag.Title = "Welcome Back!!";
-    Layout = "~/Views/Shared/_layout.cshtml";
+    Layout = "~/Views/Shared/LayoutPage1.cshtml";
 }
 
 <head>
@@ -9,9 +9,11 @@
         h1 {
             text-align: center;
         }
+
         body {
             background-color: lavender;
         }
+
         ul {
             list-style-type: none;
             margin: 0;
@@ -80,11 +82,10 @@
         input:-moz-placeholder {
             color: #f00;
         }
-        }
+        
     </style>
 
 </body>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
