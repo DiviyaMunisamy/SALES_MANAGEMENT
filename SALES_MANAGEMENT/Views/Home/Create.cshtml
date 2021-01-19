@@ -1,11 +1,17 @@
 ﻿@model SALES_MANAGEMENT.Models.LoginModel
 @{
-    ViewBag.Title = "Hi Hari!!";
-    Layout = "~/Views/Shared/layoutpage.cshtml";
+    ViewBag.Title = "Welcome Back!!";
+    Layout = "~/Views/Shared/_layout.cshtml";
 }
 
 <head>
     <style>
+        h1 {
+            text-align: center;
+        }
+        body {
+            background-color: lavender;
+        }
         ul {
             list-style-type: none;
             margin: 0;
@@ -84,7 +90,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Create Users:</h4>
+        <h1 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"> Create Manager</h1>
         <hr />
 
         <div class="form-group">

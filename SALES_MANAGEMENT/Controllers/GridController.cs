@@ -29,7 +29,7 @@ namespace SALES_MANAGEMENT.Controllers
 
                     userdetailview.UserEmailId = Sqlreader["EmailId"].ToString();
                     userdetailview.UserDepartment = Sqlreader["UserDepartment"].ToString();
-                    userdetailview.IsActive = Convert.ToInt64(Sqlreader["IsActive"]);
+                    userdetailview.Active =Sqlreader["Active"].ToString();
                     userdetailview.CreatedDate = Convert.ToDateTime(Sqlreader["CreatedDate"]);
                     userdetail.Add(userdetailview);
                 }

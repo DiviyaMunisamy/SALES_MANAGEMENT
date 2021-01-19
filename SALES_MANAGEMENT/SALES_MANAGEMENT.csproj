@@ -417,10 +417,13 @@
       <DependentUpon>LeadReportModel.edmx</DependentUpon>
       <LastGenOutput>LeadReportModel.cs</LastGenOutput>
     </Content>
-    <Content Include="MainpageImage\insightly.png" />
     <Content Include="MainpageImage\logo.jpg" />
+    <Content Include="MainpageImage\logo1.png" />
     <Content Include="marketing-plan-sample-blog.png" />
+    <Content Include="P5_A_Animated_Desktop.png" />
+    <Content Include="ProductFeatures_desktop_01.png" />
     <Content Include="Reports\Report.aspx" />
+    <Content Include="Rich-Nav-scaled.jpg" />
     <Content Include="SaleModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SaleModel.edmx</DependentUpon>
@@ -507,6 +510,7 @@
     <Content Include="Views\OrderAndInvoice\QualifiedQuotesIndex.cshtml" />
     <Content Include="Views\LeadReport\Index.cshtml" />
     <Content Include="Views\Login\Indexer.cshtml" />
+    <Content Include="Views\Shared\LayoutPage1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

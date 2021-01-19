@@ -16,7 +16,7 @@ namespace SALES_MANAGEMENT
             routes.MapRoute(
                 name: "Default1",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Lead", action = "Create", id = UrlParameter.Optional }
+                defaults: new { controller = "FirstPage", action = "Mark", id = UrlParameter.Optional }
             );
             routes.MapRoute(
              name: "Default2",
