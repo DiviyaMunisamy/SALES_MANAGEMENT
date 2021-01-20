@@ -29,11 +29,12 @@ namespace SALES_MANAGEMENT.Controllers
         {
 
         
-            string Passw = Encrypt(model.Pass);
+            
 
 
             if (ModelState.IsValid)
             {
+                string Passw = Encrypt(model.Pass);
                 var user = db.tbl_credentials.SingleOrDefault(x => x.Emailid == model.Email_id && x.Password == Passw);
                 if (user != null)
                 {

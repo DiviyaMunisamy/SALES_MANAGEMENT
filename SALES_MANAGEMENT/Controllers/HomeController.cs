@@ -54,38 +54,6 @@ namespace SALES_MANAGEMENT.Controllers
             }
         }
 
-        //public ActionResult Dashboard()
-        //{
-        //    return View();
-        //}
-
-        //public ActionResult Dropdownvalues()
-        //{
-        //    LoginModel objuser = new LoginModel();
-        //    DataSet ds = new DataSet();
-        //    string cs = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-        //    SqlConnection con = new SqlConnection(cs);
-        //    using (SqlCommand cmd = new SqlCommand("select * from Department", con))
-        //    {
-        //        con.Open();
-        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //        da.Fill(ds);
-        //        List<LoginModel> userlist = new List<LoginModel>();
-        //        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-        //        {
-        //            LoginModel uobj = new LoginModel();
-        //            uobj.DepartmentId = Convert.ToInt32(ds.Tables[0].Rows[i]["DepartmentId"]);
-
-        //            uobj.DepartmentName = ds.Tables[0].Rows[i]["DepartmentName"].ToString();
-
-        //            userlist.Add(uobj);
-        //        }
-        //        objuser.usersinfo = userlist;
-        //    }
-        //    con.Close();
-
-        //    return View(objuser);
-        //}
 
         public ActionResult getUserList()
         {
@@ -98,11 +66,7 @@ namespace SALES_MANAGEMENT.Controllers
         public ActionResult Create()
         {
 
-            //var LoginMod = new LoginModel();
-            //LoginMod.Department = db.Departments.ToList();
-
-            //LoginMod.DepartmentId = Convert.ToInt32(val[0].DepartmentId);
-            //LoginMod.DepartmentName = val[0].DepartmentName;
+        
             LoginModel dropdownValues = new LoginModel()
             {
                 BloodList = GetBloodList(),
@@ -114,24 +78,6 @@ namespace SALES_MANAGEMENT.Controllers
 
         }
 
-        //public JsonResult Check(string userdata)
-        //{
-        //    System.Threading.Thread.Sleep(200);
-        //    var SeachData = db.tbl_credentials.Where(x => x.Emailid == userdata).SingleOrDefault();
-        //    if (SeachData != null)
-        //    {
-        //        return Json(1);
-        //    }
-        //    else
-        //    {
-        //        return Json(0);
-        //    }
-        //}
-        //public JsonResult IsUserNameAvailable(string Emailid)
-        //{
-        //    return Json(!db.tbl_credentials.Any(u => u.Emailid == Emailid), JsonRequestBehavior.AllowGet);
-        //}
-
         [HttpPost]
 
         public ActionResult Create(LoginModel model)
@@ -142,8 +88,7 @@ namespace SALES_MANAGEMENT.Controllers
             };
             LoginModel objuser = new LoginModel();
             DataSet ds = new DataSet();
-            //var LoginMod = new LoginModel();
-            //LoginMod.Department = db.Departments.ToList();
+           
             try
             {
 
@@ -184,41 +129,12 @@ namespace SALES_MANAGEMENT.Controllers
             }
             catch (Exception ex)
             {
-                //ViewBag.Javascript = "<script language='javascript' type='text/javascript'>alert('Data Already Exists');</script>";
-                //return RedirectToAction("Create");
-                //TempData["alertMessage"] = "Account Already Exixts:";
-                //
+                
                 return RedirectToAction("Create");
 
             }
         }
-        //[HttpPost]
-        //public JsonResult IsUserNameAvailable(string EmailId)
-        //{
-        //    return Json(!db.tbl_credentials.Any(x => x.Emailid == EmailId),
-        //                                         JsonRequestBehavior.AllowGet);
-        //}
-
-        //public JsonResult CheckUserName(LoginModel model)
-        //{
-        //    string cs = ConfigurationManager.ConnectionStrings["LeadConnection"].ConnectionString;
-        //    SqlConnection con = new SqlConnection(cs);
-        //    SqlCommand com = new SqlCommand("sp_remote_email", con);
-        //    com.CommandType = CommandType.StoredProcedure;
-        //    com.Parameters.AddWithValue("@EmailId", model.EmailId);
-        //    SqlParameter oblogin = new SqlParameter();
-        //    con.Open();
-
-        //    int res = Convert.ToInt32(oblogin.Value);
-        //    if (res == 1)
-
-        //    {
-        //        return Json(res, JsonRequestBehavior.AllowGet);
-        //    }
-        //    return Json(res, JsonRequestBehavior.AllowGet);
-        //}
-
-
+       
         public ActionResult DisplayUser(LoginModel model)
         {
             List<LoginModel> userdetail = new List<LoginModel>();

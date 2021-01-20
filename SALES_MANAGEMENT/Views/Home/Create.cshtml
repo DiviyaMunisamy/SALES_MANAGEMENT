@@ -122,29 +122,8 @@
                 <input type="submit" value="Save" class="button" />
             </div>
         </div>
-        @ViewData["message"];
+        <h1 style="font-family:'Trebuchet MS';color:forestgreen"> @Html.ViewData["Message"] </h1>
 
-
-        @*<table class="customers" id="TableId1">
-            <thead id="lo">
-                <tr>
-
-                    <th>
-                        Emailid
-                    </th>
-            </thead>
-            <tbody>
-            </tbody>
-            @foreach (var d in Model)
-            {
-                <tr>
-                    <td>@d.EmailId</td>*@
-
-
-
-        @*</tr>
-                }
-            </table>*@
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
