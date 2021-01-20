@@ -10,6 +10,9 @@
         h1 {
             text-align: center;
         }
+        body {
+            background-color: lavender;
+        }
         .button {
             background-color: white;  
             border: none;
@@ -42,10 +45,7 @@
             color: #f00;
         }*/
         
-        body {
-            
-            background-color: lavender;
-        }
+       
     </style>
 </body>
 
@@ -80,7 +80,7 @@
             <input type="submit" value="Login" class="button" />
         </div>
     </div>
-    @ViewData["message"]
+    <h2 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;"> @Html.ViewData["Message"] </h2>
 
 
     @*<table class="customers" id="TableId1">

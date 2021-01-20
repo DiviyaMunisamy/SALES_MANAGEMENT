@@ -86,22 +86,6 @@ namespace SALES_MANAGEMENT.Controllers
 
         }
 
-        public string Encrypt(string sData)
-        {
-            try
-            {
-                byte[] encData_byte = new byte[sData.Length];
-                encData_byte = System.Text.Encoding.UTF8.GetBytes(sData);
-                string encodedData = Convert.ToBase64String(encData_byte);
-                return encodedData;
-            }
-            catch (Exception ex)
-            {
-                string message = "Error in encrypt" + ex.Message + " Value: " + sData;
-                return message;
-            }
-        }
-
         public string Decrypt(string sData)
         {
             try
@@ -122,8 +106,22 @@ namespace SALES_MANAGEMENT.Controllers
             }
         }
 
+        public string Encrypt(string sData)
+        {
+            try
+            {
+                byte[] encData_byte = new byte[sData.Length];
+                encData_byte = System.Text.Encoding.UTF8.GetBytes(sData);
+                string encodedData = Convert.ToBase64String(encData_byte);
+                return encodedData;
+            }
+            catch (Exception ex)
+            {
+                string message = "Error in encrypt" + ex.Message + " Value: " + sData;
+                return message;
+            }
+        }
 
-
-
+        
     }
 }

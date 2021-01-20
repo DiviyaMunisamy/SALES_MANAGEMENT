@@ -34,7 +34,12 @@ namespace SALES_MANAGEMENT.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime CreatedDate { get; set; }
 
+        [Display(Name = "USER ID")]
+        [Required(ErrorMessage = " User ID is Required")]
         public string Email_id { get; set; }
+
+        [Display(Name = "PASSWORD")]
+        [Required(ErrorMessage = "Password is Required")]
         public string Pass { get; set; }
     }
     public class BloodList

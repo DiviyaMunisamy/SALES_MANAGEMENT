@@ -1,48 +1,64 @@
-﻿@Model SALES_MANAGEMENT.models.LoginModel
+﻿@model SALES_MANAGEMENT.Models.LoginModel
 @{
     ViewBag.Title = "Indexer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body>
+    <style type="text/css">
+        h1 {
+            text-align: center;
+        }
+
+        body {
+            background-color: lavender;
+        }
+    </style>
+</body>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
-    <div class="w3-container w3-blue">
-        <h2>Hello User!!!</h2>
-    </div>
+    @*<div class="w3-container w3-blue">*@
+    
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>Enter the Credntials below:</h4>
+    <div class="form-horizontal">
+        <h1 style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Admin & Manager Login </h1>
+        @*<h4>Enter the Credntials below:</h4>*@
+        <hr />
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="w3-container">
-                <label>Email Id</label>
-                <div class="col-md-10">
-                    <input id="Email_id" name="Email_id" class="w3-input" value="" />
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Email_id" name="Email_id" class="w3-input" value="" />
+                @Html.ValidationMessageFor(model => model.Email_id, "", new { @class = "text-danger" })
             </div>
-            <br /><br />
-            <div class="w3-container">
-                <label>Password</label>
-                <div class="col-md-10">
-                    <input id="Pass" name="Pass" type="password" class="w3-input" value="" />
-                </div>
-            </div>
-
-
         </div>
+
+        
+
         <br /><br />
-        <div class="w3-container">
-            <div class="w3-btn w3-blue">
-                <input type="submit" value="Login" class="w3-btn w3-blue" />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pass, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="Pass" name="Pass" type="password" class="w3-input" value="" />
+                @Html.ValidationMessageFor(model => model.Pass, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+       
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="button"/>
             </div>
         </div>
 
-        <h2>@Html.ViewData["message"]</h2>
+        <h1 style="font-family:'Trebuchet MS';color:red"> @Html.ViewData["Message"] </h1>
 
 
     }
